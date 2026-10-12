@@ -1,0 +1,185 @@
+{
+  "teacher": "محمد قاسم",
+  "subject": "الرياضيات",
+  "batch": 2026,
+  "chapters_observed": 1,
+  "lessons_observed": 23,
+  "public_urls_observed": 23,
+  "known_missing_lessons": 0,
+  "unusual_links": 0,
+  "verified_playback": 0,
+  "source": "https://agent.tinyfish.ai/runs/c95c0167-7309-4c69-ba7e-9659c60cdcf5",
+  "notes": "فصل واحد مرصود: الاعداد المركبة. جميع الروابط مستخرجة من Data.playLecture مباشرة. المحاضرة الأخيرة تستخدم vdocipher بدلاً من mediadelivery.",
+  "warning": "الروابط المرصودة من موقع خارجي ولم يختبر تشغيلها؛ وجودها لا يضمن صلاحيتها أو إذن إعادة التوزيع.",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "الاعداد المركبة",
+      "listed_count": 23,
+      "observed_count": 23,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "المحاضرة الأولى (مقدمة الأعداد المركبة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/6a3d1d7e-b65f-42e3-8527-29b49b884461",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة الثانية (قوى)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/f99cff8d-444a-4e8a-a18e-3a366f36e0ec",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة الثالثة (العدد المركب)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/bb28df57-1079-49a5-b611-9ebc96571103",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 4,
+          "title": "المحاضرة الرابعة (العمليات الحسابية على مجموعة الأعداد المركبة الجزء الأول)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/c82a0bd8-8f4b-4521-9755-397f82a45f08",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 5,
+          "title": "المحاضرة الخامسة (العمليات الحسابية على مجموعة الأعداد المركبة الجزء الثاني)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/4681eb5e-feaf-4420-b922-ffb2b710010f",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة السادسة (الأقواس في الاعداد المركبة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/4dc5c6b3-54e7-4574-bac9-3386290af8a2",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة السابعة (الأقواس في الاعداد المركبة - الجزء الثاني)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/e28b7f49-92d7-4207-b5c8-3733f73ec593",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة الثامنة (جمع وطرح الكسور في الأعداد المركبة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/b6aa3ef5-82a2-46b3-98a2-89313e0360b1",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 9,
+          "title": "المحاضرة التاسعة (الاعداد المركبة - الاسئلة الخاصة بالاثبات)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/76969b88-4e83-479e-8583-eee00e4f6154",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 10,
+          "title": "المحاضرة العاشرة (حل مسائل الإثبات وشرح خواص مرافق العدد المركب)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/527977fc-23da-4831-8b50-0210969f4a98",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 11,
+          "title": "المحاضرة الحادية عشرة (التحليل في مجموعة الاعداد المركبة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/3b533b3c-d386-4f9b-aca9-511b6c25393e",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 12,
+          "title": "المحاضرة الثانية عشرة (تساوي العددين المركبين)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/616f86b2-a381-49b9-8880-47e53c99afc4",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 13,
+          "title": "المحاضرة الثالثة عشرة (تساوي العددين المركبين)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/8aeacdbd-ac54-4eff-923b-93e067f89a5f",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 14,
+          "title": "المحاضرة الرابعة عشرة (تساوي العددين المركبين - الحالة الثانية)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/9a4b3ed2-0c20-4d32-b75f-348ccf56dd5e",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 15,
+          "title": "المحاضرة الخامسة عشرة (تساوي العددين المركبين - الحالة الثالثة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/134157f8-a25c-43a9-9c21-e506f7feb4db",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 16,
+          "title": "المحاضرة السادسة عشرة (تساوي عددين مركبين)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/a0010917-0055-44e2-b796-4d0ebb207b09",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 17,
+          "title": "المحاضرة السابعة عشرة (ايجاد قيم x,y ∈ R إذا عُلم أن العددان مترافقان)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/45e52b0e-6a9d-447b-8b09-21c54c2a6560",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 18,
+          "title": "المحاضرة الثامنة عشرة (إيجاد الجذور التربيعية للأعداد المركبة)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/3be79f88-0597-4ce7-8827-ea531fd2cb40",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 19,
+          "title": "المحاضرة التاسعة عشرة (إيجاد الجذور التربيعية للأعداد المركبة - الجزء الثاني)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/2a713325-4323-47af-8783-1fe695027186",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 20,
+          "title": "المحاضرة العشرون (حل المعادلة التربيعية في مجموعة الأعداد المركبة - الجزء الأول)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/11657ede-f129-4f5d-8514-0910f04b1f38",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 21,
+          "title": "المحاضرة الواحدة والعشرون (حل المعادلة التربيعية في مجموعة الأعداد المركبة - الجزء الثاني)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/4d00022f-fe54-450e-96ae-1540764d4643",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 22,
+          "title": "المحاضرة الثانية والعشرون (تكوين المعادلة التربيعية)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/2d41d0cf-bf86-43f3-8cf2-656bd5899709",
+          "suspicious": false,
+          "verified_playback": false
+        },
+        {
+          "index": 23,
+          "title": "المحاضرة الثالثة والعشرون (ايجاد قيم الثوابت في المعادلة التربيعية)",
+          "url": "https://player.vdocipher.com/v2/?otp=20160313versASE3231f1goKkn0h8gcRrtvKKkjekvkqSmpJyoF7fsTTfQeh0NVw&playbackInfo=eyJ2aWRlb0lkIjoiYWQyYmI5Y2QzNWM1NDExMjk0NDk4MzE4MTgwZDYwYzgifQ==&player=fT72dGdGbvY8TEqw",
+          "suspicious": false,
+          "verified_playback": false
+        }
+      ]
+    }
+  ]
+}
