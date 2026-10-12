@@ -1,0 +1,353 @@
+{
+  "teacher": "حسين محمد 2026",
+  "subject": "الفيزياء",
+  "batch": 2026,
+  "reported_total_lessons": 145,
+  "extracted_lessons": 64,
+  "remaining_unindexed": 81,
+  "source_run": "https://agent.tinyfish.ai/runs/56bb5e6c-f770-471b-b5fd-155e59d8f311",
+  "verification": "روابط علنية مرصودة آلياً ولم تُختبر",
+  "chapters": [
+    {
+      "lectures": [
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_001_1789456844.mp4",
+          "index": 1,
+          "title": "(المحاضرة 1 (أساس عمل المتسعة"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_002_1789456871.mp4",
+          "index": 2,
+          "title": "(أشكال المتسعات) المحاضرة 2"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_003_1789456920.mp4",
+          "index": 3,
+          "title": "(عوازل المتسعات) المحاضرة 3"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_004_1789456969.mp4",
+          "index": 4,
+          "title": "(المتسعة بوجود العازل) المحاضرة 4"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_013_1789457289.mp4",
+          "index": 5,
+          "title": "(قوانين المتسعة الواحدة بوجود العازل الكهربائي) المحاضرة 5"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_014_1789457331.mp4",
+          "index": 6,
+          "title": "(المتسعة الواحدة بوجود العازل الكهربائي - الجزء الثاني) المحاضرة 6"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_015_1789457364.mp4",
+          "index": 7,
+          "title": "(المتسعة الواحدة بوجود العازل الكهربائي - الجزء الثالث) المحاضرة 7"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_016_1789457408.mp4",
+          "index": 8,
+          "title": "(المتسعة الواحدة بوجود العازل الكهربائي - الواجبات) المحاضرة 8"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_017_1789457445.mp4",
+          "index": 9,
+          "title": "(المتسعة الواحدة بوجود العازل الكهربائي - الإثرائيات) المحاضرة 9"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_018_1789457481.mp4",
+          "index": 10,
+          "title": "(ربط التوالي والتوازي - كلاميات) المحاضرة 10"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_019_1789457519.mp4",
+          "index": 11,
+          "title": "(الاسئلة المزعجة) المحاضرة 11"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_020_1789457560.mp4",
+          "index": 12,
+          "title": "(مسائل ربط التوالي والتوازي) المحاضرة 12"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_021_1789457601.mp4",
+          "index": 13,
+          "title": "(مسائل ربط التوالي والتوازي - الواجبات) المحاضرة 13"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_022_1789457647.mp4",
+          "index": 14,
+          "title": "(مسائل الربط المختلط) المحاضرة 14"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_023_1789457676.mp4",
+          "index": 15,
+          "title": "(مسائل الربط المختلط - اسئلة الطلاب) المحاضرة 15"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_024_1789457718.mp4",
+          "index": 16,
+          "title": "(مراجعة الربط المختلط)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_025_1789457759.mp4",
+          "index": 17,
+          "title": "(مسائل الربط المختلط - الوزاريات) المحاضرة 16"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_026_1789457797.mp4",
+          "index": 18,
+          "title": "(مسائل ربط التوازي والتوالي بوجود العازل) المحاضرة 17"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_027_1789457836.mp4",
+          "index": 19,
+          "title": "(مسائل ربط التوازي والتوالي بوجود العازل - الوزاريات) المحاضرة 18"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_028_1789457879.mp4",
+          "index": 20,
+          "title": "(مسائل ربط التوازي والتوالي وثابت العزل مجهول) المحاضرة 19"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_029_1789457905.mp4",
+          "index": 21,
+          "title": "(مسائل ربط التوازي والتوالي وثابت العزل مجهول - وزاريات) المحاضرة 20"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_030_1789457955.mp4",
+          "index": 22,
+          "title": "(مسائل ربط المتسعة مع المقاومة) المحاضرة 21"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_031_1789457989.mp4",
+          "index": 23,
+          "title": "المحاضرة 22 (مسائل ربط المتسعة مع المقاومة (الواجبات))"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_032_1789458012.mp4",
+          "index": 24,
+          "title": "المحاضرة 23 (مسائل المتسعات (الوزاريات))"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_033_1789458068.mp4",
+          "index": 25,
+          "title": "(مسائل المتسعات الوزاريات (الجزء الثاني)) المحاضرة 24"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_034_1789458102.mp4",
+          "index": 26,
+          "title": "المحاضرة 25 مسائل المتسعات الوزاريات (الجزء الثالث)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_035_1789458139.mp4",
+          "index": 27,
+          "title": "(المحاضرة 26 مسائل المتسعات الوزاريات (الجزء الرابع"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_036_1789458165.mp4",
+          "index": 28,
+          "title": "(المحاضرة 27 (مسائل المتسعات (الاثرائيات)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_037_1789458202.mp4",
+          "index": 29,
+          "title": "المحاضرة 28 (انواع المتسعات)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_038_1789458228.mp4",
+          "index": 30,
+          "title": "المحاضرة 29 (تجارب شحن وتفريغ المتسعة)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_039_1789458262.mp4",
+          "index": 31,
+          "title": "المحاضرة 30 (تطبيقات المتسعة)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_040_1789458296.mp4",
+          "index": 32,
+          "title": "المحاضرة 31 (حلول فكر)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_041_1789458335.mp4",
+          "index": 33,
+          "title": "المحاضرة 31 (الجزء الثاني)(حل اسئلة الفصل)"
+        }
+      ],
+      "chapter_index": 0,
+      "chapter_title": "المتسعات",
+      "lecture_count": 33
+    },
+    {
+      "lectures": [
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_042_1789458368.mp4",
+          "index": 1,
+          "title": "المحاضرة 1 (الحث الكهرومغناطيسي)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_043_1789458411.mp4",
+          "index": 2,
+          "title": "المحاضرة 2 (الحث الكهرومغناطيسي 2)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_044_1789458451.mp4",
+          "index": 3,
+          "title": "(المحاضرة 3 (أنشطة الحث الكهرومغناطيسي"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_045_1789458493.mp4",
+          "index": 4,
+          "title": "المحاضرة 4 (التيار المحتث و القوة الدافعة الكهربائية )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_046_1789458533.mp4",
+          "index": 5,
+          "title": "المحاضرة 5 (الحث الكهرومغناطيسي و مبدأ حفظ الطاقة )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_047_1789458547.mp4",
+          "index": 6,
+          "title": "المحاضرة 6 (حل مسائل المجموعة الأولى )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_048_1789458569.mp4",
+          "index": 7,
+          "title": "المحاضرة 7 (حل الأسئلة الوزارية)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_049_1789458603.mp4",
+          "index": 8,
+          "title": "المحاضرة 8 (الفيض المغناطيسي)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_050_1789458643.mp4",
+          "index": 9,
+          "title": "المحاضرة 9 ( قانون لنز)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_051_1789458681.mp4",
+          "index": 10,
+          "title": "المحاضرة 10 (حل مسائل المجموعة الثانية )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_052_1789458714.mp4",
+          "index": 11,
+          "title": "المحاضرة 11 (حل مسائل المجموعة الثانية (الجزء 2 )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_053_1789458750.mp4",
+          "index": 12,
+          "title": "المحاضرة 12 (حل الأسئلة  الوزارية )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_054_1789458785.mp4",
+          "index": 13,
+          "title": "المحاضرة 13 (التيارات الدوامة )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_055_1789458823.mp4",
+          "index": 14,
+          "title": "المحاضرة 14 التيارات الدوامة (الجزء الثاني)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_056_1789458863.mp4",
+          "index": 15,
+          "title": "المحاضرة  15 :  أنواع المولدات الكهربائية"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_057_1789458904.mp4",
+          "index": 16,
+          "title": "المحاضرة 16: المحرك الكهربائي +مسائل المجموعة الثالثة"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_058_1789458936.mp4",
+          "index": 17,
+          "title": "المحاضرة 17: حل الأسئلة الوزارية + نشاط عن الحث الذاتي"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_059_1789458968.mp4",
+          "index": 18,
+          "title": "المحاضرة 18: الحث الذاتي"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_060_1789459011.mp4",
+          "index": 19,
+          "title": "المحاضرة 19: الحث المتبادل"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_061_1789459057.mp4",
+          "index": 20,
+          "title": "المحاضرة 20: تطبيقات الحث الكهرومغناطيسي"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_062_1789459086.mp4",
+          "index": 21,
+          "title": "المحاضرة 21 : حل أسئلة الفصل الثاني"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_063_1789459118.mp4",
+          "index": 22,
+          "title": "المحاضرة 22: حل أسئلة الفصل الثاني  (الجزء   الثاني )"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_064_1789459151.mp4",
+          "index": 23,
+          "title": "المحاضرة 23:حل أسئلة الفصل الثاني (الجزء الثالث)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_065_1789459184.mp4",
+          "index": 24,
+          "title": "المحاضرة 24:حل أسئلة الفصل الثاني (الجزء الرابع)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_066_1789459229.mp4",
+          "index": 25,
+          "title": "المحاضرة 25:حل أسئلة  الفصل الثاني (الجزء الخامس)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_067_1789459269.mp4",
+          "index": 26,
+          "title": "المحاضرة 26: حل أسئلة الفصل الثاني ( الجزء السادس)"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_068_1789459308.mp4",
+          "index": 27,
+          "title": "المحاضرة 27: اشتقاقات الفصل الثاني"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_069_1789459340.mp4",
+          "index": 28,
+          "title": "\"المحاضرة 28: حل أسئلة \"فَكّر"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_070_1789459366.mp4",
+          "index": 29,
+          "title": "(المحاضرة 29 : حل أسئلة الفصل الثاني( الجزء السابع"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_071_1789459411.mp4",
+          "index": 30,
+          "title": "(المحاضرة 29: حل أسئلة الفصل الثاني( الجزء الثامن"
+        },
+        {
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v2/lec_072_1789459460.mp4",
+          "index": 31,
+          "title": "حل واجب 1998"
+        }
+      ],
+      "chapter_index": 1,
+      "chapter_title": "الحث الكهرومغناطسي",
+      "lecture_count": 31
+    },
+    {
+      "status": "partial_titles_only",
+      "chapter_index": 3,
+      "chapter_title": "التيار المتناوب",
+      "lecture_count": 34,
+      "lectures_summary": "Expanded. Contains 34 lectures including: التيار المتناوب, المقاومة الصرف, المحث الصرف, المتسعة صرف, الرنين, الربط على التوازي."
+    }
+  ]
+}

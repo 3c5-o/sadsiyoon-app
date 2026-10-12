@@ -1,0 +1,206 @@
+# حسين محمد — فيزياء — دفعة 2026
+
+**فهرسة جزئية**. نتيجة الفحص رصدت 145 محاضرة إجمالاً عبر وحدات المادة، لكن القائمة المستخرجة بالتفصيل تضم 64 محاضرة في أول وحدتين فقط.
+
+- المتسعات: 33 محاضرة بروابط ظاهرية
+- الحث الكهرومغناطيسي: 31 محاضرة بروابط ظاهرية
+- 81 محاضرة إضافية تحتاج استخراج الروابط والعناوين بالتفصيل.
+- روابط التشغيل الخارجية لم تُختبر ولا تُخزن ملفات الفيديو.
+- مصدر الفحص: https://agent.tinyfish.ai/runs/56bb5e6c-f770-471b-b5fd-155e59d8f311
+
+
+## المتسعات (33)
+
+1. (المحاضرة 1 (أساس عمل المتسعة
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_001_1789456844.mp4
+
+2. (أشكال المتسعات) المحاضرة 2
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_002_1789456871.mp4
+
+3. (عوازل المتسعات) المحاضرة 3
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_003_1789456920.mp4
+
+4. (المتسعة بوجود العازل) المحاضرة 4
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_004_1789456969.mp4
+
+5. (قوانين المتسعة الواحدة بوجود العازل الكهربائي) المحاضرة 5
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_013_1789457289.mp4
+
+6. (المتسعة الواحدة بوجود العازل الكهربائي - الجزء الثاني) المحاضرة 6
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_014_1789457331.mp4
+
+7. (المتسعة الواحدة بوجود العازل الكهربائي - الجزء الثالث) المحاضرة 7
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_015_1789457364.mp4
+
+8. (المتسعة الواحدة بوجود العازل الكهربائي - الواجبات) المحاضرة 8
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_016_1789457408.mp4
+
+9. (المتسعة الواحدة بوجود العازل الكهربائي - الإثرائيات) المحاضرة 9
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_017_1789457445.mp4
+
+10. (ربط التوالي والتوازي - كلاميات) المحاضرة 10
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_018_1789457481.mp4
+
+11. (الاسئلة المزعجة) المحاضرة 11
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_019_1789457519.mp4
+
+12. (مسائل ربط التوالي والتوازي) المحاضرة 12
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_020_1789457560.mp4
+
+13. (مسائل ربط التوالي والتوازي - الواجبات) المحاضرة 13
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_021_1789457601.mp4
+
+14. (مسائل الربط المختلط) المحاضرة 14
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_022_1789457647.mp4
+
+15. (مسائل الربط المختلط - اسئلة الطلاب) المحاضرة 15
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_023_1789457676.mp4
+
+16. (مراجعة الربط المختلط)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_024_1789457718.mp4
+
+17. (مسائل الربط المختلط - الوزاريات) المحاضرة 16
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_025_1789457759.mp4
+
+18. (مسائل ربط التوازي والتوالي بوجود العازل) المحاضرة 17
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_026_1789457797.mp4
+
+19. (مسائل ربط التوازي والتوالي بوجود العازل - الوزاريات) المحاضرة 18
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_027_1789457836.mp4
+
+20. (مسائل ربط التوازي والتوالي وثابت العزل مجهول) المحاضرة 19
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_028_1789457879.mp4
+
+21. (مسائل ربط التوازي والتوالي وثابت العزل مجهول - وزاريات) المحاضرة 20
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_029_1789457905.mp4
+
+22. (مسائل ربط المتسعة مع المقاومة) المحاضرة 21
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_030_1789457955.mp4
+
+23. المحاضرة 22 (مسائل ربط المتسعة مع المقاومة (الواجبات))
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_031_1789457989.mp4
+
+24. المحاضرة 23 (مسائل المتسعات (الوزاريات))
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_032_1789458012.mp4
+
+25. (مسائل المتسعات الوزاريات (الجزء الثاني)) المحاضرة 24
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_033_1789458068.mp4
+
+26. المحاضرة 25 مسائل المتسعات الوزاريات (الجزء الثالث)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_034_1789458102.mp4
+
+27. (المحاضرة 26 مسائل المتسعات الوزاريات (الجزء الرابع
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_035_1789458139.mp4
+
+28. (المحاضرة 27 (مسائل المتسعات (الاثرائيات)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_036_1789458165.mp4
+
+29. المحاضرة 28 (انواع المتسعات)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_037_1789458202.mp4
+
+30. المحاضرة 29 (تجارب شحن وتفريغ المتسعة)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_038_1789458228.mp4
+
+31. المحاضرة 30 (تطبيقات المتسعة)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_039_1789458262.mp4
+
+32. المحاضرة 31 (حلول فكر)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_040_1789458296.mp4
+
+33. المحاضرة 31 (الجزء الثاني)(حل اسئلة الفصل)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_041_1789458335.mp4
+
+## الحث الكهرومغناطسي (31)
+
+1. المحاضرة 1 (الحث الكهرومغناطيسي)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_042_1789458368.mp4
+
+2. المحاضرة 2 (الحث الكهرومغناطيسي 2)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_043_1789458411.mp4
+
+3. (المحاضرة 3 (أنشطة الحث الكهرومغناطيسي
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_044_1789458451.mp4
+
+4. المحاضرة 4 (التيار المحتث و القوة الدافعة الكهربائية )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_045_1789458493.mp4
+
+5. المحاضرة 5 (الحث الكهرومغناطيسي و مبدأ حفظ الطاقة )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_046_1789458533.mp4
+
+6. المحاضرة 6 (حل مسائل المجموعة الأولى )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_047_1789458547.mp4
+
+7. المحاضرة 7 (حل الأسئلة الوزارية)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_048_1789458569.mp4
+
+8. المحاضرة 8 (الفيض المغناطيسي)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_049_1789458603.mp4
+
+9. المحاضرة 9 ( قانون لنز)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_050_1789458643.mp4
+
+10. المحاضرة 10 (حل مسائل المجموعة الثانية )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_051_1789458681.mp4
+
+11. المحاضرة 11 (حل مسائل المجموعة الثانية (الجزء 2 )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_052_1789458714.mp4
+
+12. المحاضرة 12 (حل الأسئلة  الوزارية )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_053_1789458750.mp4
+
+13. المحاضرة 13 (التيارات الدوامة )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_054_1789458785.mp4
+
+14. المحاضرة 14 التيارات الدوامة (الجزء الثاني)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_055_1789458823.mp4
+
+15. المحاضرة  15 :  أنواع المولدات الكهربائية
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_056_1789458863.mp4
+
+16. المحاضرة 16: المحرك الكهربائي +مسائل المجموعة الثالثة
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_057_1789458904.mp4
+
+17. المحاضرة 17: حل الأسئلة الوزارية + نشاط عن الحث الذاتي
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_058_1789458936.mp4
+
+18. المحاضرة 18: الحث الذاتي
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_059_1789458968.mp4
+
+19. المحاضرة 19: الحث المتبادل
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_060_1789459011.mp4
+
+20. المحاضرة 20: تطبيقات الحث الكهرومغناطيسي
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_061_1789459057.mp4
+
+21. المحاضرة 21 : حل أسئلة الفصل الثاني
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_062_1789459086.mp4
+
+22. المحاضرة 22: حل أسئلة الفصل الثاني  (الجزء   الثاني )
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_063_1789459118.mp4
+
+23. المحاضرة 23:حل أسئلة الفصل الثاني (الجزء الثالث)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_064_1789459151.mp4
+
+24. المحاضرة 24:حل أسئلة الفصل الثاني (الجزء الرابع)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_065_1789459184.mp4
+
+25. المحاضرة 25:حل أسئلة  الفصل الثاني (الجزء الخامس)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_066_1789459229.mp4
+
+26. المحاضرة 26: حل أسئلة الفصل الثاني ( الجزء السادس)
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_067_1789459269.mp4
+
+27. المحاضرة 27: اشتقاقات الفصل الثاني
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_068_1789459308.mp4
+
+28. "المحاضرة 28: حل أسئلة "فَكّر
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_069_1789459340.mp4
+
+29. (المحاضرة 29 : حل أسئلة الفصل الثاني( الجزء السابع
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_070_1789459366.mp4
+
+30. (المحاضرة 29: حل أسئلة الفصل الثاني( الجزء الثامن
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_071_1789459411.mp4
+
+31. حل واجب 1998
+https://github.com/smyzx66-dot/housien/releases/download/v2/lec_072_1789459460.mp4
