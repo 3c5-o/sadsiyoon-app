@@ -1,0 +1,352 @@
+{
+  "teacher": "علي السوداني",
+  "subject": "الفيزياء",
+  "batch": 2026,
+  "catalog_status": "جزئي؛ فُهرست وحدتان فقط",
+  "actual_lessons": 65,
+  "real_url_fields": 65,
+  "source": "https://agent.tinyfish.ai/runs/61e6619e-cd42-458d-a31b-b434eb17663f",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "اساسيات الفيزياء",
+      "listed_count": 40,
+      "observed_count": 43,
+      "lessons": [
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/583c5061-6c9e-4d79-b4c0-f4274fa4af84",
+          "index": 1,
+          "title": "اساسيات الفيزياء"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/0290b143-5dae-4ad3-9af2-6af5b33da003",
+          "index": 2,
+          "title": "اساسيات الفيزياء (الجزء الثاني)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/156d9561-0cdf-45c4-85ca-118f490ec6f9",
+          "index": 3,
+          "title": "أساسيات الفيزياء (الجزء الثالث)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/cb0aaac5-1614-4c41-a2b8-50d7463c9a68",
+          "index": 4,
+          "title": "المحاضرة 1 (الموصل الكروي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/e1bcbd27-d90a-4e9e-b930-5c41d4f89ba7",
+          "index": 5,
+          "title": "المحاضرة 2 (المتسعة وسعة المتسعة)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/2b0c371f-0038-4d0e-a6c1-4f8ad98ebe96",
+          "index": 6,
+          "title": "المحاضرة 3 (المتسعة وسعة المتسعة (الجزء الثاني))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/e2b3b8e7-e2a4-4029-8c03-f9db48b17431",
+          "index": 7,
+          "title": "المحاضرة 4 (العازل الكهربائي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/15f473a2-6f45-447a-9771-43059321c296",
+          "index": 8,
+          "title": "المحاضرة 5 (قوة العزل الكهربائي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/c97e68b9-e4ec-43fe-b105-88d5449061ed",
+          "index": 9,
+          "title": "المحاضرة 6 (تجربة فاراداي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/b3e3b411-c003-4300-a1ae-98a4d1a75e4b",
+          "index": 10,
+          "title": "المحاضرة 7 (تأثير المساحة السطحية والبعد بين صفيحتين على المتسعة)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/ec6fd490-98ea-4808-925a-4df02dfaea03",
+          "index": 11,
+          "title": "المحاضرة 8 (تأثير العازل على المتسعة المتصلة والمنفصلة)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/8c7f09a6-863d-497e-9b4a-593aae156285",
+          "index": 12,
+          "title": "المحاضرة 9 (سلوك المتسعة عند توصيلها بالبطارية)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/492f37fc-d850-4aaa-bfcf-62ce04a551fc",
+          "index": 13,
+          "title": "المحاضرة 10 (سلوك المتسعة عند توصيلها بالبطارية (الجزء الثاني))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/dc3c915e-9e2a-4ba7-a4ba-c403c9f99dc5",
+          "index": 14,
+          "title": "المحاضرة 11 (العوامل المؤثرة في الشحنة والطاقة في المتسعات)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/3f00b418-c23e-4fae-aabf-08b33a6a46e6",
+          "index": 15,
+          "title": "المحاضرة 12 (قوانين المتسعات)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/63e0f94d-7aa3-4d95-a59f-f41bf2db5dea",
+          "index": 16,
+          "title": "المحاضرة 13 ( مسائل المتسعة المنفردة)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/88fa6975-b555-4355-9b85-920d645488ff",
+          "index": 17,
+          "title": "المحاضرة 14 (مسائل المتسعة المنفردة (الوزاريات)))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/4f48060e-efb1-4c2a-a4ac-cf4af3f6e90f",
+          "index": 18,
+          "title": "لمحاضرة 15 (مسائل المتسعة المنفردة (إثرائيات))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/ea5c2287-ec1c-47c8-9114-65bffcaaf998",
+          "index": 19,
+          "title": "المحاضرة 16 (المتسعة المنفردة (الاختيارات الوزارية))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/bab39653-ec65-4535-9a05-3faf2c0ad0f2",
+          "index": 20,
+          "title": "المحاضرة 17 (واجبات المتسعة المنفردة)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/26e4d1d0-87ec-4364-97aa-5e30a78bcd83",
+          "index": 21,
+          "title": "المحاضرة 18 (واجبات المتسعة منفردة (الجزء الثاني))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/2c86a842-af9d-49a8-97af-e0244fb342ca",
+          "index": 22,
+          "title": "المحاضرة 19 (ربط المتسعات على التوازي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/e0a5861c-0bf6-4564-989d-78ff5388e82c",
+          "index": 23,
+          "title": "المحاضرة 20 (ربط المتسعات على التوازي (الجزء الثاني))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/39fde436-9888-4499-87b4-48e9b112d72b",
+          "index": 24,
+          "title": "المحاضرة 21 (ربط المتسعات على التوازي بوجود العازل)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/c3a8cd7d-a9d9-41e9-b87c-0fa8ae033509",
+          "index": 25,
+          "title": "المحاضرة 22 (مسائل ربط المتسعات على التوازي بوجود العازل)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/a27b5811-c6f5-476a-863d-c8d04f161e3e",
+          "index": 26,
+          "title": "المحاضرة 23 (مسائل ربط المتسعات على التوازي والعازل مجهول)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/4236d132-408a-41fa-88a0-5acd5da31f90",
+          "index": 27,
+          "title": "المحاضرة 24 (افكار عن المتسعات المربوطة على التوازي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/7a07e670-2e0a-403f-8be0-5695451133fc",
+          "index": 28,
+          "title": "المحاضرة 25 (حل واجبات المتسعات المربوطة على التوازي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/0b5afd86-8429-4ad6-abef-700a197a47c1",
+          "index": 29,
+          "title": "(المحاضرة 26 (المتسعات المربوطة على التوالي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/89ef878b-ee1d-4857-bbdd-acf043af1326",
+          "index": 30,
+          "title": "المحاضرة 27 (مسائل المتسعات المربوطة على التوالي)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/2220c52f-a4e3-4f78-b5f9-8aafdd02d737",
+          "index": 31,
+          "title": "المحاضرة 28 (مسائل المتسعات المربوطة على التوالي بوجود العازل)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/cf45ebb0-49f8-4f7a-aa13-ec9b3de66a7b",
+          "index": 32,
+          "title": "المحاضرة 29 (مسائل المتسعات المربوطة على التوالي والعازل مجهول)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/a685f161-6939-41d9-806c-f3e42495dd57",
+          "index": 33,
+          "title": "(المحاضرة 30 (حل واجبات المتسعة المربوطة على التوالي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/34588462-cef6-4671-a2ed-68cc152ec7eb",
+          "index": 34,
+          "title": "المحاضرة 31 (مسائل ربط المختلط)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/d82a6ae7-b5e8-4fb5-9af5-15540775e5b6",
+          "index": 35,
+          "title": "المحاضرة 32 (مسائل الربط المختلط(الجزء الثاني))"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/4545d180-9eb9-45ef-91cd-4a6baf48dabd",
+          "index": 36,
+          "title": "المحاضرة 33 - مسائل الربط المختلط (الجزء الثالث)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/9c8c7a28-22f5-417c-b8d3-061cdae6ebe9",
+          "index": 37,
+          "title": "المحاضرة 34 - حل واجبات الربط المختلط"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/a299bb8e-75cb-4bec-bde8-e48e9f1031b3",
+          "index": 38,
+          "title": "المحاضرة 35 - بعض انواع المتسعات وتطبيقاتها"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/df2ebe16-c213-4f19-af6d-c39e6a99bc5c",
+          "index": 39,
+          "title": "(RC)المحاضرة 36 - كلاميات دوائر"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/a271c53b-387c-4f2e-aeb9-f6b4a820ebc9",
+          "index": 40,
+          "title": "المحاضرة 37- مسائل دوائر RC ( النوع الأول)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/32a0d73e-0ec3-4bb7-a575-6dbf8be6f530",
+          "index": 41,
+          "title": "المحاضرة 38- حل مسائل دوائر RC ( النوع الثاني)"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/7dad7e77-9032-4e0e-920d-33395ea9a37c",
+          "index": 42,
+          "title": "RCالمحاضرة 39 - حل واجبات دوائر"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/48b555b8-e1d2-4b54-8ead-c26b02876d95",
+          "index": 43,
+          "title": "المحاضرة 40 - حل اسئلة الفصل الأول"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "الفصل الثاني: الحث الكهرومغناطيسي",
+      "listed_count": 22,
+      "observed_count": 22,
+      "lessons": [
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/ce89eba9-8721-4d51-b2cc-e2dfcb88ef1e",
+          "index": 1,
+          "title": "المحاضرة 1 - الأساسيات"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/90085bb3-28b0-4d54-8321-da3a3f56d1c5",
+          "index": 2,
+          "title": "المحاضرة 2 - تكملة الأساسيات"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/56713f15-b60c-4ef9-bba2-112bd0e3b5be",
+          "index": 3,
+          "title": "المحاضرة 3 - الحث الكهرومغناطيسي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/5b4f8f7b-f1bf-4cbe-ae7d-d9a08fffc21f",
+          "index": 4,
+          "title": "المحاضرة 4 - الساق الموصلة"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/24ade600-8d8c-4e06-99b8-06712b33dc4e",
+          "index": 5,
+          "title": "المحاضرة 5 - تكملة الساق الموصلة"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/00dc1547-2c3a-441a-bde7-2280f7d1638a",
+          "index": 6,
+          "title": "المحاضرة 6 - مسائل الساق الموصلة"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/300fc1f7-adbc-4858-b80d-b14adeaad75a",
+          "index": 7,
+          "title": "المحاضرة 7 - الحلقة والملف"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/eea77995-6bfd-4041-b001-941eb5081cc9",
+          "index": 8,
+          "title": "المحاضرة 8 - طرق الحصول على تغير في الفيض المغناطيسي لحلقة او ملف"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/edf6656d-0fbc-4335-ae99-aff90758b36d",
+          "index": 9,
+          "title": "المحاضرة 9 - قانون فراداي وقانون لنز"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/d84ccb9e-29fe-43dc-8e57-b91b354ee3e0",
+          "index": 10,
+          "title": "المحاضرة 10 - قانون لنز"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/14ff719b-cdb0-4e45-b8f8-8358a0342c69",
+          "index": 11,
+          "title": "المحاضرة 11- مسائل الحلقة والملف"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/295e42b8-9842-4d40-a54b-d8712c6179fd",
+          "index": 12,
+          "title": "المحاضرة 12 - حل واجبات الحلقة والملف"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/4af780cd-2061-4a66-836a-bfc6946c4882",
+          "index": 13,
+          "title": "المحاضرة 13 - التيارات الدوامة"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/5543e5a8-dd5f-478a-85ea-a41374f79722",
+          "index": 14,
+          "title": "المحاضرة 14 - المولدات الكهربائية"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/976d8dbe-4cd0-4528-91bc-a42a7a6f1d40",
+          "index": 15,
+          "title": "المحاضرة 15 - المولدات والمحركات الكهربائية للتيار المستمر"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/86b746c6-9093-4250-8217-50a2145a7123",
+          "index": 16,
+          "title": "المحاضرة 16 - مسائل التيارات الدوامة"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/2306a92b-37ed-4e10-918a-3c7cbbc4c644",
+          "index": 17,
+          "title": "المحاضرة 17 - الحث الذاتي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/8013fc88-42aa-493a-97d7-19c5ca7e4fb3",
+          "index": 18,
+          "title": "المحاضرة 18 - الطاقة المختزنة في المحث"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/97401fff-4c10-4c18-9e17-a309b7369b6e",
+          "index": 19,
+          "title": "المحاضرة 19 - تكملة الحث الذاتي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/33e2009c-432d-4f73-9850-51cf21489086",
+          "index": 20,
+          "title": "المحاضرة 20 - مسائل الحث الذاتي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/ca713dc3-c137-4163-84b2-3ca60e3aee2b",
+          "index": 21,
+          "title": "المحاضرة 21 - تكملة مسائل الحث الذاتي"
+        },
+        {
+          "url": "https://iframe.mediadelivery.net/embed/215061/b1c25e96-597d-46e0-8201-ad0718c8fd93",
+          "index": 22,
+          "title": "المحاضرة 22 - الحث المتبادل"
+        }
+      ]
+    }
+  ]
+}
