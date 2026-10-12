@@ -1,0 +1,27 @@
+{
+  "teacher": "يوسف الربيعي",
+  "subject": "الكيمياء",
+  "batch": "2026",
+  "source": "https://agent.tinyfish.ai/runs/9b57a347-8172-4595-8185-5308a8fdd661",
+  "extracted_chapters": 1,
+  "extracted_lessons": 1,
+  "public_urls_seen": 1,
+  "known_missing_lessons": 0,
+  "notes": "الفصل الوحيد الظاهر على بطاقة المدرس هو الفصل الأول: الثرموداينمك. المحاضرة الوحيدة المرصودة هي محاضرة 1 مع الرابط الظاهر في onclick Data.playLecture. لم تظهر فصول أخرى على الصفحة، وقد يتم إخفاؤها أو تحميلها ديناميكياً.",
+  "warning": "الناتج يضم فقط ما ظهر في الفحص. أعداد وصفية غير متطابقة في نتيجة الأداة لا تُعتمد. لم يختبر التشغيل.",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "الفصل الاول: الثرموداينمك",
+      "listed_count": 1,
+      "observed_count": 1,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "محاضرة 1",
+          "url": "https://vz-99e5c202-ca5.b-cdn.net/9896e8e3-1eb4-4493-993b-689b3722595d/1080p/video.m3u8"
+        }
+      ]
+    }
+  ]
+}
