@@ -83,6 +83,7 @@ public class PlayerActivity extends AppCompatActivity {
         LinearLayout line3=Ui.row(this);
         favorite=addAction(line3,"☆ المفضلة",false,this::toggleFavorite);
         finished=addAction(line3,"○ مكتملة",false,this::toggleCompleted);
+        addAction(line3,"إعادة المحاولة",false,this::load);
         actions.addView(line3,Ui.top(this,-1,43,9));
         details.addView(actions,Ui.top(this,-1,-2,10));
         LinearLayout tabs=Ui.row(this);
@@ -173,7 +174,7 @@ public class PlayerActivity extends AppCompatActivity {
         setStatus("جاري تهيئة مشغّل المحاضرة...");
     }
     private void destroyPlayback(){
-        if(player!=null){savePosition();if(playerView!=null)playerView.setPlayer(null);player.release();player=null;}
+        if(player!=null){if(playerView!=null)playerView.setPlayer(null);player.release();player=null;}
         if(web!=null){web.loadUrl("about:blank");web.stopLoading();web.destroy();web=null;}
         videoBox.removeAllViews();playerView=null;
     }
