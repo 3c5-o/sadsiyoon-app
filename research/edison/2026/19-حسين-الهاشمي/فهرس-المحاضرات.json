@@ -1,1056 +1,1055 @@
 {
   "teacher": "حسين الهاشمي",
+  "batch": "2026",
   "subject": "كيمياء",
-  "batch": 2026,
-  "chapters_observed": 6,
-  "lessons_observed": 142,
-  "public_urls_observed": 142,
-  "known_missing_lessons": 0,
-  "unusual_links": 1,
-  "verified_playback": 0,
-  "source": "https://agent.tinyfish.ai/runs/61ef53bb-8108-4e87-9ada-2f038585c9e1",
-  "notes": "الناتج كامل وشامل لجميع 6 فصول و 163 محاضرة موزعة على دفعة 2026 لمدرسة حسين الهاشمي (كيمياء). جميع الروابط هي HTTPS حقيقية مستخرجة من واجهات Data.playLecture في DOM. الروابط في الفصل الأول تستضيف على ok.ru و vk.com، بينما الفصول من 2 إلى 6 تستضيف على workers.dev. لا توجد مشاهدات جزئية.",
-  "warning": "الروابط المرصودة من موقع خارجي ولم يختبر تشغيلها؛ وجودها لا يضمن صلاحيتها أو إذن إعادة التوزيع.",
+  "source_run": "https://agent.tinyfish.ai/runs/61ef53bb-8108-4e87-9ada-2f038585c9e1",
+  "observed_chapters": 6,
+  "observed_lessons": 142,
+  "public_urls_recorded": 142,
+  "temporary_links_redacted": 0,
+  "unverified_playback_count": 142,
+  "source_declared_total_in_notes": "الناتج كامل وشامل لجميع 6 فصول و 163 محاضرة موزعة على دفعة 2026 لمدرسة حسين الهاشمي (كيمياء). جميع الروابط هي HTTPS حقيقية مستخرجة من واجهات Data.playLecture في DOM. الروابط في الفصل الأول تستضيف على ok.ru و vk.com، بينما الفصول من 2 إلى 6 تستضيف على workers.dev. لا توجد مشاهدات جزئية.",
+  "coverage": "الأقسام التي ظهرت في هذا الفحص فقط؛ لا تأكيد تشغيل لكل رابط",
   "chapters": [
     {
       "index": 1,
       "title": "الفصل الاول",
-      "listed_count": 35,
+      "declared_count": 35,
       "observed_count": 35,
       "lessons": [
         {
           "index": 1,
           "title": "المحاضرة 1",
           "url": "https://ok.ru/videoembed/14912008161795",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 2,
           "title": "المحاضرة 2",
           "url": "https://ok.ru/videoembed/14912007768579",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 3,
           "title": "المحاضرة 3",
           "url": "https://ok.ru/videoembed/14912007965187",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 4,
           "title": "المحاضرة 4",
           "url": "https://ok.ru/videoembed/14912007834115",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 5,
           "title": "المحاضرة 5",
           "url": "https://ok.ru/videoembed/14912008227331",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 6,
           "title": "المحاضرة 6",
           "url": "https://ok.ru/videoembed/14912008096259",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 7,
           "title": "المحاضرة 7",
           "url": "https://ok.ru/videoembed/14857147648515",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 8,
           "title": "المحاضرة 8",
           "url": "https://ok.ru/videoembed/14858145237507",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 9,
           "title": "المحاضرة 9",
           "url": "https://ok.ru/videoembed/14858145368579",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 10,
           "title": "المحاضرة 10",
           "url": "https://ok.ru/videoembed/14858145303043",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 11,
           "title": "المحاضرة 11",
           "url": "https://ok.ru/videoembed/14858145171971",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 12,
           "title": "المحاضرة 12",
           "url": "https://ok.ru/videoembed/14858155395587",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 13,
           "title": "المحاضرة 13",
           "url": "https://ok.ru/videoembed/14858155330051",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 14,
           "title": "المحاضرة 14",
           "url": "https://ok.ru/videoembed/14858155264515",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 15,
           "title": "المحاضرة 15",
           "url": "https://ok.ru/videoembed/14858240395779",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 16,
           "title": "المحاضرة 16",
           "url": "https://ok.ru/videoembed/14858240330243",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 17,
           "title": "المحاضرة 17",
           "url": "https://ok.ru/videoembed/14858240461315",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 18,
           "title": "المحاضرة 18",
           "url": "https://ok.ru/videoembed/14858240199171",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 19,
           "title": "المحاضرة 19",
           "url": "https://ok.ru/videoembed/14858240068099",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 20,
           "title": "المحاضرة 20",
           "url": "https://ok.ru/videoembed/14858240133635",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 21,
           "title": "المحاضرة 21",
           "url": "https://ok.ru/videoembed/14858240526851",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 22,
           "title": "المحاضرة 22",
           "url": "https://ok.ru/videoembed/14858260515331",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 23,
           "title": "المحاضرة 23",
           "url": "https://ok.ru/videoembed/14858260580867",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 24,
           "title": "المحاضرة 24",
           "url": "https://ok.ru/videoembed/14858260646403",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 25,
           "title": "المحاضرة 25",
           "url": "https://ok.ru/videoembed/14858296232451",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 26,
           "title": "المحاضرة 26",
           "url": "https://ok.ru/videoembed/14858296297987",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 27,
           "title": "المحاضرة 27",
           "url": "https://ok.ru/videoembed/14858351413763",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 28,
           "title": "المحاضرة 28",
           "url": "https://ok.ru/videoembed/14858351348227",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 29,
           "title": "المحاضرة 29",
           "url": "https://ok.ru/videoembed/14858352003587",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 30,
           "title": "المحاضرة 30",
           "url": "https://vk.com/video_ext.php?oid=-239031674&id=456239050",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 31,
           "title": "المحاضرة 31",
           "url": "https://vk.com/video_ext.php?oid=-239031674&id=456239051",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 32,
           "title": "المحاضرة 32",
           "url": "https://vk.com/video_ext.php?oid=-239031674&id=456239052",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 33,
           "title": "المحاضرة 33",
           "url": "https://vk.com/video_ext.php?oid=-239031674&id=456239057",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 34,
           "title": "المحاضرة 34",
           "url": "https://vkvideo.ru/video_ext.php?oid=-239031674&id=456239055",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         },
         {
           "index": 35,
           "title": "المحاضرة 35",
           "url": "https://vk.com/video_ext.php?oid=-239031674&id=456239058",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "embed",
+          "verification": "رابط صفحة عرض خارجي؛ غير مختبر"
         }
       ]
     },
     {
       "index": 2,
       "title": "الفصل الثاني",
-      "listed_count": 35,
+      "declared_count": 35,
       "observed_count": 35,
       "lessons": [
         {
           "index": 1,
           "title": "المحاضرة 1",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_1791366402.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 2,
           "title": "المحاضرة 2",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_1791366402.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 3,
           "title": "محاضرة 3",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_a762c078_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 4,
           "title": "محاضرة 4",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_0df7b913_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 5,
           "title": "محاضرة 5",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_250fe91c_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 6,
           "title": "محاضرة 6",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_7f65aa18_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 7,
           "title": "محاضرة 7",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_9afe4b66_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 8,
           "title": "محاضرة 8",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_006_0bedb95c_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 9,
           "title": "محاضرة 9",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_cfdf2eb7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 10,
           "title": "محاضرة 10",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_1791404635.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 11,
           "title": "محاضرة 11",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_1791404834.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 12,
           "title": "محاضرة 12",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_005_1791405107.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 13,
           "title": "محاضرة 13",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_006_1791405206.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 14,
           "title": "محاضرة 14",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_008_1791405682.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 15,
           "title": "محاضرة 15",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_009_1791405717.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 16,
           "title": "محاضرة 16",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_010_1791407237.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 17,
           "title": "محاضرة 17",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_1791449167.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 18,
           "title": "محاضرة 18",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_1791449303.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 19,
           "title": "محاضرة 19",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_1791451297_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 20,
           "title": "محاضرة 20",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_96bdea09_master.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 21,
           "title": "محاضرة 21",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_04bb2e5b_master.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 22,
           "title": "محاضرة 22",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_acc70ec0_master.m3u8",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "HLS",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 23,
           "title": "محاضرة 23",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_b736d6b8_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 24,
           "title": "محاضرة 24",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_1201b5b2_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 25,
           "title": "محاضرة 25",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_3c0a1319_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 26,
           "title": "محاضرة 26",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_0191fdf7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 27,
           "title": "محاضرة 27",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_005_25d906c2_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 28,
           "title": "محاضرة 28",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_006_23a5aede_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 29,
           "title": "محاضرة 29",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_007_cc0be6a7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 30,
           "title": "محاضرة 30",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_008_968d63ac_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 31,
           "title": "محاضرة 31",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_ad47c941_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 32,
           "title": "اسئلة الفصل 32",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_6c70017a_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 33,
           "title": "اسئلة الفصل تكملة 33",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_87491c9e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 34,
           "title": "مراجعة 34",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_7369f962_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 35,
           "title": "مراجعة تكملة 35",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_005_ea1b514e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         }
       ]
     },
     {
       "index": 3,
       "title": "الفصل الثالث",
-      "listed_count": 31,
+      "declared_count": 31,
       "observed_count": 31,
       "lessons": [
         {
           "index": 1,
           "title": "محاضرة 1",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_9ba386ed_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 2,
           "title": "محاضرة 2",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_2da62534_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 3,
           "title": "محاضرة 3",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_08e7762a_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 4,
           "title": "محاضرة 4",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_4ba72da4_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 5,
           "title": "محاضرة 5",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_bd20d276.m3u",
-          "suspicious": true,
-          "verified_playback": false
+          "url_type": "other",
+          "verification": "صيغة m3u غير مثبتة؛ تحتاج اختبار"
         },
         {
           "index": 6,
           "title": "محاضرة 6",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_a8b59a9f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 7,
           "title": "محاضرة 7",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_05d3abab_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 8,
           "title": "محاضرة 8",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_e2c3546d_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 9,
           "title": "محاضرة 9",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_f144f073_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 10,
           "title": "محاضرة 10",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_6269463e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 11,
           "title": "محاضرة 11",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_83e6c371_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 12,
           "title": "محاضرة 12",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_700a4e8e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 13,
           "title": "محاضرة 13",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_249c4f03_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 14,
           "title": "محاضرة 14",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_83f1571f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 15,
           "title": "محاضرة 15",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_55053f31_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 16,
           "title": "محاضرة 16",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_049481d4_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 17,
           "title": "محاضرة 17",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_05081e7d_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 18,
           "title": "محاضرة 18",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_80c824d6_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 19,
           "title": "محاضرة 19",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_9a0d660d_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 20,
           "title": "محاضرة 20",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_3a5b11f3_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 21,
           "title": "محاضرة 21",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_5c278930_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 22,
           "title": "محاضرة 22",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_13b318a6_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 23,
           "title": "محاضرة 23",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_73f87438_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 24,
           "title": "محاضرة 24",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_e0907b4a_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 25,
           "title": "المحاضرة 25",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_f7e5d48e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 26,
           "title": "المحاضرة 26",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_43434809_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 27,
           "title": "المحاضرة 27",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_613d6669_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 28,
           "title": "المحاضرة 28",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_3f23026e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 29,
           "title": "المحاضرة 29",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_c90f9f79_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 30,
           "title": "المحاضرة 30",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_95b59c62_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 31,
           "title": "المحاضرة 31",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_4e05d0a7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         }
       ]
     },
     {
       "index": 4,
       "title": "الفصل الرابع",
-      "listed_count": 19,
+      "declared_count": 19,
       "observed_count": 19,
       "lessons": [
         {
           "index": 1,
           "title": "محاضرة 1",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_b1f21608_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 2,
           "title": "محاضرة 2",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_c3b128cd_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 3,
           "title": "محاضرة 3",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_56527815_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 4,
           "title": "محاضرة 4",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_e244d9b8_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 5,
           "title": "محاضرة 5",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_b5c27c87_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 6,
           "title": "محاضرة 6",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_7e1026c1_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 7,
           "title": "محاضرة 7",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_3a59a039_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 8,
           "title": "محاضرة 8",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_e6e1b449_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 9,
           "title": "محاضرة 9",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_09072e03_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 10,
           "title": "محاضرة 10",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_6507232a_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 11,
           "title": "محاضرة 11",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_4a6d94a7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 12,
           "title": "محاضرة 12",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_f30126b2_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 13,
           "title": "محاضرة 13",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_4a544b9f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 14,
           "title": "محاضرة 14",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_9c62c02f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 15,
           "title": "محاضرة 15",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_855c2eb7_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 16,
           "title": "محاضرة 16",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_03c1f1be_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 17,
           "title": "محاضرة 17",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_83865c9e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 18,
           "title": "محاضرة 18",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_85903316_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 19,
           "title": "محاضرة 19",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_04e5a465_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         }
       ]
     },
     {
       "index": 5,
       "title": "الفصل الخامس",
-      "listed_count": 10,
+      "declared_count": 10,
       "observed_count": 10,
       "lessons": [
         {
           "index": 1,
           "title": "محاضرة 1",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_327c4e5c_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 2,
           "title": "محاضرة 2",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_6023e1e8_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 3,
           "title": "محاضرة 3",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_89483235_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 4,
           "title": "محاضرة 4",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_9912f955_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 5,
           "title": "محاضرة 5",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_4d80b792_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 6,
           "title": "محاضرة 6",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_758d0e2e_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 7,
           "title": "محاضرة 7",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_2e3c4c16_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 8,
           "title": "محاضرة 8",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_152f82a5_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 9,
           "title": "محاضرة 9",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_c70e23a2_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 10,
           "title": "المحاضرة 10",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_28e1895f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         }
       ]
     },
     {
       "index": 6,
       "title": "الفصل السادس",
-      "listed_count": 12,
+      "declared_count": 12,
       "observed_count": 12,
       "lessons": [
         {
           "index": 1,
           "title": "المحاضرة 1",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_5a523e6c_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 2,
           "title": "المحاضرة 2",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_d8f1877f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 3,
           "title": "المحاضرة 3",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_17b7c252_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 4,
           "title": "المحاضرة 4",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_d8b90c8b_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 5,
           "title": "المحاضرة 5",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_b140b198_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 6,
           "title": "المحاضرة 6",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_2544b861_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 7,
           "title": "المحاضرة 7",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_f1f18a9f_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 8,
           "title": "المحاضرة 8",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_b3a12d93_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 9,
           "title": "المحاضرة 9",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_039f6d00_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 10,
           "title": "المحاضرة 10",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_63418e3b_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 11,
           "title": "المحاضرة 11",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_85016db4_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         },
         {
           "index": 12,
           "title": "المحاضرة 12",
           "url": "https://withered-base-1067.hmyzxvb.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_0c88df2c_original.mp4",
-          "suspicious": false,
-          "verified_playback": false
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
         }
       ]
     }
