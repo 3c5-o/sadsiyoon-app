@@ -1,0 +1,426 @@
+{
+  "teacher": "حيدر عبدالائمة 2026",
+  "batch": 2026,
+  "subject": "الرياضيات",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "الفصل الأول: الأعداد المركبة",
+      "lecture_count": 40,
+      "lectures": [
+        {
+          "index": 0,
+          "title": "المحاضرة التعريفية",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_012_1789279642.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 1,
+          "title": "المحاضرة الأولى – مقدمة عن الأعداد المركبة",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_001_1789278887.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة الثانية – أسس الأعداد المركبة",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_002_1789278927.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة الثالثة – العدد المركب",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_003_1789278974.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 4,
+          "title": "المحاضرة الرابعة – ضرب الأعداد المركبة",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_004_1789279051.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 5,
+          "title": "المحاضرة الخامسة – مرافق العدد المركب",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_017_1789279826.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة السادسة – تبسيط العدد المركب",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_018_1789279885.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة السابعة – تبسيط العدد المركب (الجزء الثاني)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_019_1789279925.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة الثامنة – إيجاد الثوابت X,Y",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_020_1789279969.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 9,
+          "title": "المحاضرة التاسعة – وزاريات إيجاد الثوابت X,Y",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_021_1789280028.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 10,
+          "title": "المحاضرة العاشرة – وزاريات إيجاد الثوابت X,Y (الجزء الثاني)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_022_1789280061.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 11,
+          "title": "المحاضرة الحادية عشرة – وزاريات إيجاد الثوابت X,Y (الجزء الثالث)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_023_1789280130.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 12,
+          "title": "المحاضرة الثانية عشرة – تحليل الفرق بين مربعين",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_024_1789280159.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 13,
+          "title": "المحاضرة الثالثة عشرة – الجذور التربيعية للعدد المركب",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_025_1789280213.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 14,
+          "title": "المحاضرة الرابعة عشرة – الجذور التربيعية للعدد المركب (النوع الثالث)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_026_1789280243.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 15,
+          "title": "المحاضرة الخامسة عشرة – حل المعادلة من الدرجة الثانية",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_027_1789280295.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 16,
+          "title": "المحاضرة السادسة عشرة – حل المعادلة من الدرجة الثانية (وزاريات)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_028_1789280338.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 17,
+          "title": "المحاضرة السابعة عشرة – تكوين المعادلة التربيعية",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_029_1789280382.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 18,
+          "title": "المحاضرة الثامنة عشرة – إيجاد الثوابت في المعادلة التربيعية",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_030_1789280422.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 19,
+          "title": "المحاضرة التاسعة عشرة – إيجاد الثوابت في المعادلة التربيعية (وزاريات)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_031_1789280464.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 20,
+          "title": "المحاضرة العشرون – التمثيل الهندسي للأعداد المركبة (شكل أرجاند)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_032_1789280503.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 21,
+          "title": "المحاضرة الحادية والعشرون – المقياس والقيمة الأساسية للسعة",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_033_1789280542.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 22,
+          "title": "المحاضرة الثانية والعشرون – الزوايا في ديموافر",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_034_1789280597.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 23,
+          "title": "ديموافر – الأسئلة الوزارية",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_035_1789280647.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 24,
+          "title": "المحاضرة الرابعة والعشرون – مبرهنة ديموافر",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_036_1789280699.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 25,
+          "title": "تطبيق مبرهنة ديموافر",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_037_1789280744.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 26,
+          "title": "المحاضرة السادسة والعشرون – مبرهنة ديموافر (وزاريات)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_038_1789280781.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 27,
+          "title": "المحاضرة السابعة والعشرون – مبرهنة ديموافر (إثرائيات)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_039_1789280817.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 28,
+          "title": "المحاضرة الثامنة والعشرون – مبرهنة ديموافر (الأسئلة الوزارية)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_040_1789280858.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 29,
+          "title": "المحاضرة التاسعة والعشرون – نتيجة مبرهنة ديموافر",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_041_1789280900.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 30,
+          "title": "المحاضرة الثلاثون – وزاريات نتيجة مبرهنة ديموافر",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_042_1789280945.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 31,
+          "title": "المحاضرة الحادية والثلاثون – وزاريات نتيجة مبرهنة ديموافر (الجزء الثاني)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_043_1789280987.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 32,
+          "title": "المحاضرة الثانية والثلاثون – الأوميكا",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_044_1789281027.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 33,
+          "title": "المحاضرة الثالثة والثلاثون – وزاريات الأوميكا",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_045_1789281086.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 34,
+          "title": "المحاضرة الرابعة والثلاثون – وزاريات الأوميكا (الجزء الثاني)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_046_1789281136.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 35,
+          "title": "المحاضرة الخامسة والثلاثون – المحاضرة الأخيرة",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_047_1789281178.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 36,
+          "title": "مراجعة الفصل الأول – الجزء الأول",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_010_1789279520.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 37,
+          "title": "مراجعة الفصل الأول – الجزء الثاني",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_008_1789279299.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 38,
+          "title": "مراجعة الفصل الأول – الجزء الثالث",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_009_1789279395.m3u8",
+          "playback_tested": false
+        },
+        {
+          "index": 39,
+          "title": "إثرائيات الفصل الأول",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_011_1789279616.m3u8",
+          "playback_tested": false
+        }
+      ],
+      "source": "استخراج سابق موثق بقائمة حيدر"
+    },
+    {
+      "index": 2,
+      "title": "الفصل الثاني: القطوع المخروطية",
+      "lecture_count": 23,
+      "lectures": [
+        {
+          "index": 0,
+          "title": "(المحاضرة 1 (القطع المكافئ",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_048_1789281227.m3u8",
+          "source_attribute": "Data.playLecture(1, 0, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_048_1789281227.m3u8','(المحاضرة 1 (القطع المكافئ','')",
+          "playback_tested": false
+        },
+        {
+          "index": 1,
+          "title": "المحاضرة 2 (القطع المكافئ - الجزء الثاني)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_049_1789281287.m3u8",
+          "source_attribute": "Data.playLecture(1, 1, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_049_1789281287.m3u8','المحاضرة 2 (القطع المكافئ - الجزء الثاني)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 2,
+          "title": "(المحاضرة 3 (وزاريات القطع المكافئ",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_050_1789281352.m3u8",
+          "source_attribute": "Data.playLecture(1, 2, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_050_1789281352.m3u8','(المحاضرة 3 (وزاريات القطع المكافئ','')",
+          "playback_tested": false
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة 4 (تعريف القطع المكافئ)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_051_1789281403.m3u8",
+          "source_attribute": "Data.playLecture(1, 3, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_051_1789281403.m3u8','المحاضرة 4 (تعريف القطع المكافئ)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 4,
+          "title": "المحاضرة 5 (القطع الناقص)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_052_1789281466.m3u8",
+          "source_attribute": "Data.playLecture(1, 4, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_052_1789281466.m3u8','المحاضرة 5 (القطع الناقص)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 5,
+          "title": "محاضرة 6 (وزاريات القطع الناقص)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_053_1789281514.m3u8",
+          "source_attribute": "Data.playLecture(1, 5, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_053_1789281514.m3u8','محاضرة 6 (وزاريات القطع الناقص)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة 7 (ملاحظات القطع الناقص)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_054_1789281557.m3u8",
+          "source_attribute": "Data.playLecture(1, 6, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_054_1789281557.m3u8','المحاضرة 7 (ملاحظات القطع الناقص)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة 8 (ملاحظات القطع الناقص (الجزء الثاني))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_055_1789281594.m3u8",
+          "source_attribute": "Data.playLecture(1, 7, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_055_1789281594.m3u8','المحاضرة 8 (ملاحظات القطع الناقص (الجزء الثاني))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة 9 (ملاحظات القطع الناقص (الجزء الثالث))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_056_1789281629.m3u8",
+          "source_attribute": "Data.playLecture(1, 8, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_056_1789281629.m3u8','المحاضرة 9 (ملاحظات القطع الناقص (الجزء الثالث))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 9,
+          "title": "المحاضرة 10 (ملاحظات القطع الناقص (الجزء الرابع))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_057_1789281680.m3u8",
+          "source_attribute": "Data.playLecture(1, 9, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_057_1789281680.m3u8','المحاضرة 10 (ملاحظات القطع الناقص (الجزء الرابع))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 10,
+          "title": "المحاضرة 11 (ملاحظات القطع الناقص (الجزء الخامس))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_058_1789281716.m3u8",
+          "source_attribute": "Data.playLecture(1, 10, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_058_1789281716.m3u8','المحاضرة 11 (ملاحظات القطع الناقص (الجزء الخامس))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 11,
+          "title": "المحاضرة 12 (ملاحظات القطع الناقص (الجزء السادس))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_059_1789281774.m3u8",
+          "source_attribute": "Data.playLecture(1, 11, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_059_1789281774.m3u8','المحاضرة 12 (ملاحظات القطع الناقص (الجزء السادس))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 12,
+          "title": "المحاضرة 13 (تعريف القطع الناقص)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_060_1789281828.m3u8",
+          "source_attribute": "Data.playLecture(1, 12, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_060_1789281828.m3u8','المحاضرة 13 (تعريف القطع الناقص)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 13,
+          "title": "المحاضرة 14 (الأسئلة الإثرائية عن القطع الناقص)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_061_1789281876.m3u8",
+          "source_attribute": "Data.playLecture(1, 13, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_061_1789281876.m3u8','المحاضرة 14 (الأسئلة الإثرائية عن القطع الناقص)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 14,
+          "title": "المحاضرة 15 (القطع الزائد)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_062_1789281920.m3u8",
+          "source_attribute": "Data.playLecture(1, 14, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_062_1789281920.m3u8','المحاضرة 15 (القطع الزائد)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 15,
+          "title": "المحاضرة 16 (ملاحظات القطع الزائد)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_063_1789281962.m3u8",
+          "source_attribute": "Data.playLecture(1, 15, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_063_1789281962.m3u8','المحاضرة 16 (ملاحظات القطع الزائد)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 16,
+          "title": "المحاضرة 17 (وزاريات القطع الزائد)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_064_1789282010.m3u8",
+          "source_attribute": "Data.playLecture(1, 16, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_064_1789282010.m3u8','المحاضرة 17 (وزاريات القطع الزائد)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 17,
+          "title": "المحاضرة 18 (وزاريات الربط بين القطع الزائد والناقص والمكافئ)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_065_1789282071.m3u8",
+          "source_attribute": "Data.playLecture(1, 17, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_065_1789282071.m3u8','المحاضرة 18 (وزاريات الربط بين القطع الزائد والناقص والمكافئ)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 18,
+          "title": "المحاضرة 19 (طول نصف القطر البؤري)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/c94e8eb2-b766-4514-aa9f-7d4a0ebcf853",
+          "source_attribute": "Data.playLecture(1, 18, 'https://iframe.mediadelivery.net/embed/215061/c94e8eb2-b766-4514-aa9f-7d4a0ebcf853','المحاضرة 19 (طول نصف القطر البؤري)','تم صنع المنصة من قبل المطور حميدو 🤍')",
+          "playback_tested": false
+        },
+        {
+          "index": 19,
+          "title": "المحاضرة 20 (وزاريات القطع الزائد (النمط المختلف))",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_001_1789290109.m3u8",
+          "source_attribute": "Data.playLecture(1, 19, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_001_1789290109.m3u8','المحاضرة 20 (وزاريات القطع الزائد (النمط المختلف))','')",
+          "playback_tested": false
+        },
+        {
+          "index": 20,
+          "title": "المحاضرة 21 (انسحاب القطع المكافئ)",
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_002_1789290150.m3u8",
+          "source_attribute": "Data.playLecture(1, 20, 'https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_002_1789290150.m3u8','المحاضرة 21 (انسحاب القطع المكافئ)','')",
+          "playback_tested": false
+        },
+        {
+          "index": 21,
+          "title": "مراجعة الفصل الثاني (الجزء الاول)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/f17da231-e623-45fc-82bf-16df602427e4",
+          "source_attribute": "Data.playLecture(1, 21, 'https://iframe.mediadelivery.net/embed/215061/f17da231-e623-45fc-82bf-16df602427e4','مراجعة الفصل الثاني (الجزء الاول)','تم صنع المنصة من قبل المطور حميدو 🤍')",
+          "playback_tested": false
+        },
+        {
+          "index": 22,
+          "title": "مراجعة الفصل الثاني (الجزء الثاني)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/3004c013-cbd1-4c48-aa6c-6f0d0fd18a33",
+          "source_attribute": "Data.playLecture(1, 22, 'https://iframe.mediadelivery.net/embed/215061/3004c013-cbd1-4c48-aa6c-6f0d0fd18a33','مراجعة الفصل الثاني (الجزء الثاني)','تم صنع المنصة من قبل المطور حميدو 🤍')",
+          "playback_tested": false
+        }
+      ],
+      "source": "https://agent.tinyfish.ai/runs/ac870a35-7a44-4984-a438-f25041dfcfed"
+    }
+  ],
+  "chapter_coverage": "الفصلان 1 و2 فقط",
+  "playback_tested_count": 0
+}
