@@ -1,0 +1,307 @@
+{
+  "teacher": "ساجد العكيلي",
+  "batch": "2026",
+  "subject": "غير محددة",
+  "source_run": "https://agent.tinyfish.ai/runs/e33b3dd0-79f7-4350-9c35-edd32d2291c3",
+  "observed_chapters": 5,
+  "observed_lessons": 36,
+  "public_urls_recorded": 36,
+  "temporary_links_redacted": 0,
+  "unverified_playback_count": 36,
+  "source_declared_total_in_notes": "جميع الروابط مستخرجة من Data.playLecture(lessonIndex, lectureIndex, HTTPS_URL, 'LectureTitle', 'Description') الموجودة في onclick للصفحة. جميع الفصول والدراس الـ36 كاملة مرصودة.",
+  "coverage": "الأقسام التي ظهرت في هذا الفحص فقط؛ لا تأكيد تشغيل لكل رابط",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "الوحدة الاولى",
+      "declared_count": 7,
+      "observed_count": 7,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "سورة البقرة (الشرح الجديد)",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787144466_Lecture_1787144463.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "سورة البقرة ( التكملة الأدق ) ج2",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787144566_Lecture_1787144463.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "حديث التعاون بين المسلمين-ج1",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787144736_Lecture_1787144463.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "حديث التعاون بين المسلمين - ج2",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787145129_s3.mp4_%40btt5bot.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "النهي عن الغضب",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787147199_Lecture_1787147194.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "نظام الأسرة في الإسلام - ج1",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787147658_Lecture_1787147194.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "نظام الأسرة في الإسلام - ج2",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787148010_Lecture_1787147194.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "الوحدة الثانية",
+      "declared_count": 10,
+      "observed_count": 10,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "المحاضرة 1",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787148881_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة 2",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787148955_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة 3",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149022_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "المحاضرة 4",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149092_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "المحاضرة 5",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149167_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة 6",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149209_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة 7",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149274_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة 8",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787149827_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "المحاضرة 9",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787150098_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 10,
+          "title": "المحاضرة 10",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787150451_Lecture_1787148879.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "title": "الوحدة الثالثة",
+      "declared_count": 8,
+      "observed_count": 8,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "محاضرة 1",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_3df35ffd_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "محاضرة 2",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_91f48c36_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "محاضرة 3",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_363b061b_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "محاضرة 4",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_e43d2a25_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "محاضرة 5",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_005_b3456a4e_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "محاضرة 6",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_006_caa37ca4_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "محاضرة 7",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_007_1ccb0235_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "محاضرة 8",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_008_8f54a026_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "title": "الوحدة الرابعة",
+      "declared_count": 9,
+      "observed_count": 9,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "محاضرة 1",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_001_94c439b4_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "محاضرة 2",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_002_0007144c_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "محاضرة 3",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_003_f0eff4cd_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "محاضرة 4",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_004_cbaff191_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "محاضرة 5",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_005_61c4255e_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "محاضرة 6",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_006_62aa8d64_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "محاضرة 7",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_007_a1eba6cd_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "محاضرة 8",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_008_34a69adb_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "محاضرة 9",
+          "url": "https://floral-credit-1a8b.smyzxc.workers.dev/smyzx66-dot/housien/releases/download/v3/lec_009_b8e29e42_original.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "title": "المراجعة الكبرى",
+      "declared_count": 2,
+      "observed_count": 2,
+      "lessons": [
+        {
+          "index": 1,
+          "title": "المحاضرة 1",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787526478_1_Video_1787526477.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة 2",
+          "url": "https://github.com/smyzx66-dot/housien/releases/download/v1/1787526958_2_Video_1787526477.mp4",
+          "url_type": "MP4",
+          "verification": "مرصود من الواجهة؛ لم يُختبر التشغيل"
+        }
+      ]
+    }
+  ]
+}
