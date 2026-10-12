@@ -1,0 +1,60 @@
+{
+  "teacher": "مهند السوداني",
+  "subject": "الكيمياء",
+  "batch": "2026",
+  "source": "https://agent.tinyfish.ai/runs/0b4784e8-60cb-40c7-a56c-f0b6ffb5afe4",
+  "extraction_note": "الفصول غير مكتملة: لا يوجد declared_count محدد في DOM. الرابط م3u8 (HLS) وليس رابط YouTube مباشر.",
+  "status": "تم فهرسة الأقسام الظاهرة، لا تأكيد لشمول كامل المادة",
+  "extracted_lessons": 5,
+  "public_urls_seen": 5,
+  "known_missing_lessons": 0,
+  "stream_playback_tested": 0,
+  "chapters": [
+    {
+      "index": 0,
+      "title": "الاساسيات",
+      "listed_count": null,
+      "extracted_count": 4,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "محاضرة 1",
+          "url": "https://vz-99e5c202-ca5.b-cdn.net/e2684c45-e39e-487b-b885-38128feb9632/1080p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "محاضرة 1 الجزء الثاني",
+          "url": "https://vz-b26dd76f-dc1.b-cdn.net/8476d313-0533-439e-9560-b47630e0dd0b/480p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "محاضرة 2",
+          "url": "https://vz-b26dd76f-dc1.b-cdn.net/09213e06-c38b-4bf8-836f-5ebb182556f9/480p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "محاضرة 2 : الجزء الثاني",
+          "url": "https://vz-b26dd76f-dc1.b-cdn.net/14dda732-23d5-4110-a03f-25e57166c178/480p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "title": "الفصل الاول : الثرموداينمك",
+      "listed_count": null,
+      "extracted_count": 1,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "محاضرة 1 : مقدمة الثرموداينمك",
+          "url": "https://vz-b26dd76f-dc1.b-cdn.net/4be13215-4fe2-4f5d-875a-cdded674b64a/480p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    }
+  ]
+}
