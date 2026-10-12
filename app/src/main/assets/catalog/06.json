@@ -1,0 +1,506 @@
+{
+  "teacher": "رفل الزبيدي",
+  "subject": "اللغة العربية",
+  "batch": "2026",
+  "source": "https://agent.tinyfish.ai/runs/77ae0aef-80bf-4889-b6ff-e929ceb1800f",
+  "extraction_note": "الـ URLs مستخرجة حرفياً من PlayLecture onclick في HTML. رقم declared_count لكل فصل مُستمد من عدد الدروس الفعلية في الـ DOM. الفصل الأخير 'أسلوب التوكيد' يحتوي درساً واحداً فقط. جميع الـ URLs بصيغة .m3u8.",
+  "status": "فهرسة جزئية؛ توجد محاضرات معلنة غير مستخرجة",
+  "extracted_lessons": 74,
+  "public_urls_seen": 74,
+  "known_missing_lessons": 7,
+  "stream_playback_tested": 0,
+  "chapters": [
+    {
+      "index": 0,
+      "title": "الاساسيات",
+      "listed_count": 5,
+      "extracted_count": 5,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "أساسيات اللغة العربية (الجزء الثاني)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_001_1789302036.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "أساسيات اللغة العربية (الجزء الثالث)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_002_1789302079.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "امتحان الأساسيات التفاعلي (الجزء الاول)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_003_1789302109.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "أساسيات اللغة العربية (الجزء الرابع)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_004_1789302144.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "أساسيات اللغة العربية (الجزء الخامس)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_005_1789302192.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "title": "الاستفهام 2026",
+      "listed_count": 26,
+      "extracted_count": 26,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "اسلوب الاستفهام تعريفه وأنواعه و الاستفهام التصديقي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_006_1789302232.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "الاستفهام التصوري",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_007_1789302285.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "همزة التسوية وأنواع أم",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_008_1789302324.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "تحويل الاستفهام من نوع لآخر",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_009_1789302364.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "صيغ الأسئلة الوزارية الخاصة بـ (أنواع الاستفهام)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_010_1789302419.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "حل أسئلة الاستفهام الوزارية (الجزء الأول)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_011_1789302445.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "حل أسئلة الاستفهام الوزارية (الجزء الثاني)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_012_1789302468.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "حل اسئلة الاستفهام الوزارية (الجزء الثالث)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_013_1789302493.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "خصائص حرفا الاستفهام (الجزء الأول)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_014_1789302518.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "خصائص حرفي الاستفهام (الجزء الثاني)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_015_1789302582.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 10,
+          "title": "حل أسئلة الاستفهام الوزارية (الجزء الرابع)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_016_1789302623.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 11,
+          "title": "حل أسئلة الاستفهام الوزارية (الجزء الخامس)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_017_1789302652.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 12,
+          "title": "دلالات أسماء الاستفهام للعاقل وغير العاقل وإعرابها (الجزء الأول)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_018_1789302676.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 13,
+          "title": "دلالات أسماء الاستفهام للعاقل وغير العاقل وإعرابها (الجزء الثاني)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_019_1789302735.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 14,
+          "title": "إعراب أسماء الاستفهام الدالة على العاقل وغير العاقل",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_020_1789302777.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 15,
+          "title": "إعراب أسماء الاستفهام الدالة على العاقل وغير العاقل",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_021_1789302828.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 16,
+          "title": "إعراب أسماء الاستفهام الدالة على العاقل وغير العاقل",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_022_1789302893.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 17,
+          "title": "حل الأسئلة الوزارية الخاصة بإعراب أسماء الاستفهام - الجزء الاول",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_023_1789302955.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 18,
+          "title": "حل الأسئلة الوزارية الخاصة بإعراب أسماء الاستفهام - الجزء الثاني",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_024_1789302994.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 19,
+          "title": "أسماء الاستفهام الدالة على الزمان والمكان",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_025_1789303020.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 20,
+          "title": "وزاريات إعراب أسماء الاستفهام الدالة على الزمان والمكان",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_026_1789303069.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 21,
+          "title": "أسماء الاستفهام الدالة على الحال والدالة على الحدث",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_027_1789303091.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 22,
+          "title": "وزاريات إعراب أسماء الاستفهام الدالة على الحال والدالة على الحدث",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_028_1789303123.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 23,
+          "title": "كم الاستفهامية وكم الخبرية",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_029_1789303150.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 24,
+          "title": "الاستفهام المجازي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_030_1789303199.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 25,
+          "title": "وزاريات كم الاستفهامية وكم الخبرية و الاستفهام المجازي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_031_1789303221.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "الادب الحديث (الفصل الاول)",
+      "listed_count": 20,
+      "extracted_count": 20,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "الأدب الحديث",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_035_1789303250.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "الشعر الحديث",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_036_1789303284.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "مدرسة الإحياء",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_037_1789303327.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "الشاعر محمد سعيد الحبوبي - قصيدته وحياته",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_038_1789303349.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "(الشاعر محمد سعيد الحبوبي (التعليق النقدي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_039_1789303375.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "الشاعر علي الشرقي - قصيدته وحياته",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_040_1789303404.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "الشاعر علي الشرقي (التعليق النقدي)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_041_1789303435.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "الشاعر حافظ إبراهيم",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_042_1789303457.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "الشاعر حافظ إبراهيم - التعليق النقدي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_043_1789303476.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "محمد مهدي الجواهري",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_044_1789303501.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 10,
+          "title": "محمد مهدي الجواهري - التعليق النقدي",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_045_1789303528.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 11,
+          "title": "مدرسة المهجر",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_046_1789303547.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 12,
+          "title": "ميخائيل نعيمة (القصيدة والتعليق النقدي)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_047_1789303572.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 13,
+          "title": "مدرسة الشعر الحر",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_048_1789303590.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 14,
+          "title": "بدر شاكر السياب (القصيدة والتعليق النقدي)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_049_1789303613.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 15,
+          "title": "(علي أحمد سعيد (أدونيس",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_050_1789303635.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 16,
+          "title": "أدونيس (القصيدة والتعليق النقدي)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_051_1789303654.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 17,
+          "title": "شعر القضية الفلسطينية",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_052_1789303674.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 18,
+          "title": "فدوى طوقان - صلاة إلى العام الجديد",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_053_1789303701.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 19,
+          "title": "محمود درويش",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_054_1789303718.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "title": "النفي",
+      "listed_count": 23,
+      "extracted_count": 16,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "أسلوب النفي - أنواعه والأداة (ليس)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_055_1789303745.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "قواعد وملاحظات (ليس)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_056_1789303795.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "حرف النفي (لاتَ)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_057_1789303851.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "وزاريات فعل النفي (ليسَ)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_058_1789303888.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "وزاريات حرف النفي (لاتَ)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_059_1789303913.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "مَا النافية (غير العاملة)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_060_1789303923.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "مَا الحجازية",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_061_1789303953.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "مَا المهملة",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_062_1789304009.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "حرف النفي (إنْ)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_063_1789304028.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "وزاريات أنواع (ما النافية)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_064_1789304065.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 10,
+          "title": "وزاريات أداة النفي (إن)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_065_1789304091.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 11,
+          "title": "مراجعة أسلوب النفي - الجزء الأول",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_066_1789304101.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 12,
+          "title": "حرفي النفي (لم) و(لما)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_067_1789304127.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 13,
+          "title": "حرف النفي (لن)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_068_1789304167.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 14,
+          "title": "(وزاريات (لم، لما ولن",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_069_1789304182.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 15,
+          "title": "اسم النفي (غير)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_070_1789304205.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "title": "الفصل: التقديم والتأخير",
+      "listed_count": 6,
+      "extracted_count": 6,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "محاضرة 1 (تقديم الخبر على المبتدأ - وجوباً)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_071_1789304233.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "محاضرة 2 (تقديم الخبر على المبتدأ وجوباً وجوازاً)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_072_1789304266.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "محاضرة 3 (وزاريات تقديم الخبر على المبتدأ)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_073_1789304295.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "محاضرة 4 (تقديم المفعول به على فعله - وجوباً)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_074_1789304331.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "(محاضرة 5 (تقديم المفعول به على فعله - وجوباً وجوازاً",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_075_1789304360.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "محاضرة 6 (وزاريات تقديم المفعول به على فعله)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_076_1789304392.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "title": "أسلوب التوكيد",
+      "listed_count": 1,
+      "extracted_count": 1,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "محاضرة 1 - أسلوب التوكيد (التوكيد اللفظي)",
+          "url": "https://restless-term-070b.hmyzc824-d08.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_077_1789304419.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    }
+  ]
+}
