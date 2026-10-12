@@ -1,0 +1,118 @@
+{
+  "teacher": "عباس الدراجي",
+  "subject": "الرياضيات",
+  "batch": "2026",
+  "source": "https://agent.tinyfish.ai/runs/47aa2fd3-728f-4952-84e4-bfae81db3bb0",
+  "extraction_note": "جميع الروابط مستخرجة حرفياً من سمات onclick='Data.playLecture(...)' في DOM الصفحة. المحاضرة 1 رابط m3u8 من سيرفر vz-99e5c202-ca5.b-cdn.net، وباقي المحاضرات (1-15) روابط embed من mediadelivery.net. هناك محاضرة واحدة مرقمة بـ 0 وهي 'محاضرة 1' دون وصف تفصيلي، وباقي المحاضرات مرقمة 1-15. إجمالي 16 درساً في الفصل الواحد.",
+  "status": "تم فهرسة الأقسام الظاهرة، لا تأكيد لشمول كامل المادة",
+  "extracted_lessons": 16,
+  "public_urls_seen": 16,
+  "known_missing_lessons": 0,
+  "stream_playback_tested": 0,
+  "chapters": [
+    {
+      "index": 0,
+      "title": "دفعة 2026",
+      "listed_count": 15,
+      "extracted_count": 16,
+      "lessons": [
+        {
+          "index": 0,
+          "title": "محاضرة 1",
+          "url": "https://vz-99e5c202-ca5.b-cdn.net/bd049c3e-6a1e-46e4-860c-1c073720d48f/1080p/video.m3u8",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 1,
+          "title": "(المحاضرة الاولى (مقدمة عن الأعداد المركبة",
+          "url": "https://iframe.mediadelivery.net/embed/215061/60a24e26-514e-4af3-b7c9-e87b620a1b44",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة الثانية (قوى i)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/5755f827-20d6-47df-9d68-6635a59c29f3",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة الثالثة (الصيغة الجبرية للعدد المركب)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/cdbad21d-4055-4e9b-994a-4fc13f84c138",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 4,
+          "title": "(المحاضرة الرابعة (ضرب وقسمة الأعداد المركبة",
+          "url": "https://iframe.mediadelivery.net/embed/215061/f394cd73-cc35-4ce6-87b0-870189f3aa71",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 5,
+          "title": "(المحاضرة الخامسة (النظير الضربي والجمعي للعدد المركب",
+          "url": "https://iframe.mediadelivery.net/embed/215061/e4b4854d-320f-49ac-b42b-08fec528806f",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة السادسة (الأقواس المرفوعة الى أس)",
+          "url": "https://iframe.mediadelivery.net/embed/215061/7194ca4d-0944-41a9-9c44-5c4f4f8400ee",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة السابعة (وزاريات الأقواس المرفوعة إلى أس (الجزء الاول))",
+          "url": "https://iframe.mediadelivery.net/embed/215061/198a14fa-acb4-4f84-8901-26adc9a4c873",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة الثامنة (وزاريات الأقواس المرفوعة إلى أس(الجزء الثاني))",
+          "url": "https://iframe.mediadelivery.net/embed/215061/4dfafa28-1216-407a-8e8a-9c8c4c2a0e02",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 9,
+          "title": "(المحاضرة التاسعة (تبسيط جمع وطرح الكسور",
+          "url": "https://iframe.mediadelivery.net/embed/215061/aaee63c0-a452-4fff-ad20-79d74d2bfe52",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 10,
+          "title": "(المحاضرة العاشرة (حل اسئلة وزاريات: أثبت أن",
+          "url": "https://iframe.mediadelivery.net/embed/215061/f0e1c7ac-181e-4bb1-bf23-fd798e0fe5ec",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 11,
+          "title": "(المحاضرة الحادية عشرة (خواص المرافق في حل أسئلة: أثبت أن",
+          "url": "https://iframe.mediadelivery.net/embed/215061/2ee2e924-4103-483b-b33e-fb0d4c8f5edd",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 12,
+          "title": "المحاضرة الثانية عشرة (التحليل في الأعداد المركبة )",
+          "url": "https://iframe.mediadelivery.net/embed/215061/5614b401-74cb-4aa6-91f7-37b17081ea7d",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 13,
+          "title": "( الحقيقية (الجزء الاول x ,y المحاضرة الثالثة عشرة إيجاد قيم",
+          "url": "https://iframe.mediadelivery.net/embed/215061/7c2235a5-d848-4b9a-af9e-d487bff91d22",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 14,
+          "title": "(الحقيقية (الجزء الثاني x ,y المحاضرة الرابعة عشرة إيجاد قيم",
+          "url": "https://iframe.mediadelivery.net/embed/215061/d0110249-1eb3-4674-a953-97215fed1268",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        },
+        {
+          "index": 15,
+          "title": "(الحقيقية (الجزء الثالث x ,y المحاضرة الخامسة عشرة إيجاد قيم",
+          "url": "https://iframe.mediadelivery.net/embed/215061/99da0ece-b3b2-4eb2-9312-d6e93d687738",
+          "status": "رابط ظاهر؛ لم يتم اختبار التشغيل"
+        }
+      ]
+    }
+  ]
+}
