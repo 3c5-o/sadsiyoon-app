@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private void addTitle(LinearLayout dest,String s,int size){dest.addView(Ui.txt(this,s,size,Ui.WHITE,true),Ui.top(this,-1,-2,10));}
     private void addMuted(LinearLayout dest,String s){dest.addView(Ui.txt(this,s,13,Ui.MUTED,false),Ui.top(this,-1,-2,5));}
 
-    private LinearLayout.LayoutParams margins(int h,int top){
-        LinearLayout.LayoutParams p=Ui.lp(this,-1,h);p.topMargin=d(top);return p;
+    private LinearLayout.LayoutParams margins(int h,int top){return margins(-1,h,top);}
+    private LinearLayout.LayoutParams margins(int w,int h,int top){
+        LinearLayout.LayoutParams p=Ui.lp(this,w,h);p.topMargin=d(top);return p;
     }
     private void render(){
         LinearLayout root=Ui.col(this);root.setBackgroundColor(Ui.BG);
