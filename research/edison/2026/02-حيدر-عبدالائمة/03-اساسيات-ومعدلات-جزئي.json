@@ -1,0 +1,51 @@
+{
+  "teacher": "حيدر عبدالائمة 2026",
+  "source": "https://agent.tinyfish.ai/runs/cf1a889f-06c6-445d-aef5-3d0eaa80ce5b",
+  "status": "جزئي: 6 روابط موثقة في الجلسة، وليس بقية فصول الثالث كاملة",
+  "chapters": [
+    {
+      "count": 4,
+      "title": "اساسيات الفصل الثالث",
+      "lessons": [
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_006_1789290427.m3u8",
+          "index": 1,
+          "title": "المحاضرة 1 - أساسيات التفاضل"
+        },
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_007_1789290480.m3u8",
+          "index": 2,
+          "title": "المحاضرة 2 - أساسيات التفاضل (الجزء الثاني)"
+        },
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_008_1789290524.m3u8",
+          "index": 3,
+          "title": "المحاضرة 3 - أساسيات التفاضل (الجزء الثالث)"
+        },
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_009_1789290561.m3u8",
+          "index": 4,
+          "title": "المحاضرة 4 - أساسيات التفاضل (الجزء الرابع)"
+        }
+      ],
+      "chapter_index": 1
+    },
+    {
+      "count": 2,
+      "title": "الفصل الثالث: المعدلات الزمنية",
+      "lessons": [
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_010_1789290589.m3u8",
+          "index": 1,
+          "title": "المحاضرة الاولى (المعدلات الزمنية)"
+        },
+        {
+          "url": "https://edson.hweeriew.workers.dev/smyzx66-dot/housien/releases/download/v1/lec_011_1789290655.m3u8",
+          "index": 2,
+          "title": "المحاضرة الثانية : المعدلات الزمنية (الجزء الثاني)"
+        }
+      ],
+      "chapter_index": 2
+    }
+  ]
+}
