@@ -126,3 +126,14 @@ for teacher,url in expected_images.items():
     assert parsed.scheme=="https" and parsed.hostname.endswith(".top4top.io") and parsed.path.endswith(".jpg")
 assert len(set(expected_images.values()))==14
 print("OK: 14 external teacher portraits mapped to the existing 2026/2027 catalogs")
+
+# Don't mislabel another grade's or year's exam sheets as 2025.
+exams=json.loads((root/"app/src/main/assets/exams/2025.json").read_text(encoding="utf-8"))
+assert exams["year"] == 2025
+assert exams["status"] == "awaiting_source_documents"
+assert exams["papers"] == [], "No verified 2025 sixth-preparatory scans have been sourced from Aselatna yet"
+source=(root/"app/src/main/java/com/sadsiyoon/app/MainActivity.java").read_text(encoding="utf-8")
+assert 'private void exams(){' in source
+assert 'private void displayExamPaper(' in source
+assert 'لا توجد ورقة 2025 مؤكدة' in source
+print("OK: 2025 science/literary gallery UI, no incorrectly labeled exam sheets")

@@ -1,3 +1,10 @@
+# Sadsiyoon 1.2.6 — 2025 exam image-gallery pilot
+
+The new `وزاريات سادسيون` screen is accessible from Home and Tests.
+It contains 2025 cohort exam-year filters for science/literary subjects and rounds, a clearly labeled **empty illustration**, links to the corresponding Aselatna sections, and an image viewer that supports multiple page images and displays an in-app translucent "سادسيون" watermark without modifying source pixels.
+
+**Data integrity:** Aselatna's visible preparatory sixth-grade archive checked on October 13, 2026 shows papers through 2021; its 2025 tag visible items concern lower grades. The pilot therefore intentionally contains **zero** 2025 sixth-preparatory scanned papers. No source image was fabricated or misdated; there is nothing to strip/rebrand yet. On receipt of verified licensed 2025 source sheets, populate `app/src/main/assets/exams/2025.json` with paper objects specifying year, branch (scientific/literary), subject, round, title, source, and an array of `https://` image URLs. Verify rights and original sheets before altering old branding.
+
 # Sadsiyoon — teacher portraits 1.2.5
 
 - 14 teacher images are linked to existing catalog names directly from the user-supplied top4top.io URLs.

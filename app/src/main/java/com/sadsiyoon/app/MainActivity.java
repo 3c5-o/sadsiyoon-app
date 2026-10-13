@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private String page="home",subjectFilter="",libraryFilter="fav",selectedBatch="2026";
     private int selectedTeacher=1,selectedChapter=0;
+    private String examBranch="scientific",examSubject="الرياضيات",examRound="الدور الأول";
     private LinearLayout content;
     private int questionIndex=0,quizScore=0;
     private final String[] questions={
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         else if(page.equals("library"))library();else if(page.equals("tests"))tests();
         else if(page.equals("more"))more();else if(page.equals("search"))search();
         else if(page.equals("notice"))notice();
+        else if(page.equals("exams"))exams();
     }
     private View toolbar(boolean topLevel){
         LinearLayout bar=Ui.row(this);Ui.pad(this,bar,16,8);
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             bar.addView(Ui.logo(this,46,false),Ui.lp(this,46,46));
         }
         LinearLayout text=Ui.col(this);text.setPadding(d(11),0,d(11),0);
-        String title=topLevel?"سادسيون":page.equals("teacher")?"المدرس":page.equals("chapter")?"المحاضرات":page.equals("search")?"البحث":"الإشعارات";
+        String title=topLevel?"سادسيون":page.equals("teacher")?"المدرس":page.equals("chapter")?"المحاضرات":page.equals("search")?"البحث":page.equals("exams")?"وزاريات سادسيون":"الإشعارات";
         text.addView(Ui.txt(this,title,21,Ui.GOLD,true));
         text.addView(Ui.txt(this,topLevel?"منصة طلاب السادس الإعدادي":"دفعة "+selectedBatch,11,Ui.MUTED,false));
         bar.addView(text,new LinearLayout.LayoutParams(0,-2,1));
@@ -168,6 +170,14 @@ public class MainActivity extends AppCompatActivity {
             view2027.setOnClickListener(v->{subjectFilter="";selectedBatch="2027";show("teachers");});
             content.addView(newBatch,margins(-2,11));
         }
+        LinearLayout ministry=Ui.card(this);
+        ministry.setBackground(Ui.gradient(this,0xff0a3440,0xff133c35,20));
+        ministry.addView(Ui.txt(this,"وزاريات سادسيون — 2025",22,Ui.MINT,true));
+        addMuted(ministry,"تجربة معرض صور الأسئلة للسادس العلمي والأدبي. الأوراق غير المنشورة تبقى معلّمة بوضوح.");
+        TextView viewPapers=Ui.btn(this,"افتح قسم الوزاريات  ‹",true);
+        ministry.addView(viewPapers,Ui.top(this,-1,45,13));
+        viewPapers.setOnClickListener(v->show("exams"));
+        content.addView(ministry,margins(-1,-2,12));
         sectionHeader("أساتذتنا المميزون","عرض الجميع",()->show("teachers"));
         HorizontalScrollView slider=new HorizontalScrollView(this);slider.setHorizontalScrollBarEnabled(false);
         LinearLayout line=Ui.row(this);
@@ -377,8 +387,161 @@ public class MainActivity extends AppCompatActivity {
         }
         if(found==0)dest.addView(Ui.txt(this,"لا توجد نتائج مطابقة",14,Ui.MUTED,false));
     }
+
+    // 2025 is a source-verified image gallery prototype, not a fabricated exam dataset.
+    // Aselatna currently shows sixth-preparatory exams only through 2021.
+    private void exams(){
+        addTitle(content,"وزاريات سادسيون",24);
+        addMuted(content,"معرض الأوراق الوزارية المصورة • سنة الامتحان 2025 • نسخة تجريبية");
+
+        LinearLayout years=Ui.card(this);years.setBackground(Ui.gradient(this,0xff123d39,Ui.PANEL,17));
+        years.addView(Ui.txt(this,"2025",27,Ui.GOLD,true));
+        addMuted(years,"الاعتماد على السنة المكتوبة في الورقة، مو تاريخ نشر المنشور.");
+        content.addView(years,margins(-1,-2,12));
+
+        LinearLayout branches=Ui.row(this);
+        String[] branchIds={"scientific","literary"};
+        String[] branchLabels={"السادس العلمي","السادس الأدبي"};
+        for(int i=0;i<branchIds.length;i++){
+            final String next=branchIds[i];
+            TextView b=Ui.btn(this,branchLabels[i],examBranch.equals(next));
+            LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(46),1f);
+            p.setMargins(d(3),0,d(3),0);branches.addView(b,p);
+            b.setOnClickListener(v->{examBranch=next;examSubject="الرياضيات";show("exams");});
+        }
+        content.addView(branches,margins(-1,-2,11));
+        addTitle(content,"اختر المادة",18);
+
+        String[] subjects=examBranch.equals("scientific")?
+            new String[]{"الرياضيات","الفيزياء","الكيمياء","الأحياء","اللغة العربية","اللغة الإنكليزية","التربية الإسلامية"}:
+            new String[]{"الرياضيات","التاريخ","الجغرافية","الاقتصاد","اللغة العربية","اللغة الإنكليزية","التربية الإسلامية"};
+        for(int i=0;i<subjects.length;i+=2){
+            LinearLayout row=Ui.row(this);
+            for(int j=i;j<Math.min(i+2,subjects.length);j++){
+                final String name=subjects[j];
+                TextView b=Ui.btn(this,name,examSubject.equals(name));
+                LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(44),1f);
+                p.setMargins(d(3),d(3),d(3),d(3));row.addView(b,p);
+                b.setOnClickListener(v->{examSubject=name;show("exams");});
+            }
+            content.addView(row);
+        }
+
+        addTitle(content,"اختر الدور",18);
+        HorizontalScrollView roundsScroll=new HorizontalScrollView(this);
+        roundsScroll.setHorizontalScrollBarEnabled(false);
+        LinearLayout rounds=Ui.row(this);
+        for(String role:new String[]{"الدور الأول","الدور الثاني","الدور الثالث","التمهيدي"}){
+            TextView b=Ui.btn(this,role,examRound.equals(role));
+            LinearLayout.LayoutParams p=Ui.lp(this,115,43);p.setMargins(d(3),0,d(3),0);
+            rounds.addView(b,p);
+            b.setOnClickListener(v->{examRound=role;show("exams");});
+        }
+        roundsScroll.addView(rounds);
+        content.addView(roundsScroll,margins(-1,-2,8));
+
+        List<ExamCatalog.Paper> papers=ExamCatalog.select(this,2025,examBranch,examSubject,examRound);
+        addTitle(content,"صور الأوراق",19);
+        if(papers.isEmpty()){
+            LinearLayout empty=Ui.card(this);
+            empty.addView(Ui.txt(this,"لا توجد ورقة 2025 مؤكدة بهذا التصنيف",17,Ui.GOLD,true));
+            addMuted(empty,"الصور الموجودة حالياً في أرشيف أسئلتنا للسادس الإعدادي تعود إلى سنوات سابقة. ما نضعها باسم 2025 حتى لا نضلّل الطالب.");
+            empty.addView(Ui.txt(this,"هذا نموذج شكل عرض الصورة عند إضافتها:",13,Ui.MINT,true),
+                Ui.top(this,-1,-2,13));
+            content.addView(empty,margins(-1,-2,9));
+            examPlaceholder();
+        }else{
+            for(ExamCatalog.Paper paper:papers){
+                LinearLayout card=Ui.card(this);
+                card.addView(Ui.txt(this,paper.title,18,Ui.WHITE,true));
+                addMuted(card,paper.urls.size()+" صفحة مصورة • "+paper.round+" • "+paper.subject);
+                TextView open=Ui.btn(this,"عرض صور الورقة",true);
+                card.addView(open,Ui.top(this,-1,46,10));
+                open.setOnClickListener(v->displayExamPaper(paper));
+                content.addView(card,margins(-1,-2,11));
+            }
+        }
+        LinearLayout src=Ui.card(this);
+        src.addView(Ui.txt(this,"المصدر: أسئلتنا",16,Ui.WHITE,true));
+        addMuted(src,"رابط القسم الأصلي للاطلاع. علامة سادسيون تُضاف في عارض الصور، ولا تغيّر نص الأسئلة.");
+        TextView link=Ui.btn(this,"زيارة قسم "+(examBranch.equals("scientific")?"العلمي":"الأدبي"),false);
+        src.addView(link,Ui.top(this,-1,42,10));
+        link.setOnClickListener(v->{
+            String url=examBranch.equals("scientific")?
+                "https://www.aselatna.com/search/label/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A?m=1":
+                "https://www.aselatna.com/search/label/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A?m=1";
+            startActivity(new Intent(Intent.ACTION_VIEW,android.net.Uri.parse(url)));
+        });
+        content.addView(src,margins(-1,-2,15));
+    }
+
+    private void examPlaceholder(){
+        android.widget.FrameLayout sheet=new android.widget.FrameLayout(this);
+        sheet.setBackground(Ui.round(this,0xfff4f5ef,16));
+        LinearLayout copy=Ui.col(this);Ui.pad(this,copy,14,15);
+        copy.addView(Ui.txt(this,"سادسيون | نموذج معاينة المعرض",17,0xff15383b,true));
+        TextView disclaimer=Ui.txt(this,"مكان صورة ورقة الامتحان الأصلية",16,0xff253b40,true);
+        disclaimer.setGravity(Gravity.CENTER);copy.addView(disclaimer,new LinearLayout.LayoutParams(-1,0,1f));
+        TextView footer=Ui.txt(this,"لا تحتوي هذه المعاينة على أسئلة وزارية فعلية",12,0xff637276,false);
+        footer.setGravity(Gravity.CENTER);
+        copy.addView(footer);
+        sheet.addView(copy,new android.widget.FrameLayout.LayoutParams(-1,-1));
+        TextView wm=Ui.txt(this,"سادسيون",45,0xff14745c,true);
+        wm.setGravity(Gravity.CENTER);wm.setAlpha(0.13f);
+        sheet.addView(wm,new android.widget.FrameLayout.LayoutParams(-1,-1));
+        content.addView(sheet,margins(-1,285,9));
+    }
+
+    private void displayExamPaper(ExamCatalog.Paper paper){
+        if(paper.urls.isEmpty())return;
+        android.widget.FrameLayout paperPage=new android.widget.FrameLayout(this);
+        paperPage.setBackgroundColor(0xffffffff);
+        android.widget.ImageView image=new android.widget.ImageView(this);
+        image.setScaleType(android.widget.ImageView.ScaleType.FIT_CENTER);
+        paperPage.addView(image,new android.widget.FrameLayout.LayoutParams(-1,-1));
+        TextView watermark=Ui.txt(this,"سادسيون",42,0xff11795e,true);
+        watermark.setGravity(Gravity.CENTER);watermark.setAlpha(0.14f);
+        paperPage.addView(watermark,new android.widget.FrameLayout.LayoutParams(-1,-1));
+        // Photos are displayed unaltered with a reversible watermark overlay, not
+        // rewritten or re-rendered: equations and printed question text are preserved.
+        final int[] position={0};
+        final TextView info=Ui.txt(this,"",14,Ui.GOLD,true);
+        final Runnable load=()->{
+            String url=paper.urls.get(position[0]);
+            info.setText("صفحة "+(position[0]+1)+" من "+paper.urls.size());
+            image.setImageDrawable(null);
+            new Thread(()->{
+                java.net.HttpURLConnection conn=null;
+                try{
+                    conn=(java.net.HttpURLConnection)new java.net.URL(url).openConnection();
+                    conn.setConnectTimeout(7000);conn.setReadTimeout(9000);
+                    android.graphics.Bitmap bmp=android.graphics.BitmapFactory.decodeStream(conn.getInputStream());
+                    if(bmp!=null)image.post(()->image.setImageBitmap(bmp));
+                }catch(Exception e){image.post(()->android.widget.Toast.makeText(this,"تعذّر تحميل صورة الورقة",Toast.LENGTH_SHORT).show());}
+                finally{if(conn!=null)conn.disconnect();}
+            }).start();
+        };
+        LinearLayout viewer=Ui.col(this);
+        Ui.pad(this,viewer,10,10);
+        viewer.addView(info);
+        viewer.addView(paperPage,Ui.top(this,-1,460,10));
+        LinearLayout buttons=Ui.row(this);
+        TextView prev=Ui.btn(this,"السابقة",false),next=Ui.btn(this,"التالية",true);
+        buttons.addView(prev,new LinearLayout.LayoutParams(0,d(46),1f));
+        buttons.addView(next,new LinearLayout.LayoutParams(0,d(46),1f));
+        prev.setOnClickListener(v->{if(position[0]>0){position[0]--;load.run();}});
+        next.setOnClickListener(v->{if(position[0]<paper.urls.size()-1){position[0]++;load.run();}});
+        viewer.addView(buttons,Ui.top(this,-1,-2,8));
+        new AlertDialog.Builder(this).setTitle(paper.title).setView(viewer)
+            .setPositiveButton("إغلاق",null).show();
+        load.run();
+    }
+
     private void tests(){
-        addTitle(content,"الاختبارات",24);addMuted(content,"اختبار تدريبي محلي قصير، لا يحتاج اتصالاً بالإنترنت.");
+        addTitle(content,"الاختبارات",24);
+        TextView examButton=Ui.btn(this,"وزاريات 2025 — العلمي والأدبي",true);
+        content.addView(examButton,margins(-1,46,8));examButton.setOnClickListener(v->show("exams"));
+        addMuted(content,"اختبار تدريبي محلي قصير، لا يحتاج اتصالاً بالإنترنت.");
         if(questionIndex>=questions.length){
             LinearLayout box=Ui.card(this);box.addView(Ui.txt(this,"نتيجتك: "+quizScore+" من "+questions.length,24,Ui.GOLD,true));
             addMuted(box,"يمكنك المحاولة مرة ثانية لتحسين نتيجتك.");
@@ -430,7 +593,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.2.5 Beta — صور المدرسين • دفعتا 2026 و2027.");
+        addMuted(content,"سادسيون V1.2.6 Beta — قسم وزاريات 2025 التجريبي.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));

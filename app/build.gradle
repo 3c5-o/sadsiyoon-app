@@ -6,8 +6,8 @@ android {
         applicationId 'com.sadsiyoon.app'
         minSdk 26
         targetSdk 35
-        versionCode 8
-        versionName '1.2.5-beta'
+        versionCode 9
+        versionName '1.2.6-beta'
     }
     buildTypes { release { minifyEnabled false } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
