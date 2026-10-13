@@ -150,22 +150,22 @@ public class MainActivity extends AppCompatActivity {
         open.setOnClickListener(v->{subjectFilter="";selectedBatch="2026";show("teachers");});
         content.addView(batch,margins(-2,15));
         // Dedicated 2027 cohort: no change to the existing 2026 directory.
-        Catalog.Teacher teacher2027=null;
-        for(Catalog.Teacher item:Catalog.byBatch(this,"2027")){teacher2027=item;break;}
-        if(teacher2027!=null){
-            final int teacherId=teacher2027.index;
+        List<Catalog.Teacher> teachers2027=Catalog.byBatch(this,"2027");
+        if(!teachers2027.isEmpty()){
+            int lectureCount2027=0;
+            for(Catalog.Teacher teacher:teachers2027)lectureCount2027+=teacher.count();
             LinearLayout newBatch=Ui.card(this);
             newBatch.setBackground(Ui.gradient(this,0xff124b46,0xff113245,20));
             newBatch.addView(Ui.txt(this,"دفعة 2027",27,Ui.MINT,true));
-            newBatch.addView(Ui.txt(this,"الرياضيات • حيدر عبدالائمة",16,Ui.WHITE,true),
+            newBatch.addView(Ui.txt(this,teachers2027.size()+" مدرسين • "+lectureCount2027+" محاضرة مفهرسة",16,Ui.WHITE,true),
                 Ui.top(this,-1,-2,7));
-            newBatch.addView(Ui.txt(this,teacher2027.chapters.size()+" فصل • "+teacher2027.count()+" محاضرة",13,Ui.GOLD,false),
+            newBatch.addView(Ui.txt(this,"رياضيات • عربي • إنكليزي",13,Ui.GOLD,false),
                 Ui.top(this,-1,-2,4));
-            newBatch.addView(Ui.txt(this,"بعض المشاهدات تتطلب اشتراكاً لدى مزود الفيديو؛ لا يضمن هذا التطبيق تشغيلها.",12,Ui.MUTED,false),
+            newBatch.addView(Ui.txt(this,"بعض مشغّلات الدروس تتطلب اشتراكاً لدى مزود الفيديو؛ التشغيل غير مضمون.",12,Ui.MUTED,false),
                 Ui.top(this,-1,-2,9));
-            TextView view2027=Ui.btn(this,"استعرض محاضرات دفعة 2027   ‹",true);
+            TextView view2027=Ui.btn(this,"استعرض مدرسي دفعة 2027   ‹",true);
             newBatch.addView(view2027,Ui.top(this,-1,45,13));
-            view2027.setOnClickListener(v->{subjectFilter="";selectedBatch="2027";openTeacher(teacherId);});
+            view2027.setOnClickListener(v->{subjectFilter="";selectedBatch="2027";show("teachers");});
             content.addView(newBatch,margins(-2,11));
         }
         sectionHeader("أساتذتنا المميزون","عرض الجميع",()->show("teachers"));
@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.2.0 — دفعتا 2026 و2027 — نسخة اختبارية.");
+        addMuted(content,"سادسيون V1.2.4 Beta — دفعتا 2026 و2027.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));

@@ -67,3 +67,28 @@ for n,entry in enumerate(chapter3["lessons"],1):
     assert entry["verified"] == "embed_present_not_playback"
 assert sum(len(ch["lessons"]) for ch in d["chapters"]) == 61
 print("OK: chapter three 7 Rumble embeds indexed; 61 total 2027 lessons")
+
+
+# 2027: preserve original chapter ordering and verify the additional three teachers.
+import re
+for asset,expected in {
+    "02-muhammad-qasim.json": [24],
+    "03-hisham-al-mamouri.json": [10,24,10,9],
+    "04-sajjad-al-obaidi.json": [4,3,22,12,2,2],
+}.items():
+    path=root/"app/src/main/assets/catalog_2027"/asset
+    doc=json.loads(path.read_text(encoding="utf-8"))
+    assert doc["batch"]=="2027" and doc["teacher"].strip()
+    assert [len(ch["lessons"]) for ch in doc["chapters"]]==expected,asset
+    for chapter in doc["chapters"]:
+        urls=[]
+        for n,lesson in enumerate(chapter["lessons"],1):
+            assert lesson["index"]==n,(asset,chapter["title"],n)
+            assert lesson["title"]==f"المحاضرة {n}"
+            assert lesson["url"].startswith("https://rumble.com/embed/")
+            assert lesson["provider"]=="rumble"
+            assert lesson["access"]=="premium"
+            assert lesson["verified"]=="embed_present_not_playback"
+            urls.append(lesson["url"])
+        assert len(set(urls))==len(urls),asset
+print("OK: 2027 index contains four teachers, 183 lectures across all 2027 chapters")

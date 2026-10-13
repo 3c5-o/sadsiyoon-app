@@ -2,7 +2,12 @@
 
 Android app (Java / AndroidX / Media3) with Arabic RTL UI and 2026/2027 batch navigation.
 
-## 1.2.3 Beta — Chapter three, 2027
+New in 1.2.4 Beta: indexed 2027 teacher **محمد قاسم** (24 math lectures, 1 chapter), **هشام المعموري** (53 Arabic lectures, 4 chapters), and **سجاد العبيدي** (45 English lectures, 6 chapters). Including the earlier Haider catalog's 61 lessons, 2027 has 183 indexed episode embed links for 4 teachers. The teacher directory advertised 99+ for Sajjad, but only 45 public episode entries were verified in the six pages checked; do not imply completion of unavailable content.
+
+All newly added URLs use public Rumble iframe embeds and may require provider Premium subscription; iframe URL retrieval alone does NOT prove actual playback. No playback restrictions are circumvented.
+
+
+## 1.2.4 Beta — Four teachers indexed for 2027
 
 - **2026**: original 19-teacher course indexes remain unchanged.
 - **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lessons; Chapter 2: 26 lessons; Chapter 3: 7 lessons; **61 lessons total**. The home card totals are computed from the bundled catalog.

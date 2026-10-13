@@ -133,35 +133,48 @@ public final class Catalog {
                 }
             }
         }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load bundled catalog",e);}
-        // 2027 is a separate catalog and retains all existing 2026 teacher IDs and user progress.
+        // Stable ordering: keep 2026 IDs 0..18 and Haider 2027 ID 19.
+        // Import subsequent 2027 teachers by lexicographic asset filename.
         try{
-            java.io.InputStream stream=context.getAssets().open("catalog_2027/01-haider-abdul-imma.json");
-            java.io.ByteArrayOutputStream buffer=new java.io.ByteArrayOutputStream();
-            byte[] part=new byte[8192];int len;
-            try{while((len=stream.read(part))!=-1)buffer.write(part,0,len);}
-            finally{stream.close();}
-            JSONObject doc=new JSONObject(new String(buffer.toByteArray(),StandardCharsets.UTF_8));
-            if("2027".equals(doc.optString("batch"))){
-                Teacher teacher=new Teacher(out.size(),doc.optString("teacher","حيدر عبدالائمة"),
-                    doc.optString("subject","الرياضيات"),IMAGES[1],"2027");
-                JSONArray chapters=doc.optJSONArray("chapters");
-                if(chapters!=null)for(int c=0;c<chapters.length();c++){
-                    JSONObject chapterJson=chapters.optJSONObject(c);if(chapterJson==null)continue;
-                    Chapter chapter=new Chapter(chapterJson.optString("title","الفصل الأول"));
-                    JSONArray episodes=chapterJson.optJSONArray("lessons");
-                    if(episodes==null)continue;
-                    for(int j=0;j<episodes.length();j++){
-                        JSONObject item=episodes.optJSONObject(j);if(item==null)continue;
-                        String url=cleanUrl(item.optString("url",""));
-                        String label=item.optString("title","المحاضرة "+(j+1)).trim();
-                        String access=item.optString("access","unverified");
-                        if(!label.isEmpty())chapter.lessons.add(new Lesson(label,url,access));
+            String[] batchFiles=context.getAssets().list("catalog_2027");
+            if(batchFiles!=null){
+                Arrays.sort(batchFiles);
+                for(String name:batchFiles){
+                    if(!name.endsWith(".json"))continue;
+                    InputStream stream=context.getAssets().open("catalog_2027/"+name);
+                    ByteArrayOutputStream buffer=new ByteArrayOutputStream();
+                    try{
+                        byte[] part=new byte[8192];int n;
+                        while((n=stream.read(part))!=-1)buffer.write(part,0,n);
+                    }finally{stream.close();}
+                    JSONObject doc=new JSONObject(new String(buffer.toByteArray(),StandardCharsets.UTF_8));
+                    if(!"2027".equals(doc.optString("batch")))continue;
+                    String teacherName=doc.optString("teacher","").trim();
+                    if(teacherName.isEmpty())continue;
+                    String imageUrl="";
+                    for(int i=0;i<NAMES.length;i++)if(NAMES[i].equals(teacherName)){imageUrl=IMAGES[i];break;}
+                    Teacher teacher=new Teacher(out.size(),teacherName,
+                            doc.optString("subject",""),imageUrl,"2027");
+                    JSONArray chapters=doc.optJSONArray("chapters");
+                    if(chapters==null)continue;
+                    for(int c=0;c<chapters.length();c++){
+                        JSONObject chapterJson=chapters.optJSONObject(c);if(chapterJson==null)continue;
+                        Chapter chapter=new Chapter(chapterJson.optString("title","الفصل "+(c+1)));
+                        JSONArray episodes=chapterJson.optJSONArray("lessons");
+                        if(episodes==null)continue;
+                        for(int j=0;j<episodes.length();j++){
+                            JSONObject item=episodes.optJSONObject(j);if(item==null)continue;
+                            String url=cleanUrl(item.optString("url",""));
+                            String label=item.optString("title","المحاضرة "+(j+1)).trim();
+                            String access=item.optString("access","unverified");
+                            if(!label.isEmpty())chapter.lessons.add(new Lesson(label,url,access));
+                        }
+                        teacher.chapters.add(chapter);
                     }
-                    teacher.chapters.add(chapter);
+                    out.add(teacher);
                 }
-                out.add(teacher);
             }
-        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load 2027 course catalog",e);}
+        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load 2027 course catalogs",e);}
         teachers=Collections.unmodifiableList(out);
     }
     public static List<Teacher> teachers(Context c){initialize(c);return teachers;}
