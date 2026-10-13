@@ -2,10 +2,11 @@
 
 Android app (Java / AndroidX / Media3) with Arabic RTL UI and 2026/2027 batch navigation.
 
-## 1.2.2 Beta — Chapter two, 2027
+## 1.2.3 Beta — Chapter three, 2027
 
 - **2026**: original 19-teacher course indexes remain unchanged.
-- **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lectures; Chapter 2: 26 lectures, **54 indexed lectures total**. The home card totals are computed from the bundled catalog.
+- **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lessons; Chapter 2: 26 lessons; Chapter 3: 7 lessons; **61 lessons total**. The home card totals are computed from the bundled catalog.
+- Chapter three's seven Rumble iframe URLs were observed on the public server 4 of https://v.sea-novels.com/p/2027.html?m=1. All seven show Premium Only Content when opened directly without subscription; iframe visibility is not proof of playback rights or successful playback.
 - Chapter two's 26 Rumble iframe URLs were selected from the public "سيرفر 3" option of https://v.sea-novels.com/p/3.html?m=1 and their external video titles matched lecture numbers. A misleading advertisement iframe was rejected for lecture 14 and replaced by its correct verified Rumble embed URL.
 - All **26 chapter-two Rumble embeds show Premium Only Content** when opened directly without a qualifying subscription. Their presence in the catalog does **not** mean playback can be guaranteed or access restrictions circumvented.
 - Chapter one retains Rumble-first/Bitchute-when-Rumble-absent link choices.
