@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Rational;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -35,6 +36,8 @@ public class PlayerActivity extends AppCompatActivity {
     private ExoPlayer player;
     private PlayerView playerView;
     private WebView web;
+    private View embeddedFullScreen;
+    private WebChromeClient.CustomViewCallback embeddedFullScreenCallback;
     private FrameLayout videoBox;
     private LinearLayout root,topbar,actions,tabContent,details;
     private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton;
@@ -60,7 +63,7 @@ public class PlayerActivity extends AppCompatActivity {
         topbar.addView(back,Ui.lp(this,75,43));back.setOnClickListener(v->finish());
         LinearLayout labels=Ui.col(this);labels.setPadding(Ui.dp(this,9),0,Ui.dp(this,9),0);
         labels.addView(Ui.txt(this,"سادسيون",20,Ui.GOLD,true));
-        labels.addView(Ui.txt(this,"محاضرات دفعة 2026",11,Ui.MUTED,false));
+        labels.addView(Ui.txt(this,"محاضرات دفعة "+current.teacher.batch,11,Ui.MUTED,false));
         topbar.addView(labels,new LinearLayout.LayoutParams(0,-2,1));
         root.addView(topbar);
         heading=Ui.txt(this,"",19,Ui.WHITE,true);root.addView(heading,Ui.top(this,-1,-2,12));
@@ -106,10 +109,10 @@ public class PlayerActivity extends AppCompatActivity {
     private void load(){
         if(current==null)return;
         heading.setText(current.lesson.title);
-        info.setText(current.teacher.name+"  •  "+current.chapter.title);
+        info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
         refreshActions();destroyPlayback();
         if(!current.lesson.available()){setStatus("هذه المحاضرة غير متاحة للتشغيل حالياً");showUnavailable();return;}
-        setStatus("جاري تهيئة المشغّل...");
+        setStatus(current.lesson.access.equals("premium")?"قد تتطلب هذه المحاضرة اشتراكاً لدى مزود الفيديو.":"جاري تهيئة المشغّل...");
         if(current.lesson.type.equals("hls")||current.lesson.type.equals("mp4"))openNative();
         else if(current.lesson.type.equals("embed"))openEmbedded();
         else showUnavailable();
@@ -150,7 +153,10 @@ public class PlayerActivity extends AppCompatActivity {
     private void openEmbedded(){
         String link=current.lesson.url;
         Uri uri=Uri.parse(link);String host=uri.getHost();
-        if(host==null||!(host.equals("iframe.mediadelivery.net")||host.equals("ok.ru")||host.equals("vk.com")||host.equals("vkvideo.ru"))){
+        if(host==null||!(host.equals("iframe.mediadelivery.net")||host.equals("ok.ru")||
+            host.equals("vk.com")||host.equals("vkvideo.ru")||
+            host.equals("rumble.com")||host.equals("www.rumble.com")||
+            host.equals("bitchute.com")||host.equals("www.bitchute.com"))){
             setStatus("نوع المشغّل غير مدعوم في النسخة الحالية");showUnavailable();return;
         }
         web=new WebView(this);web.setBackgroundColor(Color.BLACK);
@@ -158,9 +164,27 @@ public class PlayerActivity extends AppCompatActivity {
         web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);
         web.getSettings().setMediaPlaybackRequiresUserGesture(false);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        web.setWebChromeClient(new WebChromeClient());
+        web.setWebChromeClient(new WebChromeClient(){
+            @Override public void onShowCustomView(View view,CustomViewCallback callback){
+                if(embeddedFullScreen!=null){callback.onCustomViewHidden();return;}
+                embeddedFullScreen=view;embeddedFullScreenCallback=callback;
+                ViewGroup decor=(ViewGroup)getWindow().getDecorView();
+                decor.addView(view,new ViewGroup.LayoutParams(-1,-1));
+                getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            }
+            @Override public void onHideCustomView(){exitEmbeddedFullScreen();}
+        });
         web.setWebViewClient(new WebViewClient(){
-            @Override public void onPageFinished(WebView view,String loaded){setStatus("المشغّل جاهز. اضغط تشغيل لبدء المحاضرة.");}
+            @Override public void onPageFinished(WebView view,String loaded){
+                // A loaded iframe is NOT proof that a playable video exists.
+                setStatus(current.lesson.access.equals("premium")?
+                    "هذا الفيديو مقيّد باشتراك لدى مزوده؛ لا يستطيع سادسيون تجاوز هذا الشرط.":
+                    current.lesson.access.equals("unverified")?
+                    "تم فتح مشغّل المحاضرة. قد يستغرق التحميل وقتاً، والتشغيل غير مضمون.":
+                    "تم فتح مشغّل المحاضرة. اضغط تشغيل إذا كان متاحاً.");
+            }
             @Override public void onReceivedError(WebView view,android.webkit.WebResourceRequest request,android.webkit.WebResourceError error){
                 if(request.isForMainFrame())setStatus("تعذر عرض الفيديو. تحقق من اتصال الإنترنت.");
             }
@@ -171,9 +195,22 @@ public class PlayerActivity extends AppCompatActivity {
             "<style>html,body{margin:0;background:#000;width:100%;height:100%;overflow:hidden}iframe{width:100%;height:100%;border:0}</style></head>"+
             "<body><iframe src=\""+safe+"\" allow=\"autoplay;fullscreen;picture-in-picture;encrypted-media\" allowfullscreen></iframe></body></html>";
         web.loadDataWithBaseURL("https://"+host+"/",html,"text/html","UTF-8",null);
-        setStatus("جاري تهيئة مشغّل المحاضرة...");
+        setStatus(current.lesson.access.equals("premium")?"قد تتطلب المحاضرة اشتراكاً لدى المزود.":"جاري تحميل مشغّل المحاضرة...");
+    }
+    private void exitEmbeddedFullScreen(){
+        if(embeddedFullScreen!=null){
+            ViewGroup decor=(ViewGroup)getWindow().getDecorView();
+            decor.removeView(embeddedFullScreen);
+            embeddedFullScreen=null;
+            getWindow().getDecorView().setSystemUiVisibility(0);
+            if(embeddedFullScreenCallback!=null){
+                embeddedFullScreenCallback.onCustomViewHidden();
+                embeddedFullScreenCallback=null;
+            }
+        }
     }
     private void destroyPlayback(){
+        exitEmbeddedFullScreen();
         if(player!=null){if(playerView!=null)playerView.setPlayer(null);player.release();player=null;}
         if(web!=null){web.loadUrl("about:blank");web.stopLoading();web.destroy();web=null;}
         videoBox.removeAllViews();playerView=null;
