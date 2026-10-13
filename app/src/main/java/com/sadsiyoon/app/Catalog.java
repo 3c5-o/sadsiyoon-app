@@ -22,19 +22,31 @@ public final class Catalog {
         "الفيزياء","الرياضيات","اللغة الإنكليزية","الكيمياء","الفيزياء","اللغة العربية",
         "الرياضيات","الكيمياء","الأحياء","الأحياء","اللغة الإنكليزية","الكيمياء",
         "الأحياء","الفيزياء","الرياضيات","اللغة العربية","الأحياء","التربية الإسلامية","الكيمياء"};
+    // User-supplied external teacher portraits for the 2026 and 2027 directories.
+    // Two spelling variants were matched to existing catalog entries:
+    // "سجاد العگيلي" -> "ساجد العكيلي" and "هشام الغرباوي" -> "هاشم الغرباوي".
+    // Confirm these two associations with the user before a public production release.
     private static final String[] IMAGES={
-        "https://i.ibb.co/9mcCChnr/upload-1769168321.jpg",
-        "https://edson.my/assets/photo_5397877939879218921_y.jpg",
-        "https://i.ibb.co/PGntDJPc/upload-1769166009.jpg",
-        "https://i.ibb.co/35xHB9bs/upload-1769165990.jpg","",
-        "https://i.ibb.co/7NrJ92Xv/upload-1769166615.jpg",
-        "https://yt3.googleusercontent.com/l0QnUF1_R9JLkyK-Zeao8qA5yfYKZndunAVkGua2EmuPIQyAXTXVdM_MiqxZx0m02B1Ucjly=s900-c-k-c0x00ffffff-no-rj",
-        "",
-        "https://yt3.googleusercontent.com/B_86-v0AFl5PN_mJXykCJ-pyzQetoKg8DL5wISXMt5IDs8yyE8dBbzZCtyXdo57GjBM54QTDlA=s900-c-k-c0x00ffffff-no-rj",
-        "",
-        "https://yt3.googleusercontent.com/8HQeUmCfq8xI4YzMJiVtMX_rflqNOchtXvrICB1Erbfk5avv3K4HaqtfVEy3pEw5txM4_xJl=s900-c-k-c0x00ffffff-no-rj",
-        "","","","","","","https://d157djim0keagl.cloudfront.net/76c26858-4c62-47a5-ba8e-2ac359420814.webp",
-        "https://edson.my/assets/hjzpw.jpg"};
+        "https://f.top4top.io/p_3938pnnw51.jpg", // حسين محمد
+        "https://j.top4top.io/p_3938gg6om1.jpg", // حيدر عبدالائمة
+        "https://d.top4top.io/p_3938suhes1.jpg", // سجاد العبيدي
+        "https://h.top4top.io/p_3938lmygb1.jpg", // هاشم الغرباوي
+        "https://j.top4top.io/p_3938l5zla1.jpg", // علي السوداني
+        "https://j.top4top.io/p_3938dihl31.jpg", // رفل الزبيدي
+        "https://l.top4top.io/p_3938p9alv1.jpg", // عباس الدراجي
+        "https://d.top4top.io/p_3938josxy1.jpg", // مهند السوداني
+        "https://a.top4top.io/p_3938yv4y11.jpg", // نورس الموسوي
+        "", // محمد العنزي
+        "https://d.top4top.io/p_3938pjd2e1.jpg", // أزل سلوان
+        "", // يوسف الربيعي
+        "", // أحمد الجاف
+        "", // حسن عبدالكاظم
+        "https://c.top4top.io/p_3938su4u21.jpg", // محمد قاسم
+        "https://i.top4top.io/p_3938bfw3s1.jpg", // هشام المعموري
+        "https://h.top4top.io/p_3938f3g7s1.jpg", // جعفر الحسني
+        "https://l.top4top.io/p_3938ii0nw1.jpg", // ساجد العكيلي
+        "https://edson.my/assets/hjzpw.jpg" // حسين الهاشمي
+    };
     private static List<Teacher> teachers;
     public static final class Teacher {
         public final int index; public final String name,subject,image,batch;

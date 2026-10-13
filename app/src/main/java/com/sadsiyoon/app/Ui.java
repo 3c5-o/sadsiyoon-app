@@ -74,7 +74,11 @@ public final class Ui {
         try{
           connection=(HttpURLConnection)new URL(url).openConnection();
           connection.setConnectTimeout(4500);connection.setReadTimeout(4500);connection.setInstanceFollowRedirects(true);
-          Bitmap decoded=BitmapFactory.decodeStream(connection.getInputStream());
+          // Render remote portraits as bounded thumbnails to avoid storing full-size
+          // 1200px+ source images for every teacher in the in-memory card cache.
+          BitmapFactory.Options opts=new BitmapFactory.Options();
+          opts.inSampleSize=4;
+          Bitmap decoded=BitmapFactory.decodeStream(connection.getInputStream(),null,opts);
           if(decoded!=null){imageCache.put(url,decoded);image.post(()->{if(image.isAttachedToWindow())image.setImageBitmap(decoded);});}
         }catch(Exception ignored){}finally{if(connection!=null)connection.disconnect();}
       }).start();

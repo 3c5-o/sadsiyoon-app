@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.2.4 Beta — دفعتا 2026 و2027.");
+        addMuted(content,"سادسيون V1.2.5 Beta — صور المدرسين • دفعتا 2026 و2027.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));

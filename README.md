@@ -1,3 +1,13 @@
+# Sadsiyoon — teacher portraits 1.2.5
+
+- 14 teacher images are linked to existing catalog names directly from the user-supplied top4top.io URLs.
+- 2026 and 2027 show the same portrait for the same canonical teacher name, because the shared `Catalog.IMAGES` array is used in both batches.
+- All existing lessons and provider embeds remain unchanged.
+- Teacher photos are loaded over HTTPS at runtime and are *not* bundled into the APK. Images can fail to load when the external host is unavailable; the UI keeps an initial-letter placeholder.
+- External images are downsampled in memory for list performance.
+- **Name review before a production release:** the user-provided label `سجاد العگيلي` was paired provisionally with the existing teacher entry `ساجد العكيلي`, and `هشام الغرباوي` with `هاشم الغرباوي`. Please confirm these are the same teachers.
+- Debug build workflow validates catalog and portrait mappings, then publishes APK as a GitHub Actions artifact.
+
 # سادسيون — Sadsiyoon
 
 Android app (Java / AndroidX / Media3) with Arabic RTL UI and 2026/2027 batch navigation.
@@ -7,7 +17,7 @@ New in 1.2.4 Beta: indexed 2027 teacher **محمد قاسم** (24 math lectures,
 All newly added URLs use public Rumble iframe embeds and may require provider Premium subscription; iframe URL retrieval alone does NOT prove actual playback. No playback restrictions are circumvented.
 
 
-## 1.2.4 Beta — Four teachers indexed for 2027
+## 1.2.5 Beta — Teacher portraits / photos
 
 - **2026**: original 19-teacher course indexes remain unchanged.
 - **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lessons; Chapter 2: 26 lessons; Chapter 3: 7 lessons; **61 lessons total**. The home card totals are computed from the bundled catalog.

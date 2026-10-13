@@ -92,3 +92,37 @@ for asset,expected in {
             urls.append(lesson["url"])
         assert len(set(urls))==len(urls),asset
 print("OK: 2027 index contains four teachers, 183 lectures across all 2027 chapters")
+
+# Validate externally hosted portraits against the names already in the Java catalog.
+# The user supplied two spelling variants; the canonical catalog labels are kept.
+from urllib.parse import urlparse
+source=(root/"app/src/main/java/com/sadsiyoon/app/Catalog.java").read_text(encoding="utf-8")
+image_chunk=source.split("private static final String[] IMAGES={",1)[1].split("};",1)[0]
+name_chunk=source.split("private static final String[] NAMES={",1)[1].split("};",1)[0]
+labels=re.findall(r'"([^"]*)"',name_chunk)
+images=re.findall(r'"([^"]*)"',image_chunk)
+assert len(labels)==len(images)==19
+teacher_images=dict(zip(labels,images))
+expected_images={
+    "علي السوداني": "https://j.top4top.io/p_3938l5zla1.jpg",
+    "ساجد العكيلي": "https://l.top4top.io/p_3938ii0nw1.jpg",
+    "مهند السوداني": "https://d.top4top.io/p_3938josxy1.jpg",
+    "رفل الزبيدي": "https://j.top4top.io/p_3938dihl31.jpg",
+    "نورس الموسوي": "https://a.top4top.io/p_3938yv4y11.jpg",
+    "هاشم الغرباوي": "https://h.top4top.io/p_3938lmygb1.jpg",
+    "محمد قاسم": "https://c.top4top.io/p_3938su4u21.jpg",
+    "أزل سلوان": "https://d.top4top.io/p_3938pjd2e1.jpg",
+    "جعفر الحسني": "https://h.top4top.io/p_3938f3g7s1.jpg",
+    "هشام المعموري": "https://i.top4top.io/p_3938bfw3s1.jpg",
+    "حسين محمد": "https://f.top4top.io/p_3938pnnw51.jpg",
+    "عباس الدراجي": "https://l.top4top.io/p_3938p9alv1.jpg",
+    "سجاد العبيدي": "https://d.top4top.io/p_3938suhes1.jpg",
+    "حيدر عبدالائمة": "https://j.top4top.io/p_3938gg6om1.jpg",
+}
+assert len(expected_images)==14
+for teacher,url in expected_images.items():
+    assert teacher_images.get(teacher)==url, f"Portrait mismatch for {teacher}"
+    parsed=urlparse(url)
+    assert parsed.scheme=="https" and parsed.hostname.endswith(".top4top.io") and parsed.path.endswith(".jpg")
+assert len(set(expected_images.values()))==14
+print("OK: 14 external teacher portraits mapped to the existing 2026/2027 catalogs")
