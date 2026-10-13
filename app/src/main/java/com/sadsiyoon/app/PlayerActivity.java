@@ -8,6 +8,14 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowManager;
+import android.content.res.ColorStateList;
+import android.text.TextUtils;
+import android.util.TypedValue;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.ViewCompat;
 import android.util.Rational;
 import android.view.Gravity;
 import android.view.View;
@@ -39,8 +47,8 @@ public class PlayerActivity extends AppCompatActivity {
     private View embeddedFullScreen;
     private WebChromeClient.CustomViewCallback embeddedFullScreenCallback;
     private FrameLayout videoBox;
-    private LinearLayout root,topbar,actions,tabContent,details;
-    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton;
+    private LinearLayout root,topbar,actions,tabContent,details,playerShell,extrasRow,secondRow;
+    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton;
     private EditText noteInput;
     private boolean landscape=false;
     private String tab="lessons";
@@ -48,7 +56,10 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override public void onCreate(Bundle saved){
         super.onCreate(saved);
-        getWindow().setStatusBarColor(Ui.BG);getWindow().setNavigationBarColor(Ui.BG);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(0);
         prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);
         int ti=getIntent().getIntExtra("ti",1),ci=getIntent().getIntExtra("ci",0),li=getIntent().getIntExtra("li",0);
         current=Catalog.ref(this,ti,ci,li);
@@ -56,63 +67,127 @@ public class PlayerActivity extends AppCompatActivity {
         buildScreen();load();
     }
 
+    private int dp(float v){return Ui.dp(this,v);}
+    private int videoHeight(){
+        int width=getResources().getDisplayMetrics().widthPixels-dp(24);
+        return Math.max(dp(155),Math.round(width*9f/16f));
+    }
     private void buildScreen(){
-        root=Ui.col(this);root.setBackgroundColor(Ui.BG);Ui.pad(this,root,11,9);setContentView(root);
+        root=Ui.col(this);
+        root.setBackgroundColor(Ui.BG);
+        // Android 15 enforces edge-to-edge. Keep the content beneath status icons
+        // and above the gesture navigation area, even with large display fonts.
+        ViewCompat.setOnApplyWindowInsetsListener(root,(v,insets)->{
+            Insets bars=insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            boolean wide=getResources().getConfiguration().orientation==
+                Configuration.ORIENTATION_LANDSCAPE;
+            root.setPadding(dp(wide?5:12),wide?bars.top:bars.top+dp(6),
+                dp(wide?5:12),wide?bars.bottom:bars.bottom+dp(7));
+            return insets;
+        });
+        setContentView(root);
+        ViewCompat.requestApplyInsets(root);
+
         topbar=Ui.row(this);
-        TextView back=Ui.btn(this,"‹ رجوع",false);
-        topbar.addView(back,Ui.lp(this,75,43));back.setOnClickListener(v->finish());
-        LinearLayout labels=Ui.col(this);labels.setPadding(Ui.dp(this,9),0,Ui.dp(this,9),0);
-        labels.addView(Ui.txt(this,"سادسيون",20,Ui.GOLD,true));
-        labels.addView(Ui.txt(this,"محاضرات دفعة "+current.teacher.batch,11,Ui.MUTED,false));
-        topbar.addView(labels,new LinearLayout.LayoutParams(0,-2,1));
-        root.addView(topbar);
-        heading=Ui.txt(this,"",19,Ui.WHITE,true);root.addView(heading,Ui.top(this,-1,-2,12));
-        info=Ui.txt(this,"",12,Ui.MINT,false);root.addView(info,Ui.top(this,-1,-2,4));
-        videoBox=new FrameLayout(this);videoBox.setBackground(Ui.round(this,Color.BLACK,14));videoBox.setClipToOutline(true);
-        root.addView(videoBox,Ui.top(this,-1,225,12));
+        TextView back=Ui.btn(this,"رجوع ‹",false);
+        back.setTextSize(13);back.setSingleLine(true);
+        back.setGravity(Gravity.CENTER);
+        topbar.addView(back,Ui.lp(this,78,42));
+        back.setOnClickListener(v->finish());
+        LinearLayout labels=Ui.col(this);
+        labels.setGravity(Gravity.CENTER_VERTICAL);
+        labels.setPadding(dp(12),0,dp(7),0);
+        TextView brand=Ui.txt(this,"سادسيون",18,Ui.GOLD,true);
+        brand.setSingleLine(true);brand.setEllipsize(TextUtils.TruncateAt.END);
+        labels.addView(brand);
+        TextView subtitle=Ui.txt(this,"محاضرات دفعة "+current.teacher.batch,11,Ui.MUTED,false);
+        subtitle.setSingleLine(true);subtitle.setEllipsize(TextUtils.TruncateAt.END);
+        labels.addView(subtitle);
+        topbar.addView(labels,new LinearLayout.LayoutParams(0,dp(44),1f));
+        root.addView(topbar,Ui.lp(this,-1,48));
+
+        heading=Ui.txt(this,"",20,Ui.WHITE,true);
+        heading.setSingleLine(true);heading.setEllipsize(TextUtils.TruncateAt.END);
+        heading.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+        root.addView(heading,Ui.top(this,-1,34,8));
+        info=Ui.txt(this,"",12,Ui.MINT,false);
+        info.setSingleLine(true);info.setEllipsize(TextUtils.TruncateAt.END);
+        root.addView(info,Ui.top(this,-1,28,3));
+
+        playerShell=Ui.col(this);
+        playerShell.setBackground(Ui.round(this,Ui.PANEL,17));
+        playerShell.setClipToOutline(true);
+        videoBox=new FrameLayout(this);
+        videoBox.setBackgroundColor(Color.BLACK);
+        playerShell.addView(videoBox,new LinearLayout.LayoutParams(-1,videoHeight()));
+        actions=Ui.col(this);
+        Ui.pad(this,actions,5,7);
+
+        LinearLayout navigation=Ui.row(this);
+        prev=addAction(navigation,"السابق",false,()->step(-1));
+        next=addAction(navigation,"التالي",true,()->step(1));
+        favorite=addAction(navigation,"☆ حفظ",false,this::toggleFavorite);
+        finished=addAction(navigation,"○ إكمال",false,this::toggleCompleted);
+        actions.addView(navigation);
+
+        secondRow=Ui.row(this);
+        fullscreenButton=addAction(secondRow,"تكبير",false,this::toggleOrientation);
+        speedButton=addAction(secondRow,"السرعة 1×",false,this::nextSpeed);
+        pipButton=addAction(secondRow,"نافذة عائمة",false,this::enterPip);
+        addAction(secondRow,"إعادة المحاولة",false,this::load);
+        actions.addView(secondRow,Ui.top(this,-1,39,5));
+        playerShell.addView(actions);
+        root.addView(playerShell,Ui.top(this,-1,-2,10));
 
         details=Ui.col(this);
-        status=Ui.txt(this,"",13,Ui.MUTED,false);details.addView(status,Ui.top(this,-1,-2,12));
-        actions=Ui.col(this);
-        LinearLayout line1=Ui.row(this);
-        prev=addAction(line1,"السابق",false,()->step(-1));
-        next=addAction(line1,"التالي",true,()->step(1));
-        actions.addView(line1);
-        LinearLayout line2=Ui.row(this);
-        speedButton=addAction(line2,"السرعة 1×",false,this::nextSpeed);
-        fullscreenButton=addAction(line2,"ملء الشاشة",false,this::toggleOrientation);
-        addAction(line2,"نافذة عائمة",false,this::enterPip);
-        actions.addView(line2,Ui.top(this,-1,44,9));
-        LinearLayout line3=Ui.row(this);
-        favorite=addAction(line3,"☆ المفضلة",false,this::toggleFavorite);
-        finished=addAction(line3,"○ مكتملة",false,this::toggleCompleted);
-        addAction(line3,"إعادة المحاولة",false,this::load);
-        actions.addView(line3,Ui.top(this,-1,43,9));
-        details.addView(actions,Ui.top(this,-1,-2,10));
+        status=Ui.txt(this,"",12,Ui.MUTED,false);
+        status.setMaxLines(2);status.setEllipsize(TextUtils.TruncateAt.END);
+        details.addView(status,Ui.top(this,-1,-2,9));
         LinearLayout tabs=Ui.row(this);
         addAction(tabs,"المحاضرات",true,()->selectTab("lessons"));
         addAction(tabs,"الملاحظات",false,()->selectTab("notes"));
         addAction(tabs,"الملفات",false,()->selectTab("files"));
-        details.addView(tabs,Ui.top(this,-1,43,18));
-        ScrollView listScroll=new ScrollView(this);listScroll.setFillViewport(true);
-        tabContent=Ui.col(this);Ui.pad(this,tabContent,2,8);listScroll.addView(tabContent);
+        details.addView(tabs,Ui.top(this,-1,40,13));
+        ScrollView listScroll=new ScrollView(this);
+        listScroll.setFillViewport(true);
+        listScroll.setVerticalScrollBarEnabled(false);
+        tabContent=Ui.col(this);Ui.pad(this,tabContent,2,6);
+        listScroll.addView(tabContent);
         details.addView(listScroll,new LinearLayout.LayoutParams(-1,0,1f));
         root.addView(details,new LinearLayout.LayoutParams(-1,0,1f));
         showTab();updateOrientation();
     }
     private TextView addAction(LinearLayout container,String label,boolean primary,Runnable runnable){
         TextView v=Ui.btn(this,label,primary);
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,Ui.dp(this,43),1);
-        p.setMargins(Ui.dp(this,2),0,Ui.dp(this,2),0);container.addView(v,p);v.setOnClickListener(w->runnable.run());return v;
+        v.setTextSize(12);
+        v.setSingleLine(true);v.setEllipsize(TextUtils.TruncateAt.END);
+        v.setAutoSizeTextTypeUniformWithConfiguration(10,12,1,TypedValue.COMPLEX_UNIT_SP);
+        v.setContentDescription(label);
+        Ui.pad(this,v,3,7);
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,dp(39),1f);
+        p.setMargins(dp(2),0,dp(2),0);
+        container.addView(v,p);
+        v.setOnClickListener(w->runnable.run());
+        return v;
+    }
+    private void updateAvailableControls(){
+        boolean nativePlayer=current!=null &&
+            ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type));
+        if(speedButton!=null)speedButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
+        if(pipButton!=null)pipButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
     }
     private void setStatus(String msg){if(status!=null)status.setText(msg);}
     private void load(){
         if(current==null)return;
         heading.setText(current.lesson.title);
         info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
+        saveNote();
         refreshActions();destroyPlayback();
+        updateAvailableControls();
         if(!current.lesson.available()){setStatus("هذه المحاضرة غير متاحة للتشغيل حالياً");showUnavailable();return;}
-        setStatus(current.lesson.access.equals("premium")?"قد تتطلب هذه المحاضرة اشتراكاً لدى مزود الفيديو.":"جاري تهيئة المشغّل...");
+        setStatus(current.lesson.access.equals("premium")?
+            "قد تتطلب المشاهدة اشتراكاً لدى مزود الفيديو.":
+            "جاري تحميل مشغّل المحاضرة...");
         if(current.lesson.type.equals("hls")||current.lesson.type.equals("mp4"))openNative();
         else if(current.lesson.type.equals("embed"))openEmbedded();
         else showUnavailable();
@@ -180,10 +255,8 @@ public class PlayerActivity extends AppCompatActivity {
             @Override public void onPageFinished(WebView view,String loaded){
                 // A loaded iframe is NOT proof that a playable video exists.
                 setStatus(current.lesson.access.equals("premium")?
-                    "هذا الفيديو مقيّد باشتراك لدى مزوده؛ لا يستطيع سادسيون تجاوز هذا الشرط.":
-                    current.lesson.access.equals("unverified")?
-                    "تم فتح مشغّل المحاضرة. قد يستغرق التحميل وقتاً، والتشغيل غير مضمون.":
-                    "تم فتح مشغّل المحاضرة. اضغط تشغيل إذا كان متاحاً.");
+                    "المشغّل مفتوح. قد يطلب مزود الفيديو اشتراكاً؛ تحكّم بالتشغيل من داخل الفيديو.":
+                    "المشغّل مفتوح؛ استخدم أدوات التشغيل الداخلية للفيديو.");
             }
             @Override public void onReceivedError(WebView view,android.webkit.WebResourceRequest request,android.webkit.WebResourceError error){
                 if(request.isForMainFrame())setStatus("تعذر عرض الفيديو. تحقق من اتصال الإنترنت.");
@@ -195,7 +268,8 @@ public class PlayerActivity extends AppCompatActivity {
             "<style>html,body{margin:0;background:#000;width:100%;height:100%;overflow:hidden}iframe{width:100%;height:100%;border:0}</style></head>"+
             "<body><iframe src=\""+safe+"\" allow=\"autoplay;fullscreen;picture-in-picture;encrypted-media\" allowfullscreen></iframe></body></html>";
         web.loadDataWithBaseURL("https://"+host+"/",html,"text/html","UTF-8",null);
-        setStatus(current.lesson.access.equals("premium")?"قد تتطلب المحاضرة اشتراكاً لدى المزود.":"جاري تحميل مشغّل المحاضرة...");
+        setStatus(current.lesson.access.equals("premium")?
+            "قد تتطلب المحاضرة اشتراكاً لدى مزود الفيديو.":"جاري تحميل المشغّل...");
     }
     private void exitEmbeddedFullScreen(){
         if(embeddedFullScreen!=null){
@@ -228,7 +302,7 @@ public class PlayerActivity extends AppCompatActivity {
             if(r!=null&&r.lesson.available()){nextRef=r;break;}i+=change;
         }
         if(nextRef==null){Toast.makeText(this,"لا توجد محاضرة أخرى متاحة",Toast.LENGTH_SHORT).show();return;}
-        savePosition();current=nextRef;
+        savePosition();saveNote();current=nextRef;
         prefs.edit().putInt("last_t",current.ti).putInt("last_c",current.ci).putInt("last_l",current.li).apply();
         load();
     }
@@ -281,7 +355,7 @@ public class PlayerActivity extends AppCompatActivity {
                 tabContent.addView(v,Ui.top(this,-1,-2,6));
                 v.setOnClickListener(w->{
                     if(!chosen.lesson.available()){Toast.makeText(this,"هذه المحاضرة غير متاحة حالياً",Toast.LENGTH_SHORT).show();return;}
-                    savePosition();current=chosen;load();
+                    savePosition();saveNote();current=chosen;load();
                 });
             }
         }else if(tab.equals("notes")){
@@ -306,16 +380,27 @@ public class PlayerActivity extends AppCompatActivity {
     private void saveNote(){if(noteInput!=null&&current!=null)
         prefs.edit().putString("note_"+current.key(),noteInput.getText().toString()).apply();}
     private void updateOrientation(){
-        if(videoBox==null)return;
-        boolean horizontal=getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE;
-        topbar.setVisibility(horizontal?View.GONE:View.VISIBLE);
-        heading.setVisibility(horizontal?View.GONE:View.VISIBLE);
-        info.setVisibility(horizontal?View.GONE:View.VISIBLE);
-        details.setVisibility(horizontal?View.GONE:View.VISIBLE);
-        LinearLayout.LayoutParams p=(LinearLayout.LayoutParams)videoBox.getLayoutParams();
-        p.height=horizontal?0:Ui.dp(this,225);p.weight=horizontal?1f:0f;
-        p.topMargin=horizontal?0:Ui.dp(this,12);videoBox.setLayoutParams(p);
-        if(fullscreenButton!=null)fullscreenButton.setText(horizontal?"تصغير":"ملء الشاشة");
+        if(videoBox==null || playerShell==null)return;
+        boolean wide=getResources().getConfiguration().orientation==
+            Configuration.ORIENTATION_LANDSCAPE;
+        landscape=wide;
+        if(topbar!=null)topbar.setVisibility(wide?View.GONE:View.VISIBLE);
+        if(heading!=null)heading.setVisibility(wide?View.GONE:View.VISIBLE);
+        if(info!=null)info.setVisibility(wide?View.GONE:View.VISIBLE);
+        if(details!=null)details.setVisibility(wide?View.GONE:View.VISIBLE);
+        if(actions!=null)actions.setVisibility(wide?View.GONE:View.VISIBLE);
+        LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,wide?0:-2,wide?1f:0f);
+        shell.topMargin=wide?0:dp(10);
+        playerShell.setLayoutParams(shell);
+        LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,wide?0:videoHeight(),wide?1f:0f);
+        videoBox.setLayoutParams(video);
+        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"تكبير");
+        ViewCompat.requestApplyInsets(root);
+    }
+    @Override public void onBackPressed(){
+        if(embeddedFullScreen!=null){exitEmbeddedFullScreen();return;}
+        if(landscape){setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return;}
+        super.onBackPressed();
     }
     @Override public void onPictureInPictureModeChanged(boolean pip,Configuration config){
         super.onPictureInPictureModeChanged(pip,config);
