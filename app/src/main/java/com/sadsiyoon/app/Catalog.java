@@ -37,9 +37,12 @@ public final class Catalog {
         "https://edson.my/assets/hjzpw.jpg"};
     private static List<Teacher> teachers;
     public static final class Teacher {
-        public final int index; public final String name,subject,image;
+        public final int index; public final String name,subject,image,batch;
         public final List<Chapter> chapters=new ArrayList<>();
-        private Teacher(int i){index=i;name=NAMES[i];subject=SUBJECTS[i];image=IMAGES[i];}
+        private Teacher(int i){this(i,NAMES[i],SUBJECTS[i],IMAGES[i],"2026");}
+        private Teacher(int i,String n,String s,String imageUrl,String batchId){
+            index=i;name=n;subject=s;image=imageUrl;batch=batchId;
+        }
         public int count(){int n=0;for(Chapter c:chapters)n+=c.lessons.size();return n;}
         public int ready(){int n=0;for(Chapter c:chapters)for(Lesson l:c.lessons)if(l.available())n++;return n;}
     }
@@ -48,8 +51,9 @@ public final class Catalog {
         private Chapter(String t){title=t;}
     }
     public static final class Lesson {
-        public final String title,url,type;
-        private Lesson(String t,String u){title=t;url=u;type=kind(u);}
+        public final String title,url,type,access;
+        private Lesson(String t,String u){this(t,u,"standard");}
+        private Lesson(String t,String u,String a){title=t;url=u;access=a;type=kind(u);}
         public boolean available(){return !url.isEmpty() && !type.equals("none");}
         private static String kind(String url){
             if(url.isEmpty())return "none";
@@ -129,9 +133,43 @@ public final class Catalog {
                 }
             }
         }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load bundled catalog",e);}
+        // 2027 is a separate catalog and retains all existing 2026 teacher IDs and user progress.
+        try{
+            java.io.InputStream stream=context.getAssets().open("catalog_2027/01-haider-abdul-imma.json");
+            java.io.ByteArrayOutputStream buffer=new java.io.ByteArrayOutputStream();
+            byte[] part=new byte[8192];int len;
+            try{while((len=stream.read(part))!=-1)buffer.write(part,0,len);}
+            finally{stream.close();}
+            JSONObject doc=new JSONObject(new String(buffer.toByteArray(),StandardCharsets.UTF_8));
+            if("2027".equals(doc.optString("batch"))){
+                Teacher teacher=new Teacher(out.size(),doc.optString("teacher","حيدر عبدالائمة"),
+                    doc.optString("subject","الرياضيات"),IMAGES[1],"2027");
+                JSONArray chapters=doc.optJSONArray("chapters");
+                if(chapters!=null)for(int c=0;c<chapters.length();c++){
+                    JSONObject chapterJson=chapters.optJSONObject(c);if(chapterJson==null)continue;
+                    Chapter chapter=new Chapter(chapterJson.optString("title","الفصل الأول"));
+                    JSONArray episodes=chapterJson.optJSONArray("lessons");
+                    if(episodes==null)continue;
+                    for(int j=0;j<episodes.length();j++){
+                        JSONObject item=episodes.optJSONObject(j);if(item==null)continue;
+                        String url=cleanUrl(item.optString("url",""));
+                        String label=item.optString("title","المحاضرة "+(j+1)).trim();
+                        String access=item.optString("access","unverified");
+                        if(!label.isEmpty())chapter.lessons.add(new Lesson(label,url,access));
+                    }
+                    teacher.chapters.add(chapter);
+                }
+                out.add(teacher);
+            }
+        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load 2027 course catalog",e);}
         teachers=Collections.unmodifiableList(out);
     }
     public static List<Teacher> teachers(Context c){initialize(c);return teachers;}
+    public static List<Teacher> byBatch(Context c,String batch){
+        initialize(c);ArrayList<Teacher> selected=new ArrayList<>();
+        for(Teacher teacher:teachers)if(teacher.batch.equals(batch))selected.add(teacher);
+        return Collections.unmodifiableList(selected);
+    }
     public static Teacher teacher(Context c,int index){initialize(c);return index>=0&&index<teachers.size()?teachers.get(index):null;}
     public static Ref ref(Context ctx,int ti,int ci,int li){
         Teacher t=teacher(ctx,ti);
