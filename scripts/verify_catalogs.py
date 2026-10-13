@@ -13,7 +13,7 @@ p = root / "app/src/main/assets/catalog_2027/01-haider-abdul-imma.json"
 d = json.loads(p.read_text(encoding="utf-8"))
 assert d["batch"] == "2027"
 assert d["teacher"] == "حيدر عبدالائمة"
-assert len(d["chapters"]) == 1
+assert len(d["chapters"]) == 2, "Expected chapters one and two"
 chap = d["chapters"][0]
 assert len(chap["lessons"]) == 28
 fallback_numbers = {6, 19, 20, 21}
@@ -37,3 +37,17 @@ for n, entry in enumerate(chap["lessons"], 1):
 print(f"OK: {len(older)} legacy 2026 JSON files retained, "
       f"{len(chap['lessons'])} indexed 2027 lessons "
       f"({28-len(fallback_numbers)} premium Rumble, {len(fallback_numbers)} Bitchute unverified)")
+
+# Validate chapter two while retaining chapter one's exact ordering.
+chapter2=d["chapters"][1]
+assert chapter2["title"] == "الفصل الثاني"
+assert len(chapter2["lessons"]) == 26
+assert len({v["url"] for v in chapter2["lessons"]}) == 26
+for i,lesson in enumerate(chapter2["lessons"],1):
+    assert lesson["index"] == i
+    assert lesson["title"] == f"المحاضرة {i}"
+    assert lesson["url"].startswith("https://rumble.com/embed/")
+    assert lesson["provider"] == "rumble"
+    assert lesson["access"] == "premium"
+    assert lesson["verified"] == "embed_present_not_playback"
+print("OK: second chapter — 26 indexed Rumble embed URLs; all premium-restricted")

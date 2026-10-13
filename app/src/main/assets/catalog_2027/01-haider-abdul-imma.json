@@ -3,8 +3,8 @@
   "teacher": "حيدر عبدالائمة",
   "subject": "الرياضيات",
   "index": 1,
-  "origin": "public embedded player links from v.sea-novels.com; not proven playback",
-  "restrictions": "24 Rumble links display Premium Only Content; 4 Bitchute players loaded but actual video playback was not confirmed",
+  "origin": "Index of publicly embedded iframe URLs shown on v.sea-novels.com/p/2.html and /p/3.html. Source has not granted redistributing rights; embeds retain their provider restrictions.",
+  "restrictions": "26 Rumble links for chapter two and 24 Rumble links for chapter one return Premium Only Content when opened directly. Chapter one has 4 Bitchute embeds, actual playback unverified.",
   "chapters": [
     {
       "index": 1,
@@ -257,6 +257,246 @@
           "index": 28,
           "title": "المحاضرة 28",
           "url": "https://rumble.com/embed/v7awokk/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "الفصل الثاني",
+      "lessons": [
+        {
+          "index": 1,
+          "title": "المحاضرة 1",
+          "url": "https://rumble.com/embed/v7b3gxe/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 2,
+          "title": "المحاضرة 2",
+          "url": "https://rumble.com/embed/v7b3gxg/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 3,
+          "title": "المحاضرة 3",
+          "url": "https://rumble.com/embed/v7b3gxm/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 4,
+          "title": "المحاضرة 4",
+          "url": "https://rumble.com/embed/v7b3hfc/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 5,
+          "title": "المحاضرة 5",
+          "url": "https://rumble.com/embed/v7b3hfe/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 6,
+          "title": "المحاضرة 6",
+          "url": "https://rumble.com/embed/v7b3hfk/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 7,
+          "title": "المحاضرة 7",
+          "url": "https://rumble.com/embed/v7b3hum/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 8,
+          "title": "المحاضرة 8",
+          "url": "https://rumble.com/embed/v7b3huu/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 9,
+          "title": "المحاضرة 9",
+          "url": "https://rumble.com/embed/v7bg18i/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 10,
+          "title": "المحاضرة 10",
+          "url": "https://rumble.com/embed/v7bg18u/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 11,
+          "title": "المحاضرة 11",
+          "url": "https://rumble.com/embed/v7bg192/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 12,
+          "title": "المحاضرة 12",
+          "url": "https://rumble.com/embed/v7bg1ro/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 13,
+          "title": "المحاضرة 13",
+          "url": "https://rumble.com/embed/v7bg24k/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 14,
+          "title": "المحاضرة 14",
+          "url": "https://rumble.com/embed/v7bg24w/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 15,
+          "title": "المحاضرة 15",
+          "url": "https://rumble.com/embed/v7bg250/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 16,
+          "title": "المحاضرة 16",
+          "url": "https://rumble.com/embed/v7bg33g/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 17,
+          "title": "المحاضرة 17",
+          "url": "https://rumble.com/embed/v7bg3ee/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 18,
+          "title": "المحاضرة 18",
+          "url": "https://rumble.com/embed/v7c3r7k/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 19,
+          "title": "المحاضرة 19",
+          "url": "https://rumble.com/embed/v7c3r7o/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 20,
+          "title": "المحاضرة 20",
+          "url": "https://rumble.com/embed/v7c3r7w/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 21,
+          "title": "المحاضرة 21",
+          "url": "https://rumble.com/embed/v7c3rg2/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 22,
+          "title": "المحاضرة 22",
+          "url": "https://rumble.com/embed/v7ci838/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 23,
+          "title": "المحاضرة 23",
+          "url": "https://rumble.com/embed/v7ci83a/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 24,
+          "title": "المحاضرة 24",
+          "url": "https://rumble.com/embed/v7ci38q/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 25,
+          "title": "المحاضرة 25",
+          "url": "https://rumble.com/embed/v7ci38s/?pub=4oxhp6",
+          "provider": "rumble",
+          "server": "3",
+          "access": "premium",
+          "verified": "embed_present_not_playback"
+        },
+        {
+          "index": 26,
+          "title": "المحاضرة 26",
+          "url": "https://rumble.com/embed/v7ci390/?pub=4oxhp6",
           "provider": "rumble",
           "server": "3",
           "access": "premium",

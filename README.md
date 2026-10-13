@@ -1,34 +1,19 @@
-# سادسيون — SADSIYOON
+# سادسيون — Sadsiyoon
 
-تطبيق Android أصلي (Java + Media3) باللغة العربية، بواجهة داكنة وأيقونة سادسيون. ليست هناك حاجة لإنشاء حساب.
+Android app (Java / AndroidX / Media3) with Arabic RTL UI and 2026/2027 batch navigation.
 
-## النسخة 1.2.0-beta
+## 1.2.2 Beta — Chapter two, 2027
 
-- **دفعة 2026:** جميع فهارس المدرسين الـ19 محفوظة ضمن `app/src/main/assets/catalog/` بدون حذف أو تغيير.
-- **دفعة 2027:** الأستاذ **حيدر عبدالائمة**، الرياضيات، الفصل الأول، 28 محاضرة متسلسلة في `app/src/main/assets/catalog_2027/01-haider-abdul-imma.json`.
-- بطاقة مستقلة لدفعة 2027 في الرئيسية، ومبدّل دفعات 2026/2027 في دليل المدرسين، مع فصل بيانات المكتبة والتقدم حسب معرف المدرس.
-- 24 محاضرة بمشغّل **Rumble** الرسمي المضمّن، و4 ببديل **Bitchute** للمحاضرات 6 و19 و20 و21. لا تظهر روابط الاستضافة في الواجهة.
-- المشغّل الأصلي ExoPlayer يدعم HLS/MP4، أما Rumble/Bitchute والجهات الأخرى فتستخدم *صفحات التضمين الرسمية* داخل منطقة مشغّل سادسيون. قد تظهر علامة الجهة وشروطها داخل الفيديو، ولا يمكن إزالتها دون تجاوز مزود الخدمة.
-- مفضلة، إكمال يدوي، آخر مشاهدة، بحث، ملاحظات، اختبار محلي وإعدادات دون تسجيل دخول.
+- **2026**: original 19-teacher course indexes remain unchanged.
+- **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lectures; Chapter 2: 26 lectures, **54 indexed lectures total**. The home card totals are computed from the bundled catalog.
+- Chapter two's 26 Rumble iframe URLs were selected from the public "سيرفر 3" option of https://v.sea-novels.com/p/3.html?m=1 and their external video titles matched lecture numbers. A misleading advertisement iframe was rejected for lecture 14 and replaced by its correct verified Rumble embed URL.
+- All **26 chapter-two Rumble embeds show Premium Only Content** when opened directly without a qualifying subscription. Their presence in the catalog does **not** mean playback can be guaranteed or access restrictions circumvented.
+- Chapter one retains Rumble-first/Bitchute-when-Rumble-absent link choices.
+- Video displays in licensed provider iframe controls for embeds; Media3 ExoPlayer controls HLS/MP4 directly when an authorized direct video URL is available. Provider player branding or subscriber checks cannot be removed by app-side UI styling.
+- Favorites, saved positions, and notes are stored locally per lecture.
 
-### حالة الوصول للفيديوهات
+**Important:** Public iframe links are not proof of permission to redistribute third-party lectures in a public app. Obtain authorization from rights holders before distribution.
 
-جميع روابط Rumble الـ24 **أظهرت رسالة Premium Only Content عند فتحها مباشرة دون اشتراك**. رابط التضمين **ليس تصريحاً بمشاهدة الفيديو**. روابط Bitchute الأربعة تعرض واجهة مشغّل، لكن **لم يتم التأكد من بدء الفيديو فعلياً**. لا يقوم التطبيق بإزالة الإعلانات أو تجاوز الاشتراكات أو تخزين مقاطع الفيديو.
+## Build
 
-**قانونياً:** يجب الحصول على إذن أصحاب الحقوق قبل توزيع محاضراتهم داخل تطبيق عام. الروابط المدرجة هنا فهارس تجريبية وليست نسخ فيديو مستضافة في التطبيق.
-
-## بناء APK
-
-كل Push إلى `main` يشغّل `.github/workflows/android-debug.yml` لاختبار سلامة الفهارس وبناء `app-debug.apk` ونشره ضمن Artifact باسم `sadsiyoon-debug-apk`.
-هذا **توقيع Debug تجريبي**، وليس مفتاح توقيع ثابت مناسب لتحديثات متجر الإنتاج.
-
-- minSdk 26؛ targetSdk 35؛ compileSdk 36؛ Java 17؛ Media3 1.11.1.
-- لا توجد مفاتيح API سرية أو خادم مطلوب لتصفح الفهارس المحلية.
-- تشغيل الفيديو يحتاج الإنترنت وصلاحية الوصول الخاصة بكل مزود.
-
-## ملفات رئيسية
-
-- `Catalog.java`: تحميل الفهرسين 2026 و2027.
-- `MainActivity.java`: الرئيسية، الدفعات، المدرسون، الفصول، المكتبة، البحث.
-- `PlayerActivity.java`: ExoPlayer للمباشر، وWebView للمشغّل المضمّن.
-- `scripts/verify_catalogs.py`: فحص اتساق الـ28 رابطاً وإبقاء ملفات 2026.
+On each push to main, GitHub Actions runs `scripts/verify_catalogs.py`, builds `app-debug.apk`, and uploads `sadsiyoon-debug-apk` in artifacts. This is a Debug-signed test APK, not a production-signing certificate.

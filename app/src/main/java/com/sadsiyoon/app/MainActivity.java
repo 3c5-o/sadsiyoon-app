@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             newBatch.addView(Ui.txt(this,"دفعة 2027",27,Ui.MINT,true));
             newBatch.addView(Ui.txt(this,"الرياضيات • حيدر عبدالائمة",16,Ui.WHITE,true),
                 Ui.top(this,-1,-2,7));
-            newBatch.addView(Ui.txt(this,"الفصل الأول • 28 محاضرة",13,Ui.GOLD,false),
+            newBatch.addView(Ui.txt(this,teacher2027.chapters.size()+" فصل • "+teacher2027.count()+" محاضرة",13,Ui.GOLD,false),
                 Ui.top(this,-1,-2,4));
             newBatch.addView(Ui.txt(this,"بعض المشاهدات تتطلب اشتراكاً لدى مزود الفيديو؛ لا يضمن هذا التطبيق تشغيلها.",12,Ui.MUTED,false),
                 Ui.top(this,-1,-2,9));
