@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Verified original exam sheets only. Empty 2025 is intentional, not missing UI. */
+/** Source-linked authentic 2025 exam pages and optional licensed image galleries. */
 public final class ExamCatalog {
     private ExamCatalog(){}
     public static final class Paper {
@@ -35,14 +35,16 @@ public final class ExamCatalog {
                 JSONObject p=docs.optJSONObject(i);if(p==null)continue;
                 if(p.optInt("year",-1)!=year || !branch.equals(p.optString("branch")) ||
                    !subject.equals(p.optString("subject")) || !round.equals(p.optString("round")))continue;
-                JSONArray pages=p.optJSONArray("images");if(pages==null||pages.length()==0)continue;
+                String source=p.optString("source","").trim();
+                JSONArray pages=p.optJSONArray("images");
                 List<String> urls=new ArrayList<>();
-                for(int j=0;j<pages.length();j++){
+                if(pages!=null)for(int j=0;j<pages.length();j++){
                     String u=pages.optString(j,"");
                     if(u.startsWith("https://"))urls.add(u);
                 }
-                if(!urls.isEmpty())selected.add(new Paper(year,branch,subject,round,p.optString("title"),
-                            p.optString("source",""),urls));
+                // Read Mlazemna's published page, without mirroring its images.
+                if(!urls.isEmpty()||(urls.isEmpty()&&source.startsWith("https://mlazemna.com/")))
+                    selected.add(new Paper(year,branch,subject,round,p.optString("title"),source,urls));
             }
         }catch(Exception e){android.util.Log.e("Sadsiyoon","Exam catalogue unavailable",e);}
         return selected;

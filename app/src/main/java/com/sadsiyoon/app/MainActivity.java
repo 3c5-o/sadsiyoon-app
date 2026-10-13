@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
     // Aselatna currently shows sixth-preparatory exams only through 2021.
     private void exams(){
         addTitle(content,"وزاريات سادسيون",24);
-        addMuted(content,"معرض الأوراق الوزارية المصورة • سنة الامتحان 2025 • نسخة تجريبية");
+        addMuted(content,"أوراق وزارية 2025 — نماذج علمي وأدبي من ملازمنا • تجربة");
 
         LinearLayout years=Ui.card(this);years.setBackground(Ui.gradient(this,0xff123d39,Ui.PANEL,17));
         years.addView(Ui.txt(this,"2025",27,Ui.GOLD,true));
@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
         if(papers.isEmpty()){
             LinearLayout empty=Ui.card(this);
             empty.addView(Ui.txt(this,"لا توجد ورقة 2025 مؤكدة بهذا التصنيف",17,Ui.GOLD,true));
-            addMuted(empty,"الصور الموجودة حالياً في أرشيف أسئلتنا للسادس الإعدادي تعود إلى سنوات سابقة. ما نضعها باسم 2025 حتى لا نضلّل الطالب.");
+            addMuted(empty,"المتوفر حالياً من ملازمنا: رياضيات وعربي 2025 الدور الأول لكل فرع. بقية المواد والأدوار تنتظر فحص المصدر.");
             empty.addView(Ui.txt(this,"هذا نموذج شكل عرض الصورة عند إضافتها:",13,Ui.MINT,true),
                 Ui.top(this,-1,-2,13));
             content.addView(empty,margins(-1,-2,9));
@@ -454,16 +454,16 @@ public class MainActivity extends AppCompatActivity {
             for(ExamCatalog.Paper paper:papers){
                 LinearLayout card=Ui.card(this);
                 card.addView(Ui.txt(this,paper.title,18,Ui.WHITE,true));
-                addMuted(card,paper.urls.size()+" صفحة مصورة • "+paper.round+" • "+paper.subject);
-                TextView open=Ui.btn(this,"عرض صور الورقة",true);
+                addMuted(card,paper.urls.isEmpty()?"المصدر: ملازمنا • الورقة الأصلية داخل التطبيق":paper.urls.size()+" صفحات • "+paper.round+" • "+paper.subject);
+                TextView open=Ui.btn(this,paper.urls.isEmpty()?"عرض ورقة ملازمنا":"عرض صور الورقة",true);
                 card.addView(open,Ui.top(this,-1,46,10));
                 open.setOnClickListener(v->displayExamPaper(paper));
                 content.addView(card,margins(-1,-2,11));
             }
         }
         LinearLayout src=Ui.card(this);
-        src.addView(Ui.txt(this,"المصدر: أسئلتنا",16,Ui.WHITE,true));
-        addMuted(src,"رابط القسم الأصلي للاطلاع. علامة سادسيون تُضاف في عارض الصور، ولا تغيّر نص الأسئلة.");
+        src.addView(Ui.txt(this,"المصادر",16,Ui.WHITE,true));
+        addMuted(src,"أوراق التجربة من ملازمنا مع الإبقاء على مصدرها وعلاماتها. ويمكنك زيارة فهرس أسئلتنا للمقارنة.");
         TextView link=Ui.btn(this,"زيارة قسم "+(examBranch.equals("scientific")?"العلمي":"الأدبي"),false);
         src.addView(link,Ui.top(this,-1,42,10));
         link.setOnClickListener(v->{
@@ -493,7 +493,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayExamPaper(ExamCatalog.Paper paper){
-        if(paper.urls.isEmpty())return;
+        if(paper.urls.isEmpty()){
+            if(paper.source.startsWith("https://mlazemna.com/")){
+                Intent intent=new Intent(this,SourcePaperActivity.class);
+                intent.putExtra("source_url",paper.source);
+                intent.putExtra("source_title",paper.title);
+                startActivity(intent);
+            }else Toast.makeText(this,"رابط المصدر غير متاح",Toast.LENGTH_SHORT).show();
+            return;
+        }
         android.widget.FrameLayout paperPage=new android.widget.FrameLayout(this);
         paperPage.setBackgroundColor(0xffffffff);
         android.widget.ImageView image=new android.widget.ImageView(this);
@@ -593,7 +601,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.2.6 Beta — قسم وزاريات 2025 التجريبي.");
+        addMuted(content,"سادسيون V1.2.7 Beta — نماذج ملازمنا 2025 العلمي والأدبي.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));

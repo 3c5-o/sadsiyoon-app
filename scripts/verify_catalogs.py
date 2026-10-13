@@ -130,10 +130,14 @@ print("OK: 14 external teacher portraits mapped to the existing 2026/2027 catalo
 # Don't mislabel another grade's or year's exam sheets as 2025.
 exams=json.loads((root/"app/src/main/assets/exams/2025.json").read_text(encoding="utf-8"))
 assert exams["year"] == 2025
-assert exams["status"] == "awaiting_source_documents"
-assert exams["papers"] == [], "No verified 2025 sixth-preparatory scans have been sourced from Aselatna yet"
+assert exams["status"] == "source_links_verified"
+assert len(exams["papers"]) == 4
+expected = {("scientific","الرياضيات"),("literary","الرياضيات"),("scientific","اللغة العربية"),("literary","اللغة العربية")}
+assert {(p["branch"],p["subject"]) for p in exams["papers"]} == expected
+assert all(p["year"] == 2025 and p["round"] == "الدور الأول" and p["source"].startswith("https://mlazemna.com/") and p["images"] == [] for p in exams["papers"])
+assert len({p["source"] for p in exams["papers"]}) == 4
 source=(root/"app/src/main/java/com/sadsiyoon/app/MainActivity.java").read_text(encoding="utf-8")
 assert 'private void exams(){' in source
 assert 'private void displayExamPaper(' in source
 assert 'لا توجد ورقة 2025 مؤكدة' in source
-print("OK: 2025 science/literary gallery UI, no incorrectly labeled exam sheets")
+print("OK: 4 authentic 2025 scientific/literary math/Arabic exam source pages, image rights preserved")

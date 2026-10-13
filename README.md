@@ -1,3 +1,11 @@
+# Sadsiyoon 1.2.7 Beta — 2025 Mlazemna exam samples
+
+Four real, source-verified 2025 first-round exams: Mathematics and Arabic for sixth scientific and literary.
+Select 2025, branch, subject and first round in the Waziriat gallery; opening a card displays the unmodified original Mlazemna webpage and its paper images within an attributed WebView.
+An external-browser button is available if the source website restricts in-app viewing.
+No third-party images are copied, downloaded, rebranded or watermarks removed. These are live webpage embeds, not re-hosted image files.
+Other years, subjects and rounds are untouched. The prior teacher course catalogs are preserved.
+
 # Sadsiyoon 1.2.6 — 2025 exam image-gallery pilot
 
 The new `وزاريات سادسيون` screen is accessible from Home and Tests.

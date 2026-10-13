@@ -1,0 +1,93 @@
+package com.sadsiyoon.app;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+public final class SourcePaperActivity extends Activity {
+    private WebView browser;
+    private String url;
+    private boolean allowed(Uri u){
+        if(u==null || !"https".equalsIgnoreCase(u.getScheme()))return false;
+        String host=u.getHost();
+        return host!=null&&("mlazemna.com".equalsIgnoreCase(host)||host.toLowerCase(java.util.Locale.ROOT).endsWith(".mlazemna.com"));
+    }
+    private void outside(Uri u){
+        if(u==null || !"https".equalsIgnoreCase(u.getScheme()))return;
+        try{startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception ignored){}
+    }
+    @Override public void onCreate(Bundle state){
+        super.onCreate(state);
+        url=getIntent().getStringExtra("source_url");
+        if(url==null||!allowed(Uri.parse(url))){finish();return;}
+        String title=getIntent().getStringExtra("source_title");
+        LinearLayout root=Ui.col(this);
+        root.setBackgroundColor(Ui.BG);
+        root.setPadding(Ui.dp(this,10),Ui.dp(this,28),Ui.dp(this,10),Ui.dp(this,10));
+        LinearLayout toolbar=Ui.row(this);
+        TextView back=Ui.btn(this,"رجوع",false);
+        toolbar.addView(back,Ui.lp(this,68,44));
+        back.setOnClickListener(v->finish());
+        TextView name=Ui.txt(this,title==null?"ورقة وزارية":title,15,Ui.WHITE,true);
+        name.setMaxLines(2);
+        name.setGravity(Gravity.CENTER_VERTICAL);
+        toolbar.addView(name,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1f));
+        root.addView(toolbar);
+        TextView origin=Ui.txt(this,"المصدر الأصلي: ملازمنا • جميع العلامات والصور كما نشرها المصدر",12,Ui.GOLD,false);
+        root.addView(origin,Ui.top(this,-1,-2,6));
+        LinearLayout actions=Ui.row(this);
+        TextView reload=Ui.btn(this,"تحديث",false);
+        TextView open=Ui.btn(this,"فتح بالمتصفح",true);
+        actions.addView(reload,new LinearLayout.LayoutParams(0,Ui.dp(this,42),1f));
+        actions.addView(open,new LinearLayout.LayoutParams(0,Ui.dp(this,42),1f));
+        root.addView(actions,Ui.top(this,-1,-2,8));
+        open.setOnClickListener(v->outside(Uri.parse(url)));
+        ProgressBar progress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);
+        progress.setIndeterminate(true);
+        root.addView(progress,Ui.top(this,-1,4,5));
+        browser=new WebView(this);
+        browser.setBackgroundColor(Color.WHITE);
+        WebSettings settings=browser.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
+        settings.setAllowFileAccess(false);
+        settings.setAllowContentAccess(false);
+        settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+        browser.setWebViewClient(new WebViewClient(){
+            @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){
+                if(request.isForMainFrame()&&!allowed(request.getUrl())){
+                    outside(request.getUrl());return true;
+                }
+                return false;
+            }
+            @Override public void onPageFinished(WebView view,String url){
+                progress.setVisibility(View.GONE);
+            }
+        });
+        reload.setOnClickListener(v->{progress.setVisibility(View.VISIBLE);browser.reload();});
+        root.addView(browser,new LinearLayout.LayoutParams(-1,0,1f));
+        setContentView(root);
+        browser.loadUrl(url);
+    }
+    @Override public void onBackPressed(){
+        if(browser!=null&&browser.canGoBack())browser.goBack();
+        else super.onBackPressed();
+    }
+    @Override protected void onDestroy(){
+        if(browser!=null){browser.stopLoading();browser.destroy();browser=null;}
+        super.onDestroy();
+    }
+}
