@@ -17,6 +17,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.ViewCompat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private final int[] correct={1,1,1,2,2};
 
     @Override public void onCreate(Bundle saved){
-        super.onCreate(saved);getWindow().setStatusBarColor(Ui.BG);getWindow().setNavigationBarColor(Ui.BG);
+        super.onCreate(saved);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(Color.TRANSPARENT);
         prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);Catalog.initialize(this);render();
     }
     private int d(int n){return Ui.dp(this,n);}
@@ -55,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void render(){
         LinearLayout root=Ui.col(this);root.setBackgroundColor(Ui.BG);
+        ViewCompat.setOnApplyWindowInsetsListener(root,(v,insets)->{
+            Insets bars=insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            root.setPadding(bars.left,bars.top,bars.right,bars.bottom);
+            return insets;
+        });
         boolean rootPage=page.equals("home")||page.equals("teachers")||page.equals("library")||page.equals("tests")||page.equals("more");
         root.addView(toolbar(rootPage),Ui.lp(this,-1,65));
         ScrollView scroll=new ScrollView(this);
@@ -63,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1f));
         if(rootPage)root.addView(bottomNavigation(),Ui.lp(this,-1,70));
         setContentView(root);
+        ViewCompat.requestApplyInsets(root);
         if(page.equals("home"))home(); else if(page.equals("teachers"))teachers();
         else if(page.equals("teacher"))teacherPage();else if(page.equals("chapter"))chapterPage();
         else if(page.equals("library"))library();else if(page.equals("tests"))tests();

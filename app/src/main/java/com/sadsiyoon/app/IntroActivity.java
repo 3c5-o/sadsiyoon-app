@@ -11,15 +11,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.ViewCompat;
+import android.graphics.Color;
 
 public class IntroActivity extends AppCompatActivity {
     private boolean navigating=false;
     @Override public void onCreate(Bundle state){
         super.onCreate(state);
-        getWindow().setStatusBarColor(Ui.BG);getWindow().setNavigationBarColor(Ui.BG);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(Color.TRANSPARENT);
         SharedPreferences prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);
         FrameLayout screen=new FrameLayout(this);
         screen.setBackground(Ui.gradient(this,0xff0e2633,Ui.BG,0));
+        ViewCompat.setOnApplyWindowInsetsListener(screen,(v,insets)->{
+            Insets bars=insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            screen.setPadding(bars.left,bars.top,bars.right,bars.bottom);
+            return insets;
+        });
         LinearLayout body=Ui.col(this);body.setGravity(Gravity.CENTER);Ui.pad(this,body,28,20);
         ImageView image=Ui.logo(this,220,true);body.addView(image);
         TextView slogan=Ui.txt(this,"منصة طلاب السادس الإعدادي",20,Ui.WHITE,true);
@@ -35,6 +47,7 @@ public class IntroActivity extends AppCompatActivity {
         footer.setGravity(Gravity.CENTER);body.addView(footer,Ui.top(this,-1,32,30));
         FrameLayout.LayoutParams b=new FrameLayout.LayoutParams(-1,-2,Gravity.CENTER);
         screen.addView(body,b);setContentView(screen);
+        ViewCompat.requestApplyInsets(screen);
         if(prefs.getBoolean("welcome_done",false))
             new Handler(Looper.getMainLooper()).postDelayed(this::enter,1300);
     }

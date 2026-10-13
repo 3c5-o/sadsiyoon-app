@@ -51,6 +51,7 @@ public class PlayerActivity extends AppCompatActivity {
     private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton;
     private EditText noteInput;
     private boolean landscape=false;
+    private boolean pipActive=false;
     private String tab="lessons";
     private float speed=1f;
 
@@ -181,7 +182,6 @@ public class PlayerActivity extends AppCompatActivity {
         if(current==null)return;
         heading.setText(current.lesson.title);
         info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
-        saveNote();
         refreshActions();destroyPlayback();
         updateAvailableControls();
         if(!current.lesson.available()){setStatus("هذه المحاضرة غير متاحة للتشغيل حالياً");showUnavailable();return;}
@@ -384,15 +384,16 @@ public class PlayerActivity extends AppCompatActivity {
         boolean wide=getResources().getConfiguration().orientation==
             Configuration.ORIENTATION_LANDSCAPE;
         landscape=wide;
-        if(topbar!=null)topbar.setVisibility(wide?View.GONE:View.VISIBLE);
-        if(heading!=null)heading.setVisibility(wide?View.GONE:View.VISIBLE);
-        if(info!=null)info.setVisibility(wide?View.GONE:View.VISIBLE);
-        if(details!=null)details.setVisibility(wide?View.GONE:View.VISIBLE);
-        if(actions!=null)actions.setVisibility(wide?View.GONE:View.VISIBLE);
-        LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,wide?0:-2,wide?1f:0f);
-        shell.topMargin=wide?0:dp(10);
+        boolean expanded=wide||pipActive;
+        if(topbar!=null)topbar.setVisibility(expanded?View.GONE:View.VISIBLE);
+        if(heading!=null)heading.setVisibility(expanded?View.GONE:View.VISIBLE);
+        if(info!=null)info.setVisibility(expanded?View.GONE:View.VISIBLE);
+        if(details!=null)details.setVisibility(expanded?View.GONE:View.VISIBLE);
+        if(actions!=null)actions.setVisibility(expanded?View.GONE:View.VISIBLE);
+        LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,expanded?0:-2,expanded?1f:0f);
+        shell.topMargin=expanded?0:dp(10);
         playerShell.setLayoutParams(shell);
-        LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,wide?0:videoHeight(),wide?1f:0f);
+        LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,expanded?0:videoHeight(),expanded?1f:0f);
         videoBox.setLayoutParams(video);
         if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"تكبير");
         ViewCompat.requestApplyInsets(root);
@@ -404,10 +405,8 @@ public class PlayerActivity extends AppCompatActivity {
     }
     @Override public void onPictureInPictureModeChanged(boolean pip,Configuration config){
         super.onPictureInPictureModeChanged(pip,config);
-        if(topbar!=null)topbar.setVisibility(pip?View.GONE:View.VISIBLE);
-        if(details!=null)details.setVisibility(pip?View.GONE:View.VISIBLE);
-        if(heading!=null)heading.setVisibility(pip?View.GONE:View.VISIBLE);
-        if(info!=null)info.setVisibility(pip?View.GONE:View.VISIBLE);
+        pipActive=pip;
+        updateOrientation();
     }
     @Override public void onConfigurationChanged(Configuration cfg){super.onConfigurationChanged(cfg);updateOrientation();}
     @Override protected void onPause(){savePosition();saveNote();super.onPause();}
