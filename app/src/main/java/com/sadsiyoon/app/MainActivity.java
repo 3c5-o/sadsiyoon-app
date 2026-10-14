@@ -121,12 +121,12 @@ public class MainActivity extends AppCompatActivity {
             root.setPadding(bars.left,bars.top,bars.right,bars.bottom);
             return insets;
         });
-        boolean rootPage=page.equals("home")||page.equals("teachers")||page.equals("library")||page.equals("tests")||page.equals("more");
+        boolean rootPage=page.equals("home")||page.equals("teachers")||page.equals("exams")||page.equals("library")||page.equals("more");
         root.addView(toolbar(rootPage),Ui.lp(this,-1,65));
         ScrollView scroll=new ScrollView(this);
         pageScroller=scroll;
         scroll.setFillViewport(true);scroll.setVerticalScrollBarEnabled(false);
-        content=Ui.col(this);Ui.pad(this,content,17,12);scroll.addView(content);
+        content=Ui.col(this);Ui.pad(this,content,16,14);scroll.addView(content);
         root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1f));
         if(rootPage)root.addView(bottomNavigation(),Ui.lp(this,-1,70));
         setContentView(root);
@@ -142,42 +142,52 @@ public class MainActivity extends AppCompatActivity {
     }
     private View toolbar(boolean topLevel){
         LinearLayout bar=Ui.row(this);Ui.pad(this,bar,16,8);
-        bar.setBackground(Ui.gradient(this,0xff0d2933,Ui.BG,0));
+        bar.setBackground(Ui.gradient(this,0xff152C51,Ui.BG,0));
         if(!topLevel){
-            TextView back=Ui.btn(this,"‹",false);bar.addView(back,Ui.lp(this,44,43));
+            TextView back=Ui.btn(this,"رجوع",false);
+            bar.addView(back,Ui.lp(this,67,42));
             back.setOnClickListener(v->back());
         }else{
             bar.addView(Ui.logo(this,46,false),Ui.lp(this,46,46));
         }
         LinearLayout text=Ui.col(this);text.setPadding(d(11),0,d(11),0);
-        String title=topLevel?"سادسيون":page.equals("teacher")?"المدرس":page.equals("chapter")?"المحاضرات":page.equals("search")?"البحث":page.equals("exams")?"وزاريات سادسيون":"الإشعارات";
-        text.addView(Ui.txt(this,title,21,Ui.GOLD,true));
-        text.addView(Ui.txt(this,topLevel?"منصة طلاب السادس الإعدادي":"دفعة "+selectedBatch,11,Ui.MUTED,false));
+        String title=page.equals("home")?"سادسيون":page.equals("teachers")?"المدرسون":
+            page.equals("exams")?"الوزاريات":page.equals("library")?"مكتبتي":
+            page.equals("more")?"حسابي":page.equals("tests")?"الاختبارات":
+            page.equals("teacher")?"المدرس":page.equals("chapter")?"المحاضرات":
+            page.equals("search")?"البحث":"التنبيهات";
+        text.addView(Ui.txt(this,title,21,Ui.WHITE,true));
+        text.addView(Ui.txt(this,topLevel?"تعلم بوضوح، وتقدم بثقة":"دفعة "+selectedBatch,11,Ui.MUTED,false));
         bar.addView(text,new LinearLayout.LayoutParams(0,-2,1));
         if(topLevel){
-            TextView find=Ui.txt(this,"⌕",29,Ui.MINT,true);find.setGravity(Gravity.CENTER);
-            bar.addView(find,Ui.lp(this,38,43));find.setOnClickListener(v->show("search"));
-            TextView bell=Ui.txt(this,"♧",24,Ui.GOLD,true);bell.setGravity(Gravity.CENTER);
-            bar.addView(bell,Ui.lp(this,34,43));bell.setOnClickListener(v->show("notice"));
+            TextView find=Ui.btn(this,"بحث",false);
+            find.setTextSize(12);
+            bar.addView(find,Ui.lp(this,57,42));
+            find.setContentDescription("البحث عن مدرس أو محاضرة");
+            find.setOnClickListener(v->show("search"));
         }
         return bar;
     }
     private View bottomNavigation(){
-        LinearLayout nav=Ui.row(this);nav.setGravity(Gravity.CENTER);
-        nav.setBackground(Ui.stroke(this,0xff0b2029,16,0xff20413d));
-        final String[] pages={"home","teachers","library","tests","more"};
-        final String[] labels={"الرئيسية","المدرسون","مكتبتي","الاختبارات","المزيد"};
-        final String[] marks={"⌂","▦","▣","✓","≡"};
-        for(int i=0;i<5;i++){
+        LinearLayout nav=Ui.row(this);
+        Ui.pad(this,nav,8,5);nav.setGravity(Gravity.CENTER);
+        nav.setBackground(Ui.stroke(this,0xff14243B,16,0xff2C4062));
+        final String[] pages={"home","teachers","exams","library","more"};
+        final String[] labels={"الرئيسية","المدرسون","الوزاريات","مكتبتي","حسابي"};
+        final String[] marks={"⌂","▦","▤","☆","☰"};
+        for(int i=0;i<pages.length;i++){
             final String destination=pages[i];boolean active=page.equals(destination);
             LinearLayout box=Ui.col(this);box.setGravity(Gravity.CENTER);
-            TextView icon=Ui.txt(this,marks[i],24,active?Ui.GOLD:Ui.MUTED,true);
+            TextView icon=Ui.txt(this,marks[i],21,active?Ui.MINT:Ui.MUTED,true);
             icon.setGravity(Gravity.CENTER);
-            box.addView(icon,Ui.lp(this,-1,30));
-            TextView title=Ui.txt(this,labels[i],10,active?Ui.MINT:Ui.MUTED,active);
-            title.setGravity(Gravity.CENTER);box.addView(title,Ui.lp(this,-1,21));
-            if(active)box.setBackground(Ui.round(this,0xff12392f,12));
-            LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(57),1f);p.setMargins(d(2),0,d(2),0);nav.addView(box,p);
+            box.addView(icon,Ui.lp(this,-1,27));
+            TextView title=Ui.txt(this,labels[i],11,active?Ui.WHITE:Ui.MUTED,active);
+            title.setGravity(Gravity.CENTER);
+            box.addView(title,Ui.lp(this,-1,21));
+            if(active)box.setBackground(Ui.round(this,0xff264477,13));
+            LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(56),1f);
+            p.setMargins(d(2),0,d(2),0);nav.addView(box,p);
+            box.setContentDescription(labels[i]);
             box.setOnClickListener(v->{subjectFilter="";show(destination);});
         }
         return nav;
@@ -185,92 +195,145 @@ public class MainActivity extends AppCompatActivity {
     private void home(){
         String nickname=prefs.getString("nickname","طالب سادسيون");
         List<Catalog.Ref> refs=Catalog.all(this);
-        int fav=0,done=0;for(Catalog.Ref r:refs){if(prefs.getBoolean("fav_"+r.key(),false))fav++;if(prefs.getBoolean("done_"+r.key(),false))done++;}
-        final int completed=done, total=refs.size();
-        LinearLayout hero=Ui.card(this);hero.setBackground(Ui.gradient(this,0xff184d3d,0xff102634,20));
-        hero.addView(Ui.txt(this,"مرحباً "+nickname,23,Ui.WHITE,true));
-        addMuted(hero,"معاً نحو حلمك في السادس الإعدادي");
-        space(hero,14);
+        int fav=0,done=0;
+        for(Catalog.Ref r:refs){
+            if(prefs.getBoolean("fav_"+r.key(),false))fav++;
+            if(prefs.getBoolean("done_"+r.key(),false))done++;
+        }
+        int total=refs.size();
+        LinearLayout hero=Ui.card(this);
+        hero.setBackground(Ui.gradient(this,0xff254B86,0xff162B4C,22));
+        hero.addView(Ui.txt(this,"مرحباً، "+nickname,23,Ui.WHITE,true));
+        hero.addView(Ui.txt(this,"خطوة جديدة نحو هدفك الدراسي",13,0xffD6E6FF,false),Ui.top(this,-1,-2,6));
+        space(hero,17);
+        LinearLayout progressHead=Ui.row(this);
+        progressHead.addView(Ui.txt(this,"إنجازك في المحاضرات",13,Ui.WHITE,true),
+            new LinearLayout.LayoutParams(0,d(27),1f));
+        progressHead.addView(Ui.txt(this,total==0?"0%":((done*100)/total)+"%",14,Ui.MINT,true));
+        hero.addView(progressHead);
         ProgressBar progress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);
-        progress.setMax(Math.max(1,total));progress.setProgress(completed);
+        progress.setMax(Math.max(1,total));progress.setProgress(done);
         progress.setProgressTintList(android.content.res.ColorStateList.valueOf(Ui.MINT));
-        progress.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff255454));
-        hero.addView(progress,Ui.lp(this,-1,6));
-        space(hero,12);
+        progress.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff385576));
+        hero.addView(progress,Ui.top(this,-1,6,5));
+        space(hero,11);
         LinearLayout stats=Ui.row(this);
         stat(stats,"محاضرة مكتملة",String.valueOf(done));
-        stat(stats,"بالمفضلة",String.valueOf(fav));
-        stat(stats,"نسبة الإكمال",total==0?"0%":((done*100)/total)+"%");
-        hero.addView(stats);content.addView(hero,margins(-2,3));
-        LinearLayout batch=Ui.card(this);batch.setBackground(Ui.gradient(this,0xff463c2c,0xff123b38,20));
-        batch.addView(Ui.txt(this,"دفعة 2026",27,Ui.GOLD,true));addMuted(batch,"دروسك ومدرسوك بمكان واحد");
-        TextView open=Ui.btn(this,"استعرض المدرسين   ‹",true);batch.addView(open,Ui.top(this,-1,45,16));
-        open.setOnClickListener(v->{subjectFilter="";selectedBatch="2026";show("teachers");});
-        content.addView(batch,margins(-2,15));
-        // Dedicated 2027 cohort: no change to the existing 2026 directory.
-        List<Catalog.Teacher> teachers2027=Catalog.byBatch(this,"2027");
-        if(!teachers2027.isEmpty()){
-            int lectureCount2027=0;
-            for(Catalog.Teacher teacher:teachers2027)lectureCount2027+=teacher.count();
-            LinearLayout newBatch=Ui.card(this);
-            newBatch.setBackground(Ui.gradient(this,0xff124b46,0xff113245,20));
-            newBatch.addView(Ui.txt(this,"دفعة 2027",27,Ui.MINT,true));
-            newBatch.addView(Ui.txt(this,teachers2027.size()+" مدرسين • "+lectureCount2027+" محاضرة مفهرسة",16,Ui.WHITE,true),
-                Ui.top(this,-1,-2,7));
-            newBatch.addView(Ui.txt(this,"رياضيات • عربي • إنكليزي",13,Ui.GOLD,false),
-                Ui.top(this,-1,-2,4));
-            newBatch.addView(Ui.txt(this,"بعض مشغّلات الدروس تتطلب اشتراكاً لدى مزود الفيديو؛ التشغيل غير مضمون.",12,Ui.MUTED,false),
-                Ui.top(this,-1,-2,9));
-            TextView view2027=Ui.btn(this,"استعرض مدرسي دفعة 2027   ‹",true);
-            newBatch.addView(view2027,Ui.top(this,-1,45,13));
-            view2027.setOnClickListener(v->{subjectFilter="";selectedBatch="2027";show("teachers");});
-            content.addView(newBatch,margins(-2,11));
+        stat(stats,"محاضرة محفوظة",String.valueOf(fav));
+        stat(stats,"المحاضرات",String.valueOf(total));
+        hero.addView(stats);
+        content.addView(hero,margins(-1,-2,4));
+
+        if(prefs.contains("last_t")){
+            Catalog.Ref last=Catalog.ref(this,prefs.getInt("last_t",0),
+                prefs.getInt("last_c",0),prefs.getInt("last_l",0));
+            if(last!=null){
+                sectionHeader("أكمل من حيث توقفت","مكتبتي",()->show("library"));
+                LinearLayout resume=Ui.card(this);
+                resume.setBackground(Ui.gradient(this,0xff1E385C,Ui.PANEL,17));
+                resume.addView(Ui.txt(this,"متابعة المحاضرة",12,Ui.MINT,true));
+                resume.addView(Ui.txt(this,last.lesson.title,17,Ui.WHITE,true),Ui.top(this,-1,-2,6));
+                resume.addView(Ui.txt(this,last.teacher.name+" • "+last.chapter.title,12,Ui.MUTED,false),Ui.top(this,-1,-2,5));
+                TextView continueButton=Ui.btn(this,"متابعة المشاهدة  ←",true);
+                resume.addView(continueButton,Ui.top(this,-1,44,13));
+                continueButton.setOnClickListener(v->openLesson(last));
+                content.addView(resume,margins(-1,-2,6));
+            }
         }
-        LinearLayout ministry=Ui.card(this);
-        ministry.setBackground(Ui.gradient(this,0xff0a3440,0xff133c35,20));
-        ministry.addView(Ui.txt(this,"وزاريات سادسيون — 2025",22,Ui.MINT,true));
-        addMuted(ministry,"تجربة معرض صور الأسئلة للسادس العلمي والأدبي. الأوراق غير المنشورة تبقى معلّمة بوضوح.");
-        TextView viewPapers=Ui.btn(this,"افتح قسم الوزاريات  ‹",true);
-        ministry.addView(viewPapers,Ui.top(this,-1,45,13));
-        viewPapers.setOnClickListener(v->show("exams"));
-        content.addView(ministry,margins(-1,-2,12));
-        sectionHeader("أساتذتنا المميزون","عرض الجميع",()->show("teachers"));
-        HorizontalScrollView slider=new HorizontalScrollView(this);slider.setHorizontalScrollBarEnabled(false);
-        LinearLayout line=Ui.row(this);
-        List<Catalog.Teacher> ts=Catalog.byBatch(this,"2026");
-        for(int i=0;i<Math.min(ts.size(),9);i++){
-            Catalog.Teacher t=ts.get(i);final int selected=i;
+
+        sectionHeader("استكشف سادسيون","بحث",()->show("search"));
+        LinearLayout firstRow=Ui.row(this);
+        firstRow.addView(quickTile("▦","المدرسون","الدروس والفصول",()->show("teachers")),
+            quickParams());
+        firstRow.addView(quickTile("▤","الوزاريات","الأسئلة والحلول",()->show("exams")),
+            quickParams());
+        content.addView(firstRow);
+        LinearLayout secondRow=Ui.row(this);
+        secondRow.addView(quickTile("✓","الاختبارات","درّب نفسك",()->show("tests")),
+            quickParams());
+        secondRow.addView(quickTile("☆","مكتبتي","المفضلة والتقدم",()->show("library")),
+            quickParams());
+        content.addView(secondRow,Ui.top(this,-1,-2,7));
+
+        sectionHeader("اختر دفعتك","المدرسون",()->show("teachers"));
+        LinearLayout cohortRow=Ui.row(this);
+        String[] batches={"2026","2027"};
+        for(String batch:batches){
+            List<Catalog.Teacher> teachers=Catalog.byBatch(this,batch);
+            int lectures=0;for(Catalog.Teacher t:teachers)lectures+=t.count();
+            LinearLayout card=Ui.card(this);
+            card.setBackground(Ui.gradient(this,"2027".equals(batch)?0xff164C61:0xff224277,Ui.PANEL,18));
+            card.addView(Ui.txt(this,"دفعة "+batch,21,Ui.WHITE,true));
+            card.addView(Ui.txt(this,teachers.size()+" مدرس • "+lectures+" محاضرة مفهرسة",
+                12,Ui.MUTED,false),Ui.top(this,-1,-2,8));
+            TextView explore=Ui.txt(this,"عرض المدرسين  ←",13,Ui.MINT,true);
+            card.addView(explore,Ui.top(this,-1,-2,15));
+            cohortRow.addView(card,quickParams());
+            card.setOnClickListener(v->{selectedBatch=batch;subjectFilter="";show("teachers");});
+        }
+        content.addView(cohortRow);
+
+        sectionHeader("أساتذتنا","عرض الجميع",()->show("teachers"));
+        HorizontalScrollView slider=new HorizontalScrollView(this);
+        slider.setHorizontalScrollBarEnabled(false);
+        LinearLayout teachersLine=Ui.row(this);
+        List<Catalog.Teacher> teachers=Catalog.byBatch(this,selectedBatch);
+        for(int i=0;i<Math.min(teachers.size(),8);i++){
+            Catalog.Teacher teacher=teachers.get(i);
             LinearLayout card=Ui.card(this);card.setGravity(Gravity.CENTER);
-            card.setBackground(Ui.gradient(this,i%2==0?0xff15473d:0xff223448,Ui.PANEL,18));
-            android.view.View picture=Ui.portrait(this,t.image,t.name,96);card.addView(picture,Ui.lp(this,-1,98));space(card,8);
-            TextView name=Ui.txt(this,t.name,15,Ui.WHITE,true);name.setGravity(Gravity.CENTER);card.addView(name,Ui.lp(this,-1,26));
-            TextView material=Ui.txt(this,t.subject,12,Ui.MINT,false);material.setGravity(Gravity.CENTER);card.addView(material,Ui.lp(this,-1,20));
-            LinearLayout.LayoutParams p=Ui.lp(this,144,-2);p.leftMargin=d(10);line.addView(card,p);
-            card.setOnClickListener(v->openTeacher(selected));
+            card.addView(Ui.portrait(this,teacher.image,teacher.name,78),Ui.lp(this,-1,83));
+            TextView name=Ui.txt(this,teacher.name,14,Ui.WHITE,true);
+            name.setGravity(Gravity.CENTER);
+            card.addView(name,Ui.top(this,-1,28,8));
+            TextView subject=Ui.txt(this,teacher.subject,12,Ui.MINT,false);
+            subject.setGravity(Gravity.CENTER);
+            card.addView(subject,Ui.lp(this,-1,25));
+            LinearLayout.LayoutParams p=Ui.lp(this,140,163);
+            p.leftMargin=d(9);
+            teachersLine.addView(card,p);
+            card.setOnClickListener(v->openTeacher(teacher.index));
         }
-        slider.addView(line);content.addView(slider,margins(-1,190,10));
-        sectionHeader("المواد الدراسية","جميع المواد",()->show("teachers"));
-        String[] subjects={"الرياضيات","الفيزياء","الكيمياء","الأحياء","اللغة العربية","اللغة الإنكليزية","التربية الإسلامية"};
-        String[] symbols={"√x","∑","∫","DNA","ع","En","◈"};
+        slider.addView(teachersLine);
+        content.addView(slider,margins(-1,171,6));
+
+        sectionHeader("المواد الدراسية","الكل",()->show("teachers"));
+        String[] subjects={"الرياضيات","الفيزياء","الكيمياء","الأحياء",
+            "اللغة العربية","اللغة الإنكليزية","التربية الإسلامية"};
+        String[] symbols={"∑","Φ","⚗","DNA","ع","En","✧"};
         for(int i=0;i<subjects.length;i+=2){
             LinearLayout row=Ui.row(this);
             for(int j=i;j<Math.min(i+2,subjects.length);j++){
                 final String subject=subjects[j];
-                LinearLayout card=Ui.card(this);card.setBackground(Ui.gradient(this,j%2==0?0xff125244:0xff19385a,Ui.PANEL,16));
-                card.addView(Ui.txt(this,symbols[j],25,Ui.GOLD,true));
-                card.addView(Ui.txt(this,subject,14,Ui.WHITE,true),Ui.top(this,-1,24,4));
-                int count=0;for(Catalog.Teacher t:ts)if(t.subject.equals(subject))count++;
-                card.addView(Ui.txt(this,count+" مدرس",12,Ui.MUTED,false));
-                LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(116),1f);p.setMargins(d(3),d(5),d(3),d(5));row.addView(card,p);
-                card.setOnClickListener(v->{subjectFilter=subject;selectedBatch="2026";show("teachers");});
+                LinearLayout card=Ui.card(this);
+                TextView symbol=Ui.txt(this,symbols[j],23,Ui.MINT,true);
+                card.addView(symbol,Ui.lp(this,-1,32));
+                card.addView(Ui.txt(this,subject,14,Ui.WHITE,true),Ui.top(this,-1,-2,4));
+                int count=0;for(Catalog.Teacher t:teachers)if(t.subject.equals(subject))count++;
+                card.addView(Ui.txt(this,count+" مدرس",12,Ui.MUTED,false),Ui.top(this,-1,-2,4));
+                LinearLayout.LayoutParams p=quickParams();row.addView(card,p);
+                card.setOnClickListener(v->{subjectFilter=subject;show("teachers");});
             }
-            content.addView(row);
+            content.addView(row,Ui.top(this,-1,-2,6));
         }
-        if(prefs.contains("last_t")){
-            sectionHeader("متابعة المشاهدة","مكتبتي",()->show("library"));
-            Catalog.Ref last=Catalog.ref(this,prefs.getInt("last_t",0),prefs.getInt("last_c",0),prefs.getInt("last_l",0));
-            if(last!=null)lessonRow(content,last);
-        }
+        TextView sourceNote=Ui.txt(this,"قد تتطلب بعض محاضرات المزودين اشتراكاً، وتظهر حالة توفرها داخل كل محاضرة.",
+            11,Ui.MUTED,false);
+        content.addView(sourceNote,Ui.top(this,-1,-2,19));
+    }
+    private LinearLayout.LayoutParams quickParams(){
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,-2,1f);
+        p.setMargins(d(4),0,d(4),0);
+        return p;
+    }
+    private LinearLayout quickTile(String symbol,String title,String description,Runnable action){
+        LinearLayout tile=Ui.card(this);
+        TextView marker=Ui.txt(this,symbol,26,Ui.MINT,true);
+        tile.addView(marker,Ui.lp(this,-1,39));
+        tile.addView(Ui.txt(this,title,17,Ui.WHITE,true));
+        tile.addView(Ui.txt(this,description,12,Ui.MUTED,false),Ui.top(this,-1,-2,6));
+        tile.setMinimumHeight(d(128));
+        tile.setContentDescription(title);
+        tile.setOnClickListener(v->action.run());
+        return tile;
     }
     private void stat(LinearLayout row,String label,String value){
         LinearLayout col=Ui.col(this);col.setGravity(Gravity.CENTER);
@@ -726,7 +789,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.4.1 Beta — نسخة تجريبية مستقلة وآمنة.");
+        addMuted(content,"سادسيون V1.5.0 Beta — نسخة واجهات تجريبية مستقلة.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
