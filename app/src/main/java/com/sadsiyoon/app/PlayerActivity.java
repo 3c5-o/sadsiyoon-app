@@ -659,6 +659,23 @@ public class PlayerActivity extends AppCompatActivity {
                 TextView summary=Ui.txt(this,note.body,13,Ui.WHITE,false);
                 summary.setTextIsSelectable(true);
                 card.addView(summary,Ui.top(this,-1,-2,9));
+                if(note.positionMs>=0){
+                    TextView position=Ui.btn(this,"⏱ عند "+mmss(note.positionMs),false);
+                    position.setTextSize(12);
+                    card.addView(position,Ui.top(this,-1,38,8));
+                    position.setOnClickListener(v->{
+                        if(player==null){
+                            Toast.makeText(this,"الانتقال للتوقيت متاح لفيديوهات MP4 وHLS فقط",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        long duration=player.getDuration();
+                        long target=note.positionMs;
+                        if(duration>0&&duration!=androidx.media3.common.C.TIME_UNSET)
+                            target=Math.min(target,duration);
+                        player.seekTo(target);
+                        showChrome();
+                    });
+                }
                 tabContent.addView(card,Ui.top(this,-1,-2,9));
                 edit.setOnClickListener(v->editNote(index));
                 remove.setOnClickListener(v->confirmDelete(index));
@@ -703,9 +720,34 @@ public class PlayerActivity extends AppCompatActivity {
         body.setBackground(Ui.round(this,Ui.PANEL2,12));
         Ui.pad(this,body,12,12);
         form.addView(body,Ui.top(this,-1,-2,7));
+        final long[] noteTime={index>=0?entries.get(index).positionMs:-1L};
         if(index>=0){
             title.setText(entries.get(index).title);
             body.setText(entries.get(index).body);
+        }
+        if(player!=null){
+            LinearLayout timestampRow=Ui.row(this);
+            TextView insertTime=Ui.btn(this,"⏱ إدراج التوقيت الحالي",false);
+            insertTime.setTextSize(12);
+            timestampRow.addView(insertTime,new LinearLayout.LayoutParams(0,dp(43),1f));
+            TextView clearTime=Ui.btn(this,"إزالة التوقيت",false);
+            clearTime.setTextSize(12);
+            LinearLayout.LayoutParams clearParams=Ui.lp(this,120,43);
+            clearParams.leftMargin=dp(6);
+            timestampRow.addView(clearTime,clearParams);
+            TextView stampValue=Ui.txt(this,noteTime[0]>=0?
+                "التوقيت: "+mmss(noteTime[0]):"بدون توقيت مرتبط",12,Ui.MUTED,false);
+            form.addView(timestampRow,Ui.top(this,-1,-2,12));
+            form.addView(stampValue,Ui.top(this,-1,-2,6));
+            insertTime.setOnClickListener(v->{
+                if(player!=null){
+                    noteTime[0]=Math.max(0,player.getCurrentPosition());
+                    stampValue.setText("التوقيت: "+mmss(noteTime[0]));
+                }
+            });
+            clearTime.setOnClickListener(v->{
+                noteTime[0]=-1L;stampValue.setText("بدون توقيت مرتبط");
+            });
         }
         AlertDialog dialog=new AlertDialog.Builder(this)
             .setTitle(index<0?"إضافة ملاحظة":"تعديل الملاحظة")
@@ -718,7 +760,7 @@ public class PlayerActivity extends AppCompatActivity {
                 String content=body.getText().toString().trim();
                 if(titleText.isEmpty()){title.setError("أدخل عنواناً");return;}
                 if(content.isEmpty()){body.setError("أدخل نص الملاحظة");return;}
-                if(!NoteCards.save(this,lessonKey,index,titleText,content)){
+                if(!NoteCards.save(this,lessonKey,index,titleText,content,noteTime[0])){
                     Toast.makeText(this,"تعذر الحفظ أو تم بلوغ الحد المسموح للملاحظات",
                         Toast.LENGTH_LONG).show();return;
                 }
@@ -740,7 +782,7 @@ public class PlayerActivity extends AppCompatActivity {
             }).show();
     }
     private void updateOrientation(){
-        if(videoBox==null || playerShell==null)return;
+        if(videoBox==null||playerShell==null)return;
         boolean wide=getResources().getConfiguration().orientation==
             Configuration.ORIENTATION_LANDSCAPE;
         landscape=wide;
@@ -749,21 +791,25 @@ public class PlayerActivity extends AppCompatActivity {
         if(heading!=null)heading.setVisibility(expanded?View.GONE:View.VISIBLE);
         if(info!=null)info.setVisibility(expanded?View.GONE:View.VISIBLE);
         if(details!=null)details.setVisibility(expanded?View.GONE:View.VISIBLE);
-        if(playerChrome!=null)playerChrome.setVisibility(pipActive?View.GONE:View.VISIBLE);
-        if(pipActive)setToolsVisible(false);
-        if(seekBar!=null && seekBar.getTag() instanceof View)
-            ((View)seekBar.getTag()).setVisibility(expanded && pipActive?View.GONE:
-                ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type))?View.VISIBLE:View.GONE);
         LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,expanded?0:-2,expanded?1f:0f);
-        shell.topMargin=expanded?0:dp(10);
+        shell.topMargin=expanded?0:dp(8);
         playerShell.setLayoutParams(shell);
         LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,expanded?0:videoHeight(),expanded?1f:0f);
         videoBox.setLayoutParams(video);
-        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"ملء الشاشة");
+        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"تكبير");
+        if(embeddedFullScreen==null){
+            int flags=wide?(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY):0;
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+        }
+        if(pipActive)hideChrome();
+        else renderChrome();
         ViewCompat.requestApplyInsets(root);
     }
     @Override public void onBackPressed(){
         if(embeddedFullScreen!=null){exitEmbeddedFullScreen();return;}
+        if(controlsLocked){controlsLocked=false;showChrome();return;}
+        if(toolsVisible){setToolsVisible(false);return;}
         if(landscape){setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return;}
         super.onBackPressed();
     }
@@ -771,9 +817,27 @@ public class PlayerActivity extends AppCompatActivity {
         super.onPictureInPictureModeChanged(pip,config);
         pipActive=pip;
         updateOrientation();
+        if(!pip)showChrome();
     }
     @Override public void onConfigurationChanged(Configuration cfg){super.onConfigurationChanged(cfg);updateOrientation();}
-    @Override protected void onResume(){super.onResume();ticker.removeCallbacks(progressTick);ticker.post(progressTick);}
-    @Override protected void onPause(){ticker.removeCallbacks(progressTick);savePosition();super.onPause();}
-    @Override protected void onDestroy(){ticker.removeCallbacks(progressTick);destroyPlayback();super.onDestroy();}
+    @Override protected void onResume(){
+        super.onResume();
+        ticker.removeCallbacks(progressTick);ticker.post(progressTick);
+    }
+    @Override protected void onPause(){
+        ticker.removeCallbacks(progressTick);
+        ticker.removeCallbacks(autoHide);
+        savePosition();
+        super.onPause();
+    }
+    @Override protected void onStop(){
+        if(player!=null&&!isInPictureInPictureMode())player.pause();
+        super.onStop();
+    }
+    @Override protected void onDestroy(){
+        ticker.removeCallbacks(progressTick);
+        ticker.removeCallbacks(autoHide);
+        destroyPlayback();
+        super.onDestroy();
+    }
 }
