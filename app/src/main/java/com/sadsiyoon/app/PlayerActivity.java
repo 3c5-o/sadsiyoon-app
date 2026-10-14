@@ -53,12 +53,15 @@ public class PlayerActivity extends AppCompatActivity {
     private View embeddedFullScreen;
     private WebChromeClient.CustomViewCallback embeddedFullScreenCallback;
     private FrameLayout videoBox,mediaStage;
-    private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome;
-    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton;
-    private TextView tabsLessons,tabsNotes,tabsBooks,clock,seekBackButton,seekForwardButton;
+    private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome,centerControls,timeline;
+    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton,lockButton,unlockButton,seekBackButton,seekForwardButton;
+    private TextView tabsLessons,tabsNotes,tabsBooks,clock;
+    private View tapSurface;
     private SeekBar seekBar;
-    private boolean userSeeking=false;
+    private boolean userSeeking=false,chromeVisible=false,controlsLocked=false;
+    private static final long AUTO_HIDE_MS=3000L;
     private final Handler ticker=new Handler(Looper.getMainLooper());
+    private final Runnable autoHide=()->hideChrome();
     private final Runnable progressTick=new Runnable(){
         @Override public void run(){updateProgress();ticker.postDelayed(this,1000);}
     };
@@ -120,34 +123,74 @@ public class PlayerActivity extends AppCompatActivity {
         mediaStage=new FrameLayout(this);
         videoBox.addView(mediaStage,new FrameLayout.LayoutParams(-1,-1));
 
-        // All application playback actions are inside the video frame.
-        playerChrome=Ui.col(this);
-        playerChrome.setBackgroundColor(0x990C192C);
-        LinearLayout row=Ui.row(this);
-        prev=playerButton(row,"السابق",()->step(-1),false);
-        playPauseButton=playerButton(row,"تشغيل",this::togglePlay,false);
-        next=playerButton(row,"التالي",()->step(1),false);
-        playerButton(row,"الأدوات",this::toggleTools,true);
-        fullscreenButton=playerButton(row,"تكبير",this::toggleOrientation,false);
-        playerChrome.addView(row);
-        FrameLayout.LayoutParams chromePos=new FrameLayout.LayoutParams(-1,dp(47),Gravity.TOP);
-        videoBox.addView(playerChrome,chromePos);
+        // Native player only: this transparent view toggles controller visibility.
+        // For external iframe embeds it is GONE so all provider gestures work.
+        tapSurface=new View(this);
+        tapSurface.setContentDescription("إظهار أو إخفاء أدوات الفيديو");
+        videoBox.addView(tapSurface,new FrameLayout.LayoutParams(-1,-1));
+        tapSurface.setOnClickListener(v->{
+            if(chromeVisible)hideChrome();else showChrome();
+        });
 
-        // Native streams have a single app-owned progress bar; provider embeds retain
-        // their own playback UI because the app cannot control their video timeline.
-        LinearLayout timeline=Ui.col(this);
-        timeline.setBackgroundColor(0xA60C192C);
+        // Top controls, matching the reference player's layout.
+        playerChrome=Ui.row(this);
+        Ui.pad(this,playerChrome,6,5);
+        playerChrome.setBackground(Ui.gradient(this,0xe0142037,0x66142037,13));
+        TextView returnButton=playerButton(playerChrome,"رجوع",this::playerBack,false);
+        returnButton.setContentDescription("الرجوع من المشغل");
+        LinearLayout titleStack=Ui.col(this);
+        titleStack.setGravity(Gravity.CENTER_VERTICAL);
+        TextView miniTitle=Ui.txt(this,"سادسيون • مشغل المحاضرات",12,Ui.WHITE,true);
+        miniTitle.setMaxLines(1);miniTitle.setEllipsize(TextUtils.TruncateAt.END);
+        titleStack.addView(miniTitle);
+        playerChrome.addView(titleStack,new LinearLayout.LayoutParams(0,dp(44),2f));
+        lockButton=playerButton(playerChrome,"قفل",this::toggleLock,false);
+        fullscreenButton=playerButton(playerChrome,"تكبير",this::toggleOrientation,false);
+        TextView toolsButton=playerButton(playerChrome,"⋮",this::toggleTools,true);
+        toolsButton.setContentDescription("أدوات المشغل");
+        FrameLayout.LayoutParams headerPos=new FrameLayout.LayoutParams(-1,dp(54),Gravity.TOP);
+        headerPos.setMargins(dp(5),dp(5),dp(5),0);
+        videoBox.addView(playerChrome,headerPos);
+
+        // Independent unlock control makes lock mode reversible at any moment.
+        unlockButton=Ui.btn(this,"إلغاء القفل",false);
+        unlockButton.setTextSize(12);
+        unlockButton.setOnClickListener(v->toggleLock());
+        FrameLayout.LayoutParams unlockPos=new FrameLayout.LayoutParams(dp(108),dp(47),Gravity.TOP|Gravity.RIGHT);
+        unlockPos.setMargins(dp(8),dp(8),dp(8),0);
+        videoBox.addView(unlockButton,unlockPos);
+
+        // Native video center controls, all hidden during unobstructed playback.
+        centerControls=Ui.row(this);
+        centerControls.setGravity(Gravity.CENTER);
+        centerControls.setBackground(Ui.round(this,0x660B1526,25));
+        seekBackButton=playerButton(centerControls,"↶ 10",()->seekRelative(-10000),false);
+        playPauseButton=playerButton(centerControls,"▶",this::togglePlay,true);
+        playPauseButton.setTextSize(26);
+        seekForwardButton=playerButton(centerControls,"10 ↷",()->seekRelative(10000),false);
+        FrameLayout.LayoutParams centerPos=new FrameLayout.LayoutParams(dp(242),dp(65),Gravity.CENTER);
+        videoBox.addView(centerControls,centerPos);
+
+        // Only direct HLS/MP4 has an app-owned timeline; provider iframes retain theirs.
+        timeline=Ui.col(this);
+        Ui.pad(this,timeline,10,1);
+        timeline.setBackground(Ui.gradient(this,0x660B1526,0xdd0B1526,0));
+        LinearLayout timeRow=Ui.row(this);
+        clock=Ui.txt(this,"00:00 / 00:00",12,Ui.WHITE,true);
+        clock.setTextDirection(View.TEXT_DIRECTION_LTR);
+        clock.setGravity(Gravity.CENTER);
+        timeRow.addView(clock,new LinearLayout.LayoutParams(-1,dp(25)));
+        timeline.addView(timeRow);
         seekBar=new SeekBar(this);
         seekBar.setMax(1000);
         seekBar.setProgressTintList(ColorStateList.valueOf(Ui.MINT));
         seekBar.setThumbTintList(ColorStateList.valueOf(Ui.MINT));
-        timeline.addView(seekBar,Ui.lp(this,-1,29));
-        clock=Ui.txt(this,"00:00 / 00:00",11,Ui.WHITE,false);
-        clock.setGravity(Gravity.CENTER);
-        timeline.addView(clock,Ui.lp(this,-1,21));
+        timeline.addView(seekBar,Ui.lp(this,-1,33));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override public void onProgressChanged(SeekBar bar,int value,boolean fromUser){}
-            @Override public void onStartTrackingTouch(SeekBar bar){userSeeking=true;}
+            @Override public void onStartTrackingTouch(SeekBar bar){
+                userSeeking=true;showChrome();
+            }
             @Override public void onStopTrackingTouch(SeekBar bar){
                 userSeeking=false;
                 if(player!=null){
@@ -155,35 +198,38 @@ public class PlayerActivity extends AppCompatActivity {
                     if(duration>0 && duration!=androidx.media3.common.C.TIME_UNSET)
                         player.seekTo(duration*bar.getProgress()/1000);
                 }
+                scheduleAutoHide();
             }
         });
-        FrameLayout.LayoutParams timelinePos=new FrameLayout.LayoutParams(-1,dp(52),Gravity.BOTTOM);
-        videoBox.addView(timeline,timelinePos);
-        seekBar.setTag(timeline);
+        FrameLayout.LayoutParams bottomPos=new FrameLayout.LayoutParams(-1,dp(64),Gravity.BOTTOM);
+        videoBox.addView(timeline,bottomPos);
 
+        // Settings only open on demand. No permanent toolbar obstructs the lecture.
         settingsPanel=Ui.col(this);
-        Ui.pad(this,settingsPanel,8,9);
-        settingsPanel.setBackground(Ui.round(this,0xf014263f,15));
-        TextView close=Ui.txt(this,"إعدادات المشغل   ✕",13,Ui.WHITE,true);
+        Ui.pad(this,settingsPanel,9,10);
+        settingsPanel.setBackground(Ui.round(this,0xf1172947,16));
+        TextView close=Ui.txt(this,"إعدادات المشغل  ✕",13,Ui.WHITE,true);
         close.setGravity(Gravity.CENTER);
-        settingsPanel.addView(close,Ui.lp(this,-1,28));
+        settingsPanel.addView(close,Ui.lp(this,-1,32));
         close.setOnClickListener(v->setToolsVisible(false));
-        LinearLayout controls=Ui.row(this);
-        speedButton=panelButton(controls,"السرعة 1×",this::nextSpeed);
-        pipButton=panelButton(controls,"نافذة عائمة",this::enterPip);
-        panelButton(controls,"إعادة",this::load);
-        settingsPanel.addView(controls,Ui.top(this,-1,40,5));
-        LinearLayout controls2=Ui.row(this);
-        favorite=panelButton(controls2,"☆ المفضلة",this::toggleFavorite);
-        finished=panelButton(controls2,"○ مكتملة",this::toggleCompleted);
-        seekBackButton=panelButton(controls2,"إعادة 10ث",()->seekRelative(-10000));
-        seekForwardButton=panelButton(controls2,"تقديم 10ث",()->seekRelative(10000));
-        settingsPanel.addView(controls2,Ui.top(this,-1,40,5));
+        LinearLayout navigation=Ui.row(this);
+        prev=panelButton(navigation,"المحاضرة السابقة",()->step(-1));
+        next=panelButton(navigation,"المحاضرة التالية",()->step(1));
+        settingsPanel.addView(navigation,Ui.top(this,-1,42,5));
+        LinearLayout preferences=Ui.row(this);
+        speedButton=panelButton(preferences,"السرعة 1×",this::nextSpeed);
+        pipButton=panelButton(preferences,"نافذة عائمة",this::enterPip);
+        panelButton(preferences,"إعادة المحاولة",this::load);
+        settingsPanel.addView(preferences,Ui.top(this,-1,42,5));
+        LinearLayout study=Ui.row(this);
+        favorite=panelButton(study,"☆ المفضلة",this::toggleFavorite);
+        finished=panelButton(study,"○ مكتملة",this::toggleCompleted);
+        settingsPanel.addView(study,Ui.top(this,-1,42,5));
         FrameLayout.LayoutParams menuPos=new FrameLayout.LayoutParams(-1,-2,Gravity.BOTTOM);
-        menuPos.leftMargin=dp(4);menuPos.rightMargin=dp(4);
+        menuPos.setMargins(dp(4),0,dp(4),dp(4));
         videoBox.addView(settingsPanel,menuPos);
         settingsPanel.setVisibility(View.GONE);
-
+        hideChrome();
         playerShell.addView(videoBox,new LinearLayout.LayoutParams(-1,videoHeight()));
         root.addView(playerShell,Ui.top(this,-1,-2,8));
 
