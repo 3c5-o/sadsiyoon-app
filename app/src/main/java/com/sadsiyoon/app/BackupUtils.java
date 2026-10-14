@@ -15,7 +15,7 @@ import java.util.Iterator;
 public final class BackupUtils {
     private BackupUtils(){}
     private static boolean permitted(String key){
-        return key!=null && key.matches("(fav|done|position|note)_t[0-9]+_c[0-9]+_l[0-9]+");
+        return key!=null && key.matches("(fav|done|position|note|note_cards)_t[0-9]+_c[0-9]+_l[0-9]+");
     }
     private static SharedPreferences prefs(Context context){
         return context.getSharedPreferences("sadsiyoon_local_v1",Context.MODE_PRIVATE);
@@ -57,7 +57,10 @@ public final class BackupUtils {
             String key=iterator.next();
             Object value=items.opt(key);
             if(!permitted(key))throw new IOException("Unknown entry type");
-            if(key.startsWith("note_")){
+            if(key.startsWith("note_cards_")){
+                if(!(value instanceof String)||!NoteCards.isValidSerialized((String)value))
+                    throw new IOException("Invalid structured notes");
+            }else if(key.startsWith("note_")){
                 if(!(value instanceof String)||((String)value).length()>40000)
                     throw new IOException("Invalid note");
             }else if(key.startsWith("position_")){
