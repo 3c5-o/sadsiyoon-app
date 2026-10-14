@@ -789,7 +789,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.5.1 Beta — نسخة واجهات تجريبية مستقلة.");
+        addMuted(content,"سادسيون V1.6.0 Beta — نسخة واجهات تجريبية مستقلة.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
