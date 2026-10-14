@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void teacherPage(){
         Catalog.Teacher t=Catalog.teacher(this,selectedTeacher);if(t==null){show("teachers");return;}
-        LinearLayout hero=Ui.card(this);hero.setBackground(Ui.gradient(this,0xff194c42,Ui.PANEL,20));
+        LinearLayout hero=Ui.card(this);hero.setBackground(Ui.gradient(this,0xff244776,Ui.PANEL,20));
         LinearLayout top=Ui.row(this);top.addView(Ui.portrait(this,t.image,t.name,98),Ui.lp(this,100,105));
         LinearLayout right=Ui.col(this);right.setPadding(d(15),0,d(8),0);
         right.addView(Ui.txt(this,"الأستاذ "+t.name,20,Ui.WHITE,true));
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
         Catalog.Teacher t=Catalog.teacher(this,selectedTeacher);
         if(t==null||selectedChapter>=t.chapters.size()){show("teachers");return;}
         Catalog.Chapter chapter=t.chapters.get(selectedChapter);
-        LinearLayout panel=Ui.card(this);panel.setBackground(Ui.gradient(this,0xff12493d,Ui.PANEL,18));
+        LinearLayout panel=Ui.card(this);panel.setBackground(Ui.gradient(this,0xff203E6B,Ui.PANEL,18));
         panel.addView(Ui.txt(this,t.name+"  •  دفعة "+t.batch,15,Ui.GOLD,true));
         panel.addView(Ui.txt(this,chapter.title,22,Ui.WHITE,true),Ui.top(this,-1,-2,8));
         panel.addView(Ui.txt(this,chapter.lessons.size()+" محاضرة",13,Ui.MUTED,false),Ui.top(this,-1,-2,8));
@@ -518,7 +518,7 @@ public class MainActivity extends AppCompatActivity {
         addTitle(content,"وزاريات سادسيون",24);
         addMuted(content,"أوراق وزارية 2025 — نماذج علمي وأدبي من ملازمنا • تجربة");
 
-        LinearLayout years=Ui.card(this);years.setBackground(Ui.gradient(this,0xff123d39,Ui.PANEL,17));
+        LinearLayout years=Ui.card(this);years.setBackground(Ui.gradient(this,0xff203D65,Ui.PANEL,17));
         years.addView(Ui.txt(this,"2025",27,Ui.GOLD,true));
         addMuted(years,"الاعتماد على السنة المكتوبة في الورقة، مو تاريخ نشر المنشور.");
         content.addView(years,margins(-1,-2,12));
@@ -701,7 +701,7 @@ public class MainActivity extends AppCompatActivity {
             int best=Math.max(score,prefs.getInt(key,0));
             prefs.edit().putInt(key,best).apply();
             LinearLayout result=Ui.card(this);
-            result.setBackground(Ui.gradient(this,0xff174438,Ui.PANEL,18));
+            result.setBackground(Ui.gradient(this,0xff254B79,Ui.PANEL,18));
             result.addView(Ui.txt(this,"النتيجة: "+score+" من "+bank.size(),25,Ui.GOLD,true));
             addMuted(result,"أفضل نتيجة محفوظة على جهازك: "+best+" من "+bank.size());
             TextView retry=Ui.btn(this,"ابدأ اختباراً جديداً",true);
@@ -712,7 +712,7 @@ public class MainActivity extends AppCompatActivity {
         }
         PracticeBank.Question q=bank.get(questionIndex);
         LinearLayout card=Ui.card(this);
-        card.setBackground(Ui.gradient(this,0xff123b34,Ui.PANEL,18));
+        card.setBackground(Ui.gradient(this,0xff213C63,Ui.PANEL,18));
         card.addView(Ui.txt(this,"السؤال "+(questionIndex+1)+" من "+bank.size(),14,Ui.GOLD,true));
         card.addView(Ui.txt(this,q.text,20,Ui.WHITE,true),Ui.top(this,-1,-2,11));
         content.addView(card,margins(-1,-2,13));
