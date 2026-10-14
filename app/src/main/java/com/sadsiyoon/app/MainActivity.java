@@ -282,6 +282,11 @@ public class MainActivity extends AppCompatActivity {
         content.addView(batchTabs,margins(-1,45,12));
         List<Catalog.Teacher> batchTeachers=Catalog.byBatch(this,selectedBatch);
         addMuted(content,batchTeachers.size()+" مدرس ضمن دفعة "+selectedBatch);
+        if("2026".equals(selectedBatch)){
+            int missing=0;
+            for(Catalog.Teacher teacher:batchTeachers)missing+=teacher.count()-teacher.ready();
+            if(missing>0)addMuted(content,"تنبيه: "+missing+" سجل محاضرة بلا رابط مفهرس في دفعة 2026.");
+        }
         if(!subjectFilter.isEmpty()){
             TextView reset=Ui.btn(this,subjectFilter+"    ×",false);
             content.addView(reset,Ui.top(this,-1,40,12));reset.setOnClickListener(v->{subjectFilter="";show("teachers");});
@@ -315,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         right.addView(Ui.txt(this,"دفعة "+t.batch,12,Ui.MUTED,false));
         top.addView(right,new LinearLayout.LayoutParams(0,-2,1));hero.addView(top);
         space(hero,12);
-        hero.addView(Ui.txt(this,t.chapters.size()+" أقسام     •     "+t.count()+" محاضرة     •     "+t.ready()+" قابلة للمحاولة",12,Ui.GOLD,true));
+        hero.addView(Ui.txt(this,t.chapters.size()+" أقسام     •     "+t.count()+" محاضرة     •     "+t.ready()+" لها روابط (التشغيل غير مضمون)",12,Ui.GOLD,true));
         content.addView(hero,margins(-1,-2,3));
         addTitle(content,"الفصول والمحاضرات",21);
         for(int c=0;c<t.chapters.size();c++){
@@ -356,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
         String playbackLabel=done?"مكتملة":
             !ref.lesson.available()?"غير متاحة للتشغيل حالياً":
             ref.lesson.access.equals("premium")?"يتطلب اشتراك مشاهدة لدى المزود":
-            ref.lesson.access.equals("unverified")?"مشغّل مضمن — التشغيل غير مؤكّد":"شاهد المحاضرة";
+            ref.lesson.access.equals("unverified")?"مشغّل مضمن — التشغيل غير مؤكّد":"رابط موجود — التشغيل غير مفحوص";
         text.addView(Ui.txt(this,playbackLabel,11,done?Ui.MINT:Ui.MUTED,false),Ui.top(this,-1,-2,4));
         line.addView(text,new LinearLayout.LayoutParams(0,-2,1));
         TextView favorite=Ui.txt(this,fav?"★":"☆",24,fav?Ui.GOLD:Ui.MUTED,true);favorite.setGravity(Gravity.CENTER);
@@ -642,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.3.0 Beta — تحسين الاستقرار والتنقل.");
+        addMuted(content,"سادسيون V1.3.1 Beta — تدقيق المحاضرات.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));

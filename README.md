@@ -1,3 +1,7 @@
+# V1.3.1 Beta: source catalog audit
+
+Every Debug CI run now checks missing and repeated links and uploads reports/catalog_health.json and Markdown. Playback is not inferred from the URL and no missing lessons are fabricated. The 2026 teacher directory warns about known missing links. Source-linked videos show the uncertainty of playback.
+
 # V1.3.0 Beta — Phase 1 stability
 
 - Implemented navigation history: Waziriat back button returns to entry page, with state restoration on rotation and saved per-page scroll.
