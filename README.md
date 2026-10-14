@@ -1,3 +1,9 @@
+# V1.4.0 Beta — final phase: backups and secure release preparation
+
+- Export/import local favorites, notes, completed lesson flags and positions as versioned JSON using the Android Storage Access Framework, with strict type/size validation and user-chosen destinations.
+- Added optional secure signing configuration and manual GitHub Actions workflow; **the signing workflow cannot run until the owner provides the four secrets**.
+- Debug APK still has a per-run signature and is not a universal in-place upgrade. No user data, lesson assets or keystores were deleted.
+
 # V1.3.2 Beta — Phase 3: actual interactive practice
 
 - Implemented ten originally authored, offline multiple-choice practice questions for sixth scientific and ten for sixth literary, with scoring, explanations, retry and best local score for each track.

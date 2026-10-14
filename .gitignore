@@ -7,3 +7,7 @@ local.properties
 *.keystore
 *.jks
 .DS_Store
+
+# Private Android signing keys must not be committed.
+*.jks
+*.keystore

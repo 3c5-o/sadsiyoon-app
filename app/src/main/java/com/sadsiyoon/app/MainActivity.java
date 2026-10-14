@@ -31,6 +31,8 @@ import java.util.Locale;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int BACKUP_EXPORT_REQUEST=8181;
+    private static final int BACKUP_IMPORT_REQUEST=8182;
     private SharedPreferences prefs;
     private String page="home",subjectFilter="",libraryFilter="fav",selectedBatch="2026";
     private int selectedTeacher=1,selectedChapter=0;
@@ -688,6 +690,31 @@ public class MainActivity extends AppCompatActivity {
         panel.addView(autoplay,Ui.top(this,-1,45,7));
         addMuted(panel,"المشغّل يدعم ملء الشاشة والنافذة العائمة حسب إمكانات الجهاز.");
         content.addView(panel,margins(-1,-2,12));
+        LinearLayout backups=Ui.card(this);
+        backups.addView(Ui.txt(this,"النسخ الاحتياطي المحلي",18,Ui.WHITE,true));
+        addMuted(backups,"صدّر مفضلاتك وملاحظاتك وتقدمك إلى ملف JSON تختاره بنفسك، أو استعدها على جهاز آخر. احتفظ بالملف بمكان خاص لأن الملاحظات قد تكون شخصية.");
+        TextView export=Ui.btn(this,"تصدير نسخة احتياطية",true);
+        backups.addView(export,Ui.top(this,-1,45,12));
+        export.setOnClickListener(v->{
+            Intent action=new Intent(Intent.ACTION_CREATE_DOCUMENT);
+            action.addCategory(Intent.CATEGORY_OPENABLE);
+            action.setType("application/json");
+            action.putExtra(Intent.EXTRA_TITLE,"sadsiyoon-backup.json");
+            startActivityForResult(action,BACKUP_EXPORT_REQUEST);
+        });
+        TextView restore=Ui.btn(this,"استيراد نسخة احتياطية",false);
+        backups.addView(restore,Ui.top(this,-1,45,8));
+        restore.setOnClickListener(v->new AlertDialog.Builder(this)
+            .setTitle("استيراد تقدم الدراسة")
+            .setMessage("سيتم دمج الملاحظات والتقدم الموجود في الملف مع بيانات الجهاز. المفاتيح المتطابقة ستتحدث. اختر ملف سادسيون موثوقاً فقط.")
+            .setNegativeButton("إلغاء",null)
+            .setPositiveButton("اختيار ملف",(dialog,which)->{
+                Intent picker=new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                picker.addCategory(Intent.CATEGORY_OPENABLE);
+                picker.setType("application/json");
+                startActivityForResult(picker,BACKUP_IMPORT_REQUEST);
+            }).show());
+        content.addView(backups,margins(-1,-2,12));
         TextView reset=Ui.btn(this,"مسح تقدم المشاهدة والمفضلة",false);
         content.addView(reset,margins(-1,48,15));
         reset.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("تأكيد مسح التقدم")
@@ -699,7 +726,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.3.2 Beta — اختبارات علمي وأدبي.");
+        addMuted(content,"سادسيون V1.4.0 Beta — النسخ الاحتياطي والتحضير للتوقيع.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
@@ -715,6 +742,32 @@ public class MainActivity extends AppCompatActivity {
                 if(!name.isEmpty())prefs.edit().putString("nickname",name.substring(0,Math.min(30,name.length()))).apply();
                 show("more");
             }).show();
+    }
+    @Override protected void onActivityResult(int request,int result,Intent data){
+        super.onActivityResult(request,result,data);
+        if(result!=RESULT_OK||data==null||data.getData()==null)return;
+        try{
+            if(request==BACKUP_EXPORT_REQUEST){
+                try(java.io.OutputStream stream=getContentResolver().openOutputStream(data.getData())){
+                    if(stream==null)throw new java.io.IOException("Storage location is unavailable");
+                    int exported=BackupUtils.exportTo(this,stream);
+                    Toast.makeText(this,"تم تصدير "+exported+" عنصر من بياناتك",Toast.LENGTH_LONG).show();
+                }
+            }else if(request==BACKUP_IMPORT_REQUEST){
+                int imported;
+                try(java.io.InputStream stream=getContentResolver().openInputStream(data.getData())){
+                    if(stream==null)throw new java.io.IOException("Cannot read selected file");
+                    imported=BackupUtils.importFrom(this,stream);
+                }
+                Toast.makeText(this,"تم استيراد "+imported+" عنصر بنجاح",Toast.LENGTH_LONG).show();
+                render();
+            }
+        }catch(Exception error){
+            android.util.Log.e("Sadsiyoon","Backup operation failed",error);
+            new AlertDialog.Builder(this).setTitle("تعذر تنفيذ النسخ الاحتياطي")
+                .setMessage("تأكد من اختيار ملف JSON صالح ومساحة تخزين متاحة، ثم حاول مرة أخرى.")
+                .setPositiveButton("حسناً",null).show();
+        }
     }
     private void back(){
         rememberScroll();
