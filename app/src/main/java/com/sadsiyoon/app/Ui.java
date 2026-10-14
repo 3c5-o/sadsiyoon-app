@@ -15,9 +15,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class Ui {
- public static final int BG=Color.rgb(7,22,33), PANEL=Color.rgb(16,37,48), PANEL2=Color.rgb(25,56,65);
- public static final int MINT=Color.rgb(85,230,191), GOLD=Color.rgb(217,182,108);
- public static final int WHITE=Color.rgb(242,249,246), MUTED=Color.rgb(160,185,189), RED=Color.rgb(255,160,155);
+ public static final int BG=Color.rgb(13,22,39), PANEL=Color.rgb(23,38,61), PANEL2=Color.rgb(35,55,83);
+ public static final int BLUE=Color.rgb(52,104,247), MINT=Color.rgb(32,199,180), GOLD=Color.rgb(124,169,255);
+ public static final int WHITE=Color.rgb(245,248,255), MUTED=Color.rgb(164,182,210), RED=Color.rgb(255,156,165);
  private static final LruCache<String,Bitmap> imageCache=new LruCache<String,Bitmap>(8*1024*1024){
     @Override protected int sizeOf(String key,Bitmap value){return value==null?0:value.getByteCount();}
  };
@@ -40,12 +40,12 @@ public final class Ui {
     if(bold)v.setTypeface(Typeface.DEFAULT,Typeface.BOLD);return v;
  }
  public static TextView btn(Context c,String s,boolean main){
-    TextView t=txt(c,s,14,main?BG:WHITE,true);t.setGravity(Gravity.CENTER);
-    pad(c,t,12,10);t.setBackground(round(c,main?MINT:PANEL2,12));
+    TextView t=txt(c,s,14,WHITE,true);t.setGravity(Gravity.CENTER);
+    pad(c,t,12,10);t.setBackground(round(c,main?BLUE:PANEL2,14));
     t.setClickable(true);t.setFocusable(true);return t;
  }
  public static LinearLayout card(Context c){
-    LinearLayout l=col(c);pad(c,l,15,15);l.setBackground(stroke(c,PANEL,18,Color.rgb(32,77,78)));return l;
+    LinearLayout l=col(c);pad(c,l,16,16);l.setBackground(stroke(c,PANEL,18,Color.rgb(43,62,91)));return l;
  }
  public static View gap(Context c,int h){View v=new View(c);v.setLayoutParams(new LinearLayout.LayoutParams(1,dp(c,h)));return v;}
  public static LinearLayout.LayoutParams lp(Context c,int w,int h){
