@@ -53,12 +53,15 @@ public class PlayerActivity extends AppCompatActivity {
     private View embeddedFullScreen;
     private WebChromeClient.CustomViewCallback embeddedFullScreenCallback;
     private FrameLayout videoBox,mediaStage;
-    private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome;
-    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton;
-    private TextView tabsLessons,tabsNotes,tabsBooks,clock,seekBackButton,seekForwardButton;
+    private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome,centerControls,timeline;
+    private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton,lockButton,unlockButton,seekBackButton,seekForwardButton;
+    private TextView tabsLessons,tabsNotes,tabsBooks,clock;
+    private View tapSurface;
     private SeekBar seekBar;
-    private boolean userSeeking=false;
+    private boolean userSeeking=false,chromeVisible=false,controlsLocked=false;
+    private static final long AUTO_HIDE_MS=3000L;
     private final Handler ticker=new Handler(Looper.getMainLooper());
+    private final Runnable autoHide=()->hideChrome();
     private final Runnable progressTick=new Runnable(){
         @Override public void run(){updateProgress();ticker.postDelayed(this,1000);}
     };
@@ -120,34 +123,74 @@ public class PlayerActivity extends AppCompatActivity {
         mediaStage=new FrameLayout(this);
         videoBox.addView(mediaStage,new FrameLayout.LayoutParams(-1,-1));
 
-        // All application playback actions are inside the video frame.
-        playerChrome=Ui.col(this);
-        playerChrome.setBackgroundColor(0x990C192C);
-        LinearLayout row=Ui.row(this);
-        prev=playerButton(row,"السابق",()->step(-1),false);
-        playPauseButton=playerButton(row,"تشغيل",this::togglePlay,false);
-        next=playerButton(row,"التالي",()->step(1),false);
-        playerButton(row,"الأدوات",this::toggleTools,true);
-        fullscreenButton=playerButton(row,"تكبير",this::toggleOrientation,false);
-        playerChrome.addView(row);
-        FrameLayout.LayoutParams chromePos=new FrameLayout.LayoutParams(-1,dp(47),Gravity.TOP);
-        videoBox.addView(playerChrome,chromePos);
+        // Native player only: this transparent view toggles controller visibility.
+        // For external iframe embeds it is GONE so all provider gestures work.
+        tapSurface=new View(this);
+        tapSurface.setContentDescription("إظهار أو إخفاء أدوات الفيديو");
+        videoBox.addView(tapSurface,new FrameLayout.LayoutParams(-1,-1));
+        tapSurface.setOnClickListener(v->{
+            if(chromeVisible)hideChrome();else showChrome();
+        });
 
-        // Native streams have a single app-owned progress bar; provider embeds retain
-        // their own playback UI because the app cannot control their video timeline.
-        LinearLayout timeline=Ui.col(this);
-        timeline.setBackgroundColor(0xA60C192C);
+        // Top controls, matching the reference player's layout.
+        playerChrome=Ui.row(this);
+        Ui.pad(this,playerChrome,6,5);
+        playerChrome.setBackground(Ui.gradient(this,0xe0142037,0x66142037,13));
+        TextView returnButton=playerButton(playerChrome,"رجوع",this::playerBack,false);
+        returnButton.setContentDescription("الرجوع من المشغل");
+        LinearLayout titleStack=Ui.col(this);
+        titleStack.setGravity(Gravity.CENTER_VERTICAL);
+        TextView miniTitle=Ui.txt(this,"سادسيون • مشغل المحاضرات",12,Ui.WHITE,true);
+        miniTitle.setMaxLines(1);miniTitle.setEllipsize(TextUtils.TruncateAt.END);
+        titleStack.addView(miniTitle);
+        playerChrome.addView(titleStack,new LinearLayout.LayoutParams(0,dp(44),2f));
+        lockButton=playerButton(playerChrome,"قفل",this::toggleLock,false);
+        fullscreenButton=playerButton(playerChrome,"تكبير",this::toggleOrientation,false);
+        TextView toolsButton=playerButton(playerChrome,"⋮",this::toggleTools,true);
+        toolsButton.setContentDescription("أدوات المشغل");
+        FrameLayout.LayoutParams headerPos=new FrameLayout.LayoutParams(-1,dp(54),Gravity.TOP);
+        headerPos.setMargins(dp(5),dp(5),dp(5),0);
+        videoBox.addView(playerChrome,headerPos);
+
+        // Independent unlock control makes lock mode reversible at any moment.
+        unlockButton=Ui.btn(this,"إلغاء القفل",false);
+        unlockButton.setTextSize(12);
+        unlockButton.setOnClickListener(v->toggleLock());
+        FrameLayout.LayoutParams unlockPos=new FrameLayout.LayoutParams(dp(108),dp(47),Gravity.TOP|Gravity.RIGHT);
+        unlockPos.setMargins(dp(8),dp(8),dp(8),0);
+        videoBox.addView(unlockButton,unlockPos);
+
+        // Native video center controls, all hidden during unobstructed playback.
+        centerControls=Ui.row(this);
+        centerControls.setGravity(Gravity.CENTER);
+        centerControls.setBackground(Ui.round(this,0x660B1526,25));
+        seekBackButton=playerButton(centerControls,"↶ 10",()->seekRelative(-10000),false);
+        playPauseButton=playerButton(centerControls,"▶",this::togglePlay,true);
+        playPauseButton.setTextSize(26);
+        seekForwardButton=playerButton(centerControls,"10 ↷",()->seekRelative(10000),false);
+        FrameLayout.LayoutParams centerPos=new FrameLayout.LayoutParams(dp(242),dp(65),Gravity.CENTER);
+        videoBox.addView(centerControls,centerPos);
+
+        // Only direct HLS/MP4 has an app-owned timeline; provider iframes retain theirs.
+        timeline=Ui.col(this);
+        Ui.pad(this,timeline,10,1);
+        timeline.setBackground(Ui.gradient(this,0x660B1526,0xdd0B1526,0));
+        LinearLayout timeRow=Ui.row(this);
+        clock=Ui.txt(this,"00:00 / 00:00",12,Ui.WHITE,true);
+        clock.setTextDirection(View.TEXT_DIRECTION_LTR);
+        clock.setGravity(Gravity.CENTER);
+        timeRow.addView(clock,new LinearLayout.LayoutParams(-1,dp(25)));
+        timeline.addView(timeRow);
         seekBar=new SeekBar(this);
         seekBar.setMax(1000);
         seekBar.setProgressTintList(ColorStateList.valueOf(Ui.MINT));
         seekBar.setThumbTintList(ColorStateList.valueOf(Ui.MINT));
-        timeline.addView(seekBar,Ui.lp(this,-1,29));
-        clock=Ui.txt(this,"00:00 / 00:00",11,Ui.WHITE,false);
-        clock.setGravity(Gravity.CENTER);
-        timeline.addView(clock,Ui.lp(this,-1,21));
+        timeline.addView(seekBar,Ui.lp(this,-1,33));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override public void onProgressChanged(SeekBar bar,int value,boolean fromUser){}
-            @Override public void onStartTrackingTouch(SeekBar bar){userSeeking=true;}
+            @Override public void onStartTrackingTouch(SeekBar bar){
+                userSeeking=true;showChrome();
+            }
             @Override public void onStopTrackingTouch(SeekBar bar){
                 userSeeking=false;
                 if(player!=null){
@@ -155,35 +198,38 @@ public class PlayerActivity extends AppCompatActivity {
                     if(duration>0 && duration!=androidx.media3.common.C.TIME_UNSET)
                         player.seekTo(duration*bar.getProgress()/1000);
                 }
+                scheduleAutoHide();
             }
         });
-        FrameLayout.LayoutParams timelinePos=new FrameLayout.LayoutParams(-1,dp(52),Gravity.BOTTOM);
-        videoBox.addView(timeline,timelinePos);
-        seekBar.setTag(timeline);
+        FrameLayout.LayoutParams bottomPos=new FrameLayout.LayoutParams(-1,dp(64),Gravity.BOTTOM);
+        videoBox.addView(timeline,bottomPos);
 
+        // Settings only open on demand. No permanent toolbar obstructs the lecture.
         settingsPanel=Ui.col(this);
-        Ui.pad(this,settingsPanel,8,9);
-        settingsPanel.setBackground(Ui.round(this,0xf014263f,15));
-        TextView close=Ui.txt(this,"إعدادات المشغل   ✕",13,Ui.WHITE,true);
+        Ui.pad(this,settingsPanel,9,10);
+        settingsPanel.setBackground(Ui.round(this,0xf1172947,16));
+        TextView close=Ui.txt(this,"إعدادات المشغل  ✕",13,Ui.WHITE,true);
         close.setGravity(Gravity.CENTER);
-        settingsPanel.addView(close,Ui.lp(this,-1,28));
+        settingsPanel.addView(close,Ui.lp(this,-1,32));
         close.setOnClickListener(v->setToolsVisible(false));
-        LinearLayout controls=Ui.row(this);
-        speedButton=panelButton(controls,"السرعة 1×",this::nextSpeed);
-        pipButton=panelButton(controls,"نافذة عائمة",this::enterPip);
-        panelButton(controls,"إعادة",this::load);
-        settingsPanel.addView(controls,Ui.top(this,-1,40,5));
-        LinearLayout controls2=Ui.row(this);
-        favorite=panelButton(controls2,"☆ المفضلة",this::toggleFavorite);
-        finished=panelButton(controls2,"○ مكتملة",this::toggleCompleted);
-        seekBackButton=panelButton(controls2,"إعادة 10ث",()->seekRelative(-10000));
-        seekForwardButton=panelButton(controls2,"تقديم 10ث",()->seekRelative(10000));
-        settingsPanel.addView(controls2,Ui.top(this,-1,40,5));
+        LinearLayout navigation=Ui.row(this);
+        prev=panelButton(navigation,"المحاضرة السابقة",()->step(-1));
+        next=panelButton(navigation,"المحاضرة التالية",()->step(1));
+        settingsPanel.addView(navigation,Ui.top(this,-1,42,5));
+        LinearLayout preferences=Ui.row(this);
+        speedButton=panelButton(preferences,"السرعة 1×",this::nextSpeed);
+        pipButton=panelButton(preferences,"نافذة عائمة",this::enterPip);
+        panelButton(preferences,"إعادة المحاولة",this::load);
+        settingsPanel.addView(preferences,Ui.top(this,-1,42,5));
+        LinearLayout study=Ui.row(this);
+        favorite=panelButton(study,"☆ المفضلة",this::toggleFavorite);
+        finished=panelButton(study,"○ مكتملة",this::toggleCompleted);
+        settingsPanel.addView(study,Ui.top(this,-1,42,5));
         FrameLayout.LayoutParams menuPos=new FrameLayout.LayoutParams(-1,-2,Gravity.BOTTOM);
-        menuPos.leftMargin=dp(4);menuPos.rightMargin=dp(4);
+        menuPos.setMargins(dp(4),0,dp(4),dp(4));
         videoBox.addView(settingsPanel,menuPos);
         settingsPanel.setVisibility(View.GONE);
-
+        hideChrome();
         playerShell.addView(videoBox,new LinearLayout.LayoutParams(-1,videoHeight()));
         root.addView(playerShell,Ui.top(this,-1,-2,8));
 
@@ -252,9 +298,59 @@ public class PlayerActivity extends AppCompatActivity {
             tabs[i].setBackground(Ui.round(this,selected?Ui.BLUE:Ui.PANEL2,11));
         }
     }
+    private boolean isNative(){
+        return current!=null&&("mp4".equals(current.lesson.type)||"hls".equals(current.lesson.type));
+    }
+    private boolean isEmbedded(){
+        return current!=null&&"embed".equals(current.lesson.type);
+    }
+    private void playerBack(){
+        if(landscape){setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return;}
+        finish();
+    }
+    private void toggleLock(){
+        if(!isNative())return;
+        controlsLocked=!controlsLocked;
+        toolsVisible=false;
+        chromeVisible=false;
+        showChrome();
+    }
+    private void scheduleAutoHide(){
+        ticker.removeCallbacks(autoHide);
+        if(chromeVisible && !userSeeking && (isEmbedded() || (player!=null&&player.isPlaying()))){
+            ticker.postDelayed(autoHide,toolsVisible?5000L:AUTO_HIDE_MS);
+        }
+    }
+    private void renderChrome(){
+        if(videoBox==null)return;
+        boolean active=chromeVisible&&!pipActive&&embeddedFullScreen==null;
+        boolean unlocked=active&&!controlsLocked;
+        boolean overlayMenu=unlocked&&toolsVisible;
+        if(playerChrome!=null)playerChrome.setVisibility(unlocked?View.VISIBLE:View.GONE);
+        if(centerControls!=null)centerControls.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
+        if(timeline!=null)timeline.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
+        if(settingsPanel!=null)settingsPanel.setVisibility(overlayMenu?View.VISIBLE:View.GONE);
+        if(unlockButton!=null)unlockButton.setVisibility(active&&controlsLocked?View.VISIBLE:View.GONE);
+        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive?View.VISIBLE:View.GONE);
+    }
+    private void showChrome(){
+        chromeVisible=true;
+        renderChrome();
+        scheduleAutoHide();
+    }
+    private void hideChrome(){
+        if(userSeeking)return;
+        toolsVisible=false;
+        chromeVisible=false;
+        ticker.removeCallbacks(autoHide);
+        renderChrome();
+    }
     private void setToolsVisible(boolean visible){
+        if(controlsLocked||pipActive)return;
         toolsVisible=visible;
-        if(settingsPanel!=null)settingsPanel.setVisibility(visible&&!pipActive?View.VISIBLE:View.GONE);
+        chromeVisible=true;
+        renderChrome();
+        scheduleAutoHide();
     }
     private void toggleTools(){setToolsVisible(!toolsVisible);}
     private void togglePlay(){
@@ -264,6 +360,7 @@ public class PlayerActivity extends AppCompatActivity {
         }
         if(player.isPlaying())player.pause();else player.play();
         updateProgress();
+        showChrome();
     }
     private void seekRelative(long distance){
         if(player==null)return;
@@ -272,7 +369,7 @@ public class PlayerActivity extends AppCompatActivity {
         if(duration>0 && duration!=androidx.media3.common.C.TIME_UNSET)
             target=Math.min(target,duration);
         player.seekTo(target);
-        updateProgress();
+        updateProgress();showChrome();
     }
     private static String mmss(long millis){
         long seconds=Math.max(0,millis/1000);
@@ -281,7 +378,7 @@ public class PlayerActivity extends AppCompatActivity {
     private void updateProgress(){
         boolean nativeAvailable=player!=null;
         if(playPauseButton!=null){
-            playPauseButton.setText(nativeAvailable?(player.isPlaying()?"إيقاف":"تشغيل"):"المزود");
+            playPauseButton.setText(nativeAvailable?(player.isPlaying()?"❚❚":"▶"):"▶");
             playPauseButton.setEnabled(nativeAvailable);
             playPauseButton.setAlpha(nativeAvailable?1f:0.5f);
         }
@@ -293,24 +390,22 @@ public class PlayerActivity extends AppCompatActivity {
         }else clock.setText(mmss(position)+" / --:--");
     }
     private void updateAvailableControls(){
-        boolean nativePlayer=current!=null &&
-            ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type));
-        if(speedButton!=null)speedButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(pipButton!=null)pipButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekBackButton!=null)seekBackButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekForwardButton!=null)seekForwardButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekBar!=null && seekBar.getTag() instanceof View)
-            ((View)seekBar.getTag()).setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(playPauseButton!=null){
-            playPauseButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        }
+        boolean nativeSource=isNative();
+        if(speedButton!=null)speedButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(pipButton!=null)pipButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(lockButton!=null)lockButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(playPauseButton!=null)playPauseButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(seekBackButton!=null)seekBackButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(seekForwardButton!=null)seekForwardButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        renderChrome();
     }
     private void setStatus(String msg){if(status!=null)status.setText(msg);}
     private void load(){
         if(current==null)return;
         heading.setText(current.lesson.title);
         info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
-        setToolsVisible(false);
+        controlsLocked=false;
+        hideChrome();
         if(seekBar!=null)seekBar.setProgress(0);
         if(clock!=null)clock.setText("00:00 / 00:00");
         refreshActions();destroyPlayback();
@@ -323,6 +418,7 @@ public class PlayerActivity extends AppCompatActivity {
         else if(current.lesson.type.equals("embed"))openEmbedded();
         else showUnavailable();
         showTab();
+        showChrome();
     }
     private void showUnavailable(){
         TextView empty=Ui.txt(this,"لا يمكن تشغيل هذه المحاضرة حالياً",16,Ui.WHITE,true);
@@ -335,6 +431,10 @@ public class PlayerActivity extends AppCompatActivity {
         mediaStage.addView(playerView,new FrameLayout.LayoutParams(-1,-1));
         player=new ExoPlayer.Builder(this).build();playerView.setPlayer(player);
         player.addListener(new Player.Listener(){
+            @Override public void onIsPlayingChanged(boolean isPlaying){
+                updateProgress();
+                if(isPlaying)scheduleAutoHide();else showChrome();
+            }
             @Override public void onPlaybackStateChanged(int state){
                 if(state==Player.STATE_BUFFERING)setStatus("جاري تحميل المحاضرة...");
                 if(state==Player.STATE_READY)setStatus("المحاضرة جاهزة للمشاهدة");
@@ -346,6 +446,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
             @Override public void onPlayerError(PlaybackException err){
                 setStatus("تعذر تشغيل هذه المحاضرة. تحقق من اتصال الإنترنت أو حاول مرة أخرى.");
+                showChrome();
                 Toast.makeText(PlayerActivity.this,"حدث خطأ أثناء التشغيل",Toast.LENGTH_LONG).show();
             }
         });
@@ -366,6 +467,13 @@ public class PlayerActivity extends AppCompatActivity {
             setStatus("نوع المشغّل غير مدعوم في النسخة الحالية");showUnavailable();return;
         }
         web=new WebView(this);web.setBackgroundColor(Color.BLACK);
+        web.setOnTouchListener((v,event)->{
+            // Do not consume the event: third-party iframe gestures remain functional.
+            if(event.getActionMasked()==android.view.MotionEvent.ACTION_DOWN){
+                showChrome();
+            }
+            return false;
+        });
         web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);
         web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);
         web.getSettings().setMediaPlaybackRequiresUserGesture(false);
@@ -374,6 +482,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override public void onShowCustomView(View view,CustomViewCallback callback){
                 if(embeddedFullScreen!=null){callback.onCustomViewHidden();return;}
                 embeddedFullScreen=view;embeddedFullScreenCallback=callback;
+                renderChrome();
                 ViewGroup decor=(ViewGroup)getWindow().getDecorView();
                 decor.addView(view,new ViewGroup.LayoutParams(-1,-1));
                 getWindow().getDecorView().setSystemUiVisibility(
@@ -408,6 +517,7 @@ public class PlayerActivity extends AppCompatActivity {
             decor.removeView(embeddedFullScreen);
             embeddedFullScreen=null;
             getWindow().getDecorView().setSystemUiVisibility(0);
+            hideChrome();
             if(embeddedFullScreenCallback!=null){
                 embeddedFullScreenCallback.onCustomViewHidden();
                 embeddedFullScreenCallback=null;
@@ -459,17 +569,22 @@ public class PlayerActivity extends AppCompatActivity {
         speed=values[(index+1)%values.length];
         player.setPlaybackParameters(new PlaybackParameters(speed));
         speedButton.setText("السرعة "+speed+"×");
+        scheduleAutoHide();
     }
     private void toggleOrientation(){
-        landscape=!landscape;
-        setRequestedOrientation(landscape?ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        // Android will call onConfigurationChanged when dimensions actually update.
+        boolean wide=getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE;
+        setRequestedOrientation(wide?ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
     }
     private void enterPip(){
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.O||player==null){
             Toast.makeText(this,"النافذة العائمة متاحة لمشغّل الفيديو الأصلي فقط",Toast.LENGTH_SHORT).show();return;
         }
-        try{setPictureInPictureParams(new PictureInPictureParams.Builder().setAspectRatio(new Rational(16,9)).build());enterPictureInPictureMode();}
+        try{
+            hideChrome();
+            setPictureInPictureParams(new PictureInPictureParams.Builder().setAspectRatio(new Rational(16,9)).build());
+            enterPictureInPictureMode();
+        }
         catch(Exception e){Toast.makeText(this,"الجهاز لا يدعم النافذة العائمة",Toast.LENGTH_SHORT).show();}
     }
     private void selectTab(String t){tab=t;showTab();}
@@ -544,6 +659,23 @@ public class PlayerActivity extends AppCompatActivity {
                 TextView summary=Ui.txt(this,note.body,13,Ui.WHITE,false);
                 summary.setTextIsSelectable(true);
                 card.addView(summary,Ui.top(this,-1,-2,9));
+                if(note.positionMs>=0){
+                    TextView position=Ui.btn(this,"⏱ عند "+mmss(note.positionMs),false);
+                    position.setTextSize(12);
+                    card.addView(position,Ui.top(this,-1,38,8));
+                    position.setOnClickListener(v->{
+                        if(player==null){
+                            Toast.makeText(this,"الانتقال للتوقيت متاح لفيديوهات MP4 وHLS فقط",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        long duration=player.getDuration();
+                        long target=note.positionMs;
+                        if(duration>0&&duration!=androidx.media3.common.C.TIME_UNSET)
+                            target=Math.min(target,duration);
+                        player.seekTo(target);
+                        showChrome();
+                    });
+                }
                 tabContent.addView(card,Ui.top(this,-1,-2,9));
                 edit.setOnClickListener(v->editNote(index));
                 remove.setOnClickListener(v->confirmDelete(index));
@@ -588,9 +720,34 @@ public class PlayerActivity extends AppCompatActivity {
         body.setBackground(Ui.round(this,Ui.PANEL2,12));
         Ui.pad(this,body,12,12);
         form.addView(body,Ui.top(this,-1,-2,7));
+        final long[] noteTime={index>=0?entries.get(index).positionMs:-1L};
         if(index>=0){
             title.setText(entries.get(index).title);
             body.setText(entries.get(index).body);
+        }
+        if(player!=null){
+            LinearLayout timestampRow=Ui.row(this);
+            TextView insertTime=Ui.btn(this,"⏱ إدراج التوقيت الحالي",false);
+            insertTime.setTextSize(12);
+            timestampRow.addView(insertTime,new LinearLayout.LayoutParams(0,dp(43),1f));
+            TextView clearTime=Ui.btn(this,"إزالة التوقيت",false);
+            clearTime.setTextSize(12);
+            LinearLayout.LayoutParams clearParams=Ui.lp(this,120,43);
+            clearParams.leftMargin=dp(6);
+            timestampRow.addView(clearTime,clearParams);
+            TextView stampValue=Ui.txt(this,noteTime[0]>=0?
+                "التوقيت: "+mmss(noteTime[0]):"بدون توقيت مرتبط",12,Ui.MUTED,false);
+            form.addView(timestampRow,Ui.top(this,-1,-2,12));
+            form.addView(stampValue,Ui.top(this,-1,-2,6));
+            insertTime.setOnClickListener(v->{
+                if(player!=null){
+                    noteTime[0]=Math.max(0,player.getCurrentPosition());
+                    stampValue.setText("التوقيت: "+mmss(noteTime[0]));
+                }
+            });
+            clearTime.setOnClickListener(v->{
+                noteTime[0]=-1L;stampValue.setText("بدون توقيت مرتبط");
+            });
         }
         AlertDialog dialog=new AlertDialog.Builder(this)
             .setTitle(index<0?"إضافة ملاحظة":"تعديل الملاحظة")
@@ -603,7 +760,7 @@ public class PlayerActivity extends AppCompatActivity {
                 String content=body.getText().toString().trim();
                 if(titleText.isEmpty()){title.setError("أدخل عنواناً");return;}
                 if(content.isEmpty()){body.setError("أدخل نص الملاحظة");return;}
-                if(!NoteCards.save(this,lessonKey,index,titleText,content)){
+                if(!NoteCards.save(this,lessonKey,index,titleText,content,noteTime[0])){
                     Toast.makeText(this,"تعذر الحفظ أو تم بلوغ الحد المسموح للملاحظات",
                         Toast.LENGTH_LONG).show();return;
                 }
@@ -625,7 +782,7 @@ public class PlayerActivity extends AppCompatActivity {
             }).show();
     }
     private void updateOrientation(){
-        if(videoBox==null || playerShell==null)return;
+        if(videoBox==null||playerShell==null)return;
         boolean wide=getResources().getConfiguration().orientation==
             Configuration.ORIENTATION_LANDSCAPE;
         landscape=wide;
@@ -634,21 +791,25 @@ public class PlayerActivity extends AppCompatActivity {
         if(heading!=null)heading.setVisibility(expanded?View.GONE:View.VISIBLE);
         if(info!=null)info.setVisibility(expanded?View.GONE:View.VISIBLE);
         if(details!=null)details.setVisibility(expanded?View.GONE:View.VISIBLE);
-        if(playerChrome!=null)playerChrome.setVisibility(pipActive?View.GONE:View.VISIBLE);
-        if(pipActive)setToolsVisible(false);
-        if(seekBar!=null && seekBar.getTag() instanceof View)
-            ((View)seekBar.getTag()).setVisibility(expanded && pipActive?View.GONE:
-                ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type))?View.VISIBLE:View.GONE);
         LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,expanded?0:-2,expanded?1f:0f);
-        shell.topMargin=expanded?0:dp(10);
+        shell.topMargin=expanded?0:dp(8);
         playerShell.setLayoutParams(shell);
         LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,expanded?0:videoHeight(),expanded?1f:0f);
         videoBox.setLayoutParams(video);
-        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"ملء الشاشة");
+        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"تكبير");
+        if(embeddedFullScreen==null){
+            int flags=wide?(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY):0;
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+        }
+        if(pipActive)hideChrome();
+        else renderChrome();
         ViewCompat.requestApplyInsets(root);
     }
     @Override public void onBackPressed(){
         if(embeddedFullScreen!=null){exitEmbeddedFullScreen();return;}
+        if(controlsLocked){controlsLocked=false;showChrome();return;}
+        if(toolsVisible){setToolsVisible(false);return;}
         if(landscape){setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return;}
         super.onBackPressed();
     }
@@ -656,9 +817,27 @@ public class PlayerActivity extends AppCompatActivity {
         super.onPictureInPictureModeChanged(pip,config);
         pipActive=pip;
         updateOrientation();
+        if(!pip)showChrome();
     }
     @Override public void onConfigurationChanged(Configuration cfg){super.onConfigurationChanged(cfg);updateOrientation();}
-    @Override protected void onResume(){super.onResume();ticker.removeCallbacks(progressTick);ticker.post(progressTick);}
-    @Override protected void onPause(){ticker.removeCallbacks(progressTick);savePosition();super.onPause();}
-    @Override protected void onDestroy(){ticker.removeCallbacks(progressTick);destroyPlayback();super.onDestroy();}
+    @Override protected void onResume(){
+        super.onResume();
+        ticker.removeCallbacks(progressTick);ticker.post(progressTick);
+    }
+    @Override protected void onPause(){
+        ticker.removeCallbacks(progressTick);
+        ticker.removeCallbacks(autoHide);
+        savePosition();
+        super.onPause();
+    }
+    @Override protected void onStop(){
+        if(player!=null&&!isInPictureInPictureMode())player.pause();
+        super.onStop();
+    }
+    @Override protected void onDestroy(){
+        ticker.removeCallbacks(progressTick);
+        ticker.removeCallbacks(autoHide);
+        destroyPlayback();
+        super.onDestroy();
+    }
 }
