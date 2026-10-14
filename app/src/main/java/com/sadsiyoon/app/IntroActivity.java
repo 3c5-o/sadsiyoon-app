@@ -1,13 +1,13 @@
 package com.sadsiyoon.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,44 +15,93 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.ViewCompat;
-import android.graphics.Color;
 
+/**
+ * Branded, non-blocking two-second splash. No network, catalog parsing or
+ * button press is needed before opening the student's home screen.
+ */
 public class IntroActivity extends AppCompatActivity {
-    private boolean navigating=false;
-    @Override public void onCreate(Bundle state){
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private boolean navigating = false;
+    private final Runnable openHome = this::enter;
+
+    @Override public void onCreate(Bundle state) {
         super.onCreate(state);
-        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
-        SharedPreferences prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);
-        FrameLayout screen=new FrameLayout(this);
-        screen.setBackground(Ui.gradient(this,0xff0e2633,Ui.BG,0));
-        ViewCompat.setOnApplyWindowInsetsListener(screen,(v,insets)->{
-            Insets bars=insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            screen.setPadding(bars.left,bars.top,bars.right,bars.bottom);
+
+        FrameLayout screen = new FrameLayout(this);
+        screen.setBackground(Ui.gradient(this, 0xff162F58, Ui.BG, 0));
+        ViewCompat.setOnApplyWindowInsetsListener(screen, (v, insets) -> {
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            screen.setPadding(bars.left, bars.top, bars.right, bars.bottom);
             return insets;
         });
-        LinearLayout body=Ui.col(this);body.setGravity(Gravity.CENTER);Ui.pad(this,body,28,20);
-        ImageView image=Ui.logo(this,220,true);body.addView(image);
-        TextView slogan=Ui.txt(this,"منصة طلاب السادس الإعدادي",20,Ui.WHITE,true);
-        slogan.setGravity(Gravity.CENTER);body.addView(slogan,Ui.top(this,-1,44,8));
-        TextView desc=Ui.txt(this,"طريقك نحو المستقبل يبدأ من هنا",14,Ui.MUTED,false);
-        desc.setGravity(Gravity.CENTER);body.addView(desc,Ui.top(this,-1,30,6));
-        TextView line=Ui.txt(this,"──────  ◆  ──────",17,Ui.GOLD,true);
-        line.setGravity(Gravity.CENTER);body.addView(line,Ui.top(this,-1,35,24));
-        TextView action=Ui.btn(this,prefs.getBoolean("welcome_done",false)?"متابعة":"ابدأ رحلتك الآن",true);
-        body.addView(action,Ui.top(this,-1,54,32));
-        action.setOnClickListener(v->{prefs.edit().putBoolean("welcome_done",true).apply();enter();});
-        TextView footer=Ui.txt(this,"سادسيون  •  تجربة تعليمية بهوية مستقلة",11,Ui.MUTED,false);
-        footer.setGravity(Gravity.CENTER);body.addView(footer,Ui.top(this,-1,32,30));
-        FrameLayout.LayoutParams b=new FrameLayout.LayoutParams(-1,-2,Gravity.CENTER);
-        screen.addView(body,b);setContentView(screen);
+
+        LinearLayout body = Ui.col(this);
+        body.setGravity(Gravity.CENTER);
+        Ui.pad(this, body, 24, 24);
+        TextView eyebrow = Ui.txt(this, "S A D E S I O N", 12, Ui.MINT, true);
+        eyebrow.setGravity(Gravity.CENTER);
+        body.addView(eyebrow, Ui.lp(this, -1, 28));
+
+        FrameLayout emblem = new FrameLayout(this);
+        emblem.setBackground(Ui.stroke(this, 0xff1A355D, 32, 0xff365C8B));
+        emblem.setClipToOutline(true);
+        FrameLayout.LayoutParams logoParams = new FrameLayout.LayoutParams(
+            Ui.dp(this, 116), Ui.dp(this, 116), Gravity.CENTER);
+        emblem.addView(Ui.logo(this, 116, false), logoParams);
+        LinearLayout.LayoutParams emblemParams = Ui.lp(this, 156, 156);
+        emblemParams.gravity = Gravity.CENTER_HORIZONTAL;
+        emblemParams.topMargin = Ui.dp(this, 12);
+        body.addView(emblem, emblemParams);
+
+        TextView brand = Ui.txt(this, "سادسيون", 34, Ui.WHITE, true);
+        brand.setGravity(Gravity.CENTER);
+        body.addView(brand, Ui.top(this, -1, 53, 15));
+
+        TextView title = Ui.txt(this, "منصة السادس الإعدادي", 17, Ui.WHITE, true);
+        title.setGravity(Gravity.CENTER);
+        body.addView(title, Ui.top(this, -1, 35, 3));
+
+        TextView subtitle = Ui.txt(this, "محاضراتك، وزارياتك، وتقدمك بمكان واحد", 13, Ui.MUTED, false);
+        subtitle.setGravity(Gravity.CENTER);
+        body.addView(subtitle, Ui.top(this, -1, 41, 3));
+
+        View accent = new View(this);
+        accent.setBackground(Ui.round(this, Ui.MINT, 3));
+        LinearLayout.LayoutParams accentParams = Ui.lp(this, 64, 4);
+        accentParams.gravity = Gravity.CENTER_HORIZONTAL;
+        accentParams.topMargin = Ui.dp(this, 26);
+        body.addView(accent, accentParams);
+
+        FrameLayout.LayoutParams bodyParams = new FrameLayout.LayoutParams(-1, -2, Gravity.CENTER);
+        screen.addView(body, bodyParams);
+
+        TextView footer = Ui.txt(this, "رحلة تعلم أوضح", 12, Ui.MUTED, false);
+        footer.setGravity(Gravity.CENTER);
+        FrameLayout.LayoutParams footerParams = new FrameLayout.LayoutParams(-1, Ui.dp(this, 50), Gravity.BOTTOM);
+        footerParams.bottomMargin = Ui.dp(this, 12);
+        screen.addView(footer, footerParams);
+
+        setContentView(screen);
         ViewCompat.requestApplyInsets(screen);
-        if(prefs.getBoolean("welcome_done",false))
-            new Handler(Looper.getMainLooper()).postDelayed(this::enter,1300);
+        body.setAlpha(0f);
+        body.setTranslationY(Ui.dp(this, 14));
+        body.animate().alpha(1f).translationY(0f).setDuration(480).start();
+        handler.postDelayed(openHome, 2000);
     }
-    private void enter(){
-        if(navigating||isFinishing()||isDestroyed())return;navigating=true;
-        startActivity(new Intent(this,MainActivity.class));finish();
+
+    private void enter() {
+        if (navigating || isFinishing() || isDestroyed()) return;
+        navigating = true;
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override protected void onDestroy() {
+        handler.removeCallbacks(openHome);
+        super.onDestroy();
     }
 }
