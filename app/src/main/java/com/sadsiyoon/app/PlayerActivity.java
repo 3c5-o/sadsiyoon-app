@@ -354,7 +354,7 @@ public class PlayerActivity extends AppCompatActivity {
                 final Catalog.Ref chosen=ref;
                 TextView v=Ui.txt(this,(i+1)+"  •  "+ref.lesson.title,13,
                     i==current.li?Ui.MINT:(ref.lesson.available()?Ui.WHITE:Ui.MUTED),i==current.li);
-                Ui.pad(this,v,12,13);v.setBackground(Ui.round(this,i==current.li?0xff15483c:Ui.PANEL,11));
+                Ui.pad(this,v,12,13);v.setBackground(Ui.round(this,i==current.li?0xff224A77:Ui.PANEL,11));
                 tabContent.addView(v,Ui.top(this,-1,-2,6));
                 v.setOnClickListener(w->{
                     if(!chosen.lesson.available()){Toast.makeText(this,"هذه المحاضرة غير متاحة حالياً",Toast.LENGTH_SHORT).show();return;}
