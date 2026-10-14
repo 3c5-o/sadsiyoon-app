@@ -755,7 +755,7 @@ public class MainActivity extends AppCompatActivity {
         content.addView(panel,margins(-1,-2,12));
         LinearLayout backups=Ui.card(this);
         backups.addView(Ui.txt(this,"النسخ الاحتياطي المحلي",18,Ui.WHITE,true));
-        addMuted(backups,"صدّر مفضلاتك وملاحظاتك وتقدمك إلى ملف JSON تختاره بنفسك، أو استعدها على جهاز آخر. احتفظ بالملف بمكان خاص لأن الملاحظات قد تكون شخصية.");
+        addMuted(backups,"صدّر مفضلاتك وبطاقات ملاحظاتك وتقدمك إلى ملف JSON تختاره بنفسك، أو استعدها على جهاز آخر. احتفظ بالملف بمكان خاص لأن الملاحظات قد تكون شخصية.");
         TextView export=Ui.btn(this,"تصدير نسخة احتياطية",true);
         backups.addView(export,Ui.top(this,-1,45,12));
         export.setOnClickListener(v->{
@@ -789,7 +789,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.5.0 Beta — نسخة واجهات تجريبية مستقلة.");
+        addMuted(content,"سادسيون V1.5.1 Beta — نسخة واجهات تجريبية مستقلة.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
