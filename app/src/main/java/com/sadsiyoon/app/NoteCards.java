@@ -17,9 +17,9 @@ public final class NoteCards {
 
     public static final class Note {
         public final String title, body;
-        public final long createdAt;
-        Note(String title,String body,long createdAt){
-            this.title=title;this.body=body;this.createdAt=createdAt;
+        public final long createdAt, positionMs;
+        Note(String title,String body,long createdAt,long positionMs){
+            this.title=title;this.body=body;this.createdAt=createdAt;this.positionMs=positionMs;
         }
     }
     private static SharedPreferences preferences(Context c){
@@ -36,8 +36,13 @@ public final class NoteCards {
                 !(note.opt("body") instanceof String)||
                 !(note.opt("createdAt") instanceof Number))throw new Exception("Invalid note shape");
             String title=note.getString("title"),body=note.getString("body");
+            Object timestamp=note.opt("positionMs");
+            if(timestamp!=null && !(timestamp instanceof Number))
+                throw new Exception("Invalid note time");
             if(title.trim().isEmpty()||title.length()>MAX_TITLE||body.length()>MAX_BODY||
-                note.getLong("createdAt")<0)throw new Exception("Invalid note fields");
+                note.getLong("createdAt")<0||
+                (timestamp instanceof Number && ((Number)timestamp).longValue() < -1))
+                throw new Exception("Invalid note fields");
         }
         return data;
     }
@@ -69,7 +74,7 @@ public final class NoteCards {
             for(int i=0;i<array.length();i++){
                 JSONObject entry=array.getJSONObject(i);
                 items.add(new Note(entry.getString("title"),entry.getString("body"),
-                    entry.getLong("createdAt")));
+                    entry.getLong("createdAt"),entry.optLong("positionMs",-1L)));
             }
         }catch(Exception err){
             // Never replace malformed imported data automatically.
@@ -78,7 +83,10 @@ public final class NoteCards {
         return items;
     }
     public static boolean save(Context context,String lessonKey,int editIndex,String title,String body){
-        if(title==null||body==null)return false;
+        return save(context,lessonKey,editIndex,title,body,-1L);
+    }
+    public static boolean save(Context context,String lessonKey,int editIndex,String title,String body,long positionMs){
+        if(title==null||body==null||positionMs < -1L)return false;
         title=title.trim();body=body.trim();
         if(title.isEmpty()||title.length()>MAX_TITLE||body.isEmpty()||body.length()>MAX_BODY)return false;
         SharedPreferences prefs=preferences(context);
@@ -91,6 +99,7 @@ public final class NoteCards {
             item.put("title",title);item.put("body",body);
             item.put("createdAt",editIndex>=0?data.getJSONObject(editIndex).getLong("createdAt"):
                 System.currentTimeMillis());
+            item.put("positionMs",positionMs);
             if(editIndex>=0)data.put(editIndex,item);else data.put(item);
             String encoded=data.toString();
             if(encoded.length()>MAX_JSON)return false;
