@@ -298,9 +298,59 @@ public class PlayerActivity extends AppCompatActivity {
             tabs[i].setBackground(Ui.round(this,selected?Ui.BLUE:Ui.PANEL2,11));
         }
     }
+    private boolean isNative(){
+        return current!=null&&("mp4".equals(current.lesson.type)||"hls".equals(current.lesson.type));
+    }
+    private boolean isEmbedded(){
+        return current!=null&&"embed".equals(current.lesson.type);
+    }
+    private void playerBack(){
+        if(landscape){setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return;}
+        finish();
+    }
+    private void toggleLock(){
+        if(!isNative())return;
+        controlsLocked=!controlsLocked;
+        toolsVisible=false;
+        chromeVisible=false;
+        showChrome();
+    }
+    private void scheduleAutoHide(){
+        ticker.removeCallbacks(autoHide);
+        if(chromeVisible && !userSeeking && (isEmbedded() || (player!=null&&player.isPlaying()))){
+            ticker.postDelayed(autoHide,toolsVisible?5000L:AUTO_HIDE_MS);
+        }
+    }
+    private void renderChrome(){
+        if(videoBox==null)return;
+        boolean active=chromeVisible&&!pipActive&&embeddedFullScreen==null;
+        boolean unlocked=active&&!controlsLocked;
+        boolean overlayMenu=unlocked&&toolsVisible;
+        if(playerChrome!=null)playerChrome.setVisibility(unlocked?View.VISIBLE:View.GONE);
+        if(centerControls!=null)centerControls.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
+        if(timeline!=null)timeline.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
+        if(settingsPanel!=null)settingsPanel.setVisibility(overlayMenu?View.VISIBLE:View.GONE);
+        if(unlockButton!=null)unlockButton.setVisibility(active&&controlsLocked?View.VISIBLE:View.GONE);
+        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive?View.VISIBLE:View.GONE);
+    }
+    private void showChrome(){
+        chromeVisible=true;
+        renderChrome();
+        scheduleAutoHide();
+    }
+    private void hideChrome(){
+        if(userSeeking)return;
+        toolsVisible=false;
+        chromeVisible=false;
+        ticker.removeCallbacks(autoHide);
+        renderChrome();
+    }
     private void setToolsVisible(boolean visible){
+        if(controlsLocked||pipActive)return;
         toolsVisible=visible;
-        if(settingsPanel!=null)settingsPanel.setVisibility(visible&&!pipActive?View.VISIBLE:View.GONE);
+        chromeVisible=true;
+        renderChrome();
+        scheduleAutoHide();
     }
     private void toggleTools(){setToolsVisible(!toolsVisible);}
     private void togglePlay(){
@@ -310,6 +360,7 @@ public class PlayerActivity extends AppCompatActivity {
         }
         if(player.isPlaying())player.pause();else player.play();
         updateProgress();
+        showChrome();
     }
     private void seekRelative(long distance){
         if(player==null)return;
@@ -318,7 +369,7 @@ public class PlayerActivity extends AppCompatActivity {
         if(duration>0 && duration!=androidx.media3.common.C.TIME_UNSET)
             target=Math.min(target,duration);
         player.seekTo(target);
-        updateProgress();
+        updateProgress();showChrome();
     }
     private static String mmss(long millis){
         long seconds=Math.max(0,millis/1000);
@@ -327,7 +378,7 @@ public class PlayerActivity extends AppCompatActivity {
     private void updateProgress(){
         boolean nativeAvailable=player!=null;
         if(playPauseButton!=null){
-            playPauseButton.setText(nativeAvailable?(player.isPlaying()?"إيقاف":"تشغيل"):"المزود");
+            playPauseButton.setText(nativeAvailable?(player.isPlaying()?"❚❚":"▶"):"▶");
             playPauseButton.setEnabled(nativeAvailable);
             playPauseButton.setAlpha(nativeAvailable?1f:0.5f);
         }
@@ -339,24 +390,22 @@ public class PlayerActivity extends AppCompatActivity {
         }else clock.setText(mmss(position)+" / --:--");
     }
     private void updateAvailableControls(){
-        boolean nativePlayer=current!=null &&
-            ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type));
-        if(speedButton!=null)speedButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(pipButton!=null)pipButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekBackButton!=null)seekBackButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekForwardButton!=null)seekForwardButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(seekBar!=null && seekBar.getTag() instanceof View)
-            ((View)seekBar.getTag()).setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        if(playPauseButton!=null){
-            playPauseButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
-        }
+        boolean nativeSource=isNative();
+        if(speedButton!=null)speedButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(pipButton!=null)pipButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(lockButton!=null)lockButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(playPauseButton!=null)playPauseButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(seekBackButton!=null)seekBackButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        if(seekForwardButton!=null)seekForwardButton.setVisibility(nativeSource?View.VISIBLE:View.GONE);
+        renderChrome();
     }
     private void setStatus(String msg){if(status!=null)status.setText(msg);}
     private void load(){
         if(current==null)return;
         heading.setText(current.lesson.title);
         info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
-        setToolsVisible(false);
+        controlsLocked=false;
+        hideChrome();
         if(seekBar!=null)seekBar.setProgress(0);
         if(clock!=null)clock.setText("00:00 / 00:00");
         refreshActions();destroyPlayback();
@@ -369,6 +418,7 @@ public class PlayerActivity extends AppCompatActivity {
         else if(current.lesson.type.equals("embed"))openEmbedded();
         else showUnavailable();
         showTab();
+        showChrome();
     }
     private void showUnavailable(){
         TextView empty=Ui.txt(this,"لا يمكن تشغيل هذه المحاضرة حالياً",16,Ui.WHITE,true);
@@ -381,6 +431,10 @@ public class PlayerActivity extends AppCompatActivity {
         mediaStage.addView(playerView,new FrameLayout.LayoutParams(-1,-1));
         player=new ExoPlayer.Builder(this).build();playerView.setPlayer(player);
         player.addListener(new Player.Listener(){
+            @Override public void onIsPlayingChanged(boolean isPlaying){
+                updateProgress();
+                if(isPlaying)scheduleAutoHide();else showChrome();
+            }
             @Override public void onPlaybackStateChanged(int state){
                 if(state==Player.STATE_BUFFERING)setStatus("جاري تحميل المحاضرة...");
                 if(state==Player.STATE_READY)setStatus("المحاضرة جاهزة للمشاهدة");
@@ -392,6 +446,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
             @Override public void onPlayerError(PlaybackException err){
                 setStatus("تعذر تشغيل هذه المحاضرة. تحقق من اتصال الإنترنت أو حاول مرة أخرى.");
+                showChrome();
                 Toast.makeText(PlayerActivity.this,"حدث خطأ أثناء التشغيل",Toast.LENGTH_LONG).show();
             }
         });
@@ -412,6 +467,13 @@ public class PlayerActivity extends AppCompatActivity {
             setStatus("نوع المشغّل غير مدعوم في النسخة الحالية");showUnavailable();return;
         }
         web=new WebView(this);web.setBackgroundColor(Color.BLACK);
+        web.setOnTouchListener((v,event)->{
+            // Do not consume the event: third-party iframe gestures remain functional.
+            if(event.getActionMasked()==android.view.MotionEvent.ACTION_DOWN){
+                showChrome();
+            }
+            return false;
+        });
         web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);
         web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);
         web.getSettings().setMediaPlaybackRequiresUserGesture(false);
@@ -420,6 +482,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override public void onShowCustomView(View view,CustomViewCallback callback){
                 if(embeddedFullScreen!=null){callback.onCustomViewHidden();return;}
                 embeddedFullScreen=view;embeddedFullScreenCallback=callback;
+                renderChrome();
                 ViewGroup decor=(ViewGroup)getWindow().getDecorView();
                 decor.addView(view,new ViewGroup.LayoutParams(-1,-1));
                 getWindow().getDecorView().setSystemUiVisibility(
@@ -454,6 +517,7 @@ public class PlayerActivity extends AppCompatActivity {
             decor.removeView(embeddedFullScreen);
             embeddedFullScreen=null;
             getWindow().getDecorView().setSystemUiVisibility(0);
+            hideChrome();
             if(embeddedFullScreenCallback!=null){
                 embeddedFullScreenCallback.onCustomViewHidden();
                 embeddedFullScreenCallback=null;
@@ -505,17 +569,22 @@ public class PlayerActivity extends AppCompatActivity {
         speed=values[(index+1)%values.length];
         player.setPlaybackParameters(new PlaybackParameters(speed));
         speedButton.setText("السرعة "+speed+"×");
+        scheduleAutoHide();
     }
     private void toggleOrientation(){
-        landscape=!landscape;
-        setRequestedOrientation(landscape?ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        // Android will call onConfigurationChanged when dimensions actually update.
+        boolean wide=getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE;
+        setRequestedOrientation(wide?ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
     }
     private void enterPip(){
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.O||player==null){
             Toast.makeText(this,"النافذة العائمة متاحة لمشغّل الفيديو الأصلي فقط",Toast.LENGTH_SHORT).show();return;
         }
-        try{setPictureInPictureParams(new PictureInPictureParams.Builder().setAspectRatio(new Rational(16,9)).build());enterPictureInPictureMode();}
+        try{
+            hideChrome();
+            setPictureInPictureParams(new PictureInPictureParams.Builder().setAspectRatio(new Rational(16,9)).build());
+            enterPictureInPictureMode();
+        }
         catch(Exception e){Toast.makeText(this,"الجهاز لا يدعم النافذة العائمة",Toast.LENGTH_SHORT).show();}
     }
     private void selectTab(String t){tab=t;showTab();}
