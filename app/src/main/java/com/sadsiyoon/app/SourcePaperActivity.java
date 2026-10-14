@@ -10,6 +10,10 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.ViewCompat;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,7 +40,13 @@ public final class SourcePaperActivity extends Activity {
         String title=getIntent().getStringExtra("source_title");
         LinearLayout root=Ui.col(this);
         root.setBackgroundColor(Ui.BG);
-        root.setPadding(Ui.dp(this,10),Ui.dp(this,28),Ui.dp(this,10),Ui.dp(this,10));
+        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+        ViewCompat.setOnApplyWindowInsetsListener(root,(view,insets)->{
+            Insets bars=insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            root.setPadding(bars.left+Ui.dp(this,10),bars.top+Ui.dp(this,8),
+                bars.right+Ui.dp(this,10),bars.bottom+Ui.dp(this,10));
+            return insets;
+        });
         LinearLayout toolbar=Ui.row(this);
         TextView back=Ui.btn(this,"رجوع",false);
         toolbar.addView(back,Ui.lp(this,68,44));
@@ -95,6 +105,7 @@ public final class SourcePaperActivity extends Activity {
         reload.setOnClickListener(v->{progress.setVisibility(View.VISIBLE);browser.reload();});
         root.addView(browser,new LinearLayout.LayoutParams(-1,0,1f));
         setContentView(root);
+        ViewCompat.requestApplyInsets(root);
         browser.loadUrl(url);
     }
     @Override public void onBackPressed(){

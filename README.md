@@ -1,3 +1,10 @@
+# V1.3.2 Beta — Phase 3: actual interactive practice
+
+- Implemented ten originally authored, offline multiple-choice practice questions for sixth scientific and ten for sixth literary, with scoring, explanations, retry and best local score for each track.
+- These questions are **practice items, NOT claimed as official ministry exam questions**; the real 2025 Mlazemna paper links remain under Waziriat and are attributed to their source.
+- Fixed a regression introduced in Phase 1: when a filter changed while remaining on the same screen, render was skipped; same-page quiz, exams, and search refresh now rerender correctly.
+- Added system bar inset padding to the original-paper WebView reader to reduce clipping on Android 15.
+
 # V1.3.1 Beta: source catalog audit
 
 Every Debug CI run now checks missing and repeated links and uploads reports/catalog_health.json and Markdown. Playback is not inferred from the URL and no missing lessons are fabricated. The 2026 teacher directory warns about known missing links. Source-linked videos show the uncertainty of playback.

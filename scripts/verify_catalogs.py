@@ -141,3 +141,12 @@ assert 'private void exams(){' in source
 assert 'private void displayExamPaper(' in source
 assert 'لا توجد ورقة 2025 مؤكدة' in source
 print("OK: 4 authentic 2025 scientific/literary math/Arabic exam source pages, image rights preserved")
+
+# PracticeBank contains 10 original questions for each branch, with four choices.
+bank=(root/"app/src/main/java/com/sadsiyoon/app/PracticeBank.java").read_text(encoding="utf-8")
+assert bank.count("add(items,")==20, "Expected 20 reviewed local practice questions"
+assert "not official ministerial" in bank.lower()
+screen=(root/"app/src/main/java/com/sadsiyoon/app/MainActivity.java").read_text(encoding="utf-8")
+assert "PracticeBank.forBranch(practiceBranch)" in screen
+assert "if(next.equals(page))" in screen, "Same-page filter updates must rerender"
+print("OK: 20 original practice questions and working same-page filter/quiz redraws")

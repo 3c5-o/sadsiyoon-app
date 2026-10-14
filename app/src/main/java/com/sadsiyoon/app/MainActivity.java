@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private String scrollKey(){return page+":"+selectedBatch+":"+selectedTeacher+":"+selectedChapter+":"+examBranch+":"+examSubject+":"+examRound;}
     private void rememberScroll(){if(pageScroller!=null)scrollPositions.put(scrollKey(),pageScroller.getScrollY());}
     private int questionIndex=0,quizScore=0;
+    private String practiceBranch="scientific";
     private final String[] questions={
         "ما ناتج ٢ + ٣ × ٤؟","أيّ مما يأتي اسم إشارة؟",
         "ما وحدة قياس شدة التيار الكهربائي؟","ما الفرع العلمي الذي يدرس التفاعلات بين المواد؟",
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
             examBranch=saved.getString("examBranch","scientific");
             examSubject=saved.getString("examSubject","الرياضيات");
             examRound=saved.getString("examRound","الدور الأول");
+            practiceBranch=saved.getString("practiceBranch","scientific");
+            questionIndex=saved.getInt("questionIndex",0);
+            quizScore=saved.getInt("quizScore",0);
             ArrayList<String> history=saved.getStringArrayList("navHistory");
             if(history!=null)for(String oldPage:history)navigationHistory.addLast(oldPage);
         }
@@ -76,7 +80,13 @@ public class MainActivity extends AppCompatActivity {
     private int d(int n){return Ui.dp(this,n);}
     private void space(LinearLayout a,int height){a.addView(Ui.gap(this,height));}
     private void show(String next){
-        if(next==null||next.equals(page))return;
+        if(next==null)return;
+        if(next.equals(page)){
+            // Rebuild the same screen when a filter, quiz answer, or retry changes.
+            scrollPositions.remove(scrollKey());
+            render();
+            return;
+        }
         rememberScroll();
         navigationHistory.addLast(page);
         if(navigationHistory.size()>30)navigationHistory.removeFirst();
@@ -89,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         state.putString("subjectFilter",subjectFilter);state.putString("libraryFilter",libraryFilter);
         state.putString("examBranch",examBranch);state.putString("examSubject",examSubject);
         state.putString("examRound",examRound);
+        state.putString("practiceBranch",practiceBranch);
+        state.putInt("questionIndex",questionIndex);
+        state.putInt("quizScore",quizScore);
         state.putStringArrayList("navHistory",new ArrayList<>(navigationHistory));
         super.onSaveInstanceState(state);
     }
@@ -592,33 +605,72 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tests(){
-        addTitle(content,"الاختبارات",24);
-        TextView examButton=Ui.btn(this,"وزاريات 2025 — العلمي والأدبي",true);
-        content.addView(examButton,margins(-1,46,8));examButton.setOnClickListener(v->show("exams"));
-        addMuted(content,"اختبار تدريبي محلي قصير، لا يحتاج اتصالاً بالإنترنت.");
-        if(questionIndex>=questions.length){
-            LinearLayout box=Ui.card(this);box.addView(Ui.txt(this,"نتيجتك: "+quizScore+" من "+questions.length,24,Ui.GOLD,true));
-            addMuted(box,"يمكنك المحاولة مرة ثانية لتحسين نتيجتك.");
-            TextView retry=Ui.btn(this,"إعادة الاختبار",true);box.addView(retry,Ui.top(this,-1,48,18));
-            retry.setOnClickListener(v->{questionIndex=0;quizScore=0;show("tests");});content.addView(box,margins(-1,-2,16));return;
+        addTitle(content,"اختبارات سادسيون",24);
+        TextView archive=Ui.btn(this,"افتح الأسئلة الوزارية المصورة",true);
+        content.addView(archive,margins(-1,46,8));
+        archive.setOnClickListener(v->show("exams"));
+        addMuted(content,"اختبارات تدريبية أصلية وليست أسئلة وزارية رسمية. تعمل بدون إنترنت.");
+
+        LinearLayout branches=Ui.row(this);
+        String[] ids={"scientific","literary"};
+        String[] titles={"السادس العلمي","السادس الأدبي"};
+        for(int i=0;i<ids.length;i++){
+            final String choice=ids[i];
+            TextView b=Ui.btn(this,titles[i],choice.equals(practiceBranch));
+            LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(46),1f);
+            p.setMargins(d(4),d(4),d(4),d(4));
+            branches.addView(b,p);
+            b.setOnClickListener(v->{if(!choice.equals(practiceBranch)){
+                practiceBranch=choice;questionIndex=0;quizScore=0;show("tests");
+            }});
         }
-        LinearLayout box=Ui.card(this);box.setBackground(Ui.gradient(this,0xff103b34,Ui.PANEL,20));
-        box.addView(Ui.txt(this,"السؤال "+(questionIndex+1)+" من "+questions.length,14,Ui.GOLD,true));
-        box.addView(Ui.txt(this,questions[questionIndex],21,Ui.WHITE,true),Ui.top(this,-1,-2,12));
-        content.addView(box,margins(-1,-2,17));
-        final int at=questionIndex;
-        for(int i=0;i<4;i++){
-            final int choice=i;TextView option=Ui.btn(this,options[at][i],false);option.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
-            content.addView(option,margins(-1,52,10));
+        content.addView(branches,margins(-1,-2,9));
+
+        List<PracticeBank.Question> bank=PracticeBank.forBranch(practiceBranch);
+        if(bank.isEmpty()){
+            addMuted(content,"لا توجد أسئلة تدريبية متاحة");return;
+        }
+        if(questionIndex>=bank.size()){
+            int score=quizScore;
+            String key="practice_best_"+practiceBranch;
+            int best=Math.max(score,prefs.getInt(key,0));
+            prefs.edit().putInt(key,best).apply();
+            LinearLayout result=Ui.card(this);
+            result.setBackground(Ui.gradient(this,0xff174438,Ui.PANEL,18));
+            result.addView(Ui.txt(this,"النتيجة: "+score+" من "+bank.size(),25,Ui.GOLD,true));
+            addMuted(result,"أفضل نتيجة محفوظة على جهازك: "+best+" من "+bank.size());
+            TextView retry=Ui.btn(this,"ابدأ اختباراً جديداً",true);
+            result.addView(retry,Ui.top(this,-1,48,18));
+            retry.setOnClickListener(v->{questionIndex=0;quizScore=0;show("tests");});
+            content.addView(result,margins(-1,-2,15));
+            return;
+        }
+        PracticeBank.Question q=bank.get(questionIndex);
+        LinearLayout card=Ui.card(this);
+        card.setBackground(Ui.gradient(this,0xff123b34,Ui.PANEL,18));
+        card.addView(Ui.txt(this,"السؤال "+(questionIndex+1)+" من "+bank.size(),14,Ui.GOLD,true));
+        card.addView(Ui.txt(this,q.text,20,Ui.WHITE,true),Ui.top(this,-1,-2,11));
+        content.addView(card,margins(-1,-2,13));
+        for(int i=0;i<q.options.length;i++){
+            final int selected=i;
+            TextView option=Ui.btn(this,q.options[i],false);
+            option.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+            content.addView(option,margins(-1,52,9));
             option.setOnClickListener(v->{
-                boolean correctAnswer=choice==correct[at];
-                if(correctAnswer)quizScore++;
-                new AlertDialog.Builder(this).setTitle(correctAnswer?"إجابة صحيحة":"راجع الإجابة")
-                    .setMessage(correctAnswer?"أحسنت.":"الإجابة الصحيحة: "+options[at][correct[at]])
-                    .setPositiveButton("التالي",(dialog,w)->{questionIndex++;show("tests");}).setCancelable(false).show();
+                boolean right=selected==q.answer;
+                if(right)quizScore++;
+                String message=(right?"إجابة صحيحة.":"الإجابة الصحيحة: "+q.options[q.answer])
+                    +"\n\nالشرح: "+q.explanation;
+                new AlertDialog.Builder(this)
+                    .setTitle(right?"صحيح":"راجع الحل")
+                    .setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("السؤال التالي",(dialog,w)->{questionIndex++;show("tests");})
+                    .show();
             });
         }
     }
+
     private void more(){
         addTitle(content,"حسابي والإعدادات",24);
         LinearLayout profile=Ui.card(this);
@@ -647,7 +699,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.3.1 Beta — تدقيق المحاضرات.");
+        addMuted(content,"سادسيون V1.3.2 Beta — اختبارات علمي وأدبي.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
