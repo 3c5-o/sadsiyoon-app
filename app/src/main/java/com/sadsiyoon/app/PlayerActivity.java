@@ -55,7 +55,7 @@ public class PlayerActivity extends AppCompatActivity {
     private FrameLayout videoBox,mediaStage;
     private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome;
     private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton;
-    private TextView tabsLessons,tabsNotes,tabsBooks,clock;
+    private TextView tabsLessons,tabsNotes,tabsBooks,clock,seekBackButton,seekForwardButton;
     private SeekBar seekBar;
     private boolean userSeeking=false;
     private final Handler ticker=new Handler(Looper.getMainLooper());
@@ -176,8 +176,8 @@ public class PlayerActivity extends AppCompatActivity {
         LinearLayout controls2=Ui.row(this);
         favorite=panelButton(controls2,"☆ المفضلة",this::toggleFavorite);
         finished=panelButton(controls2,"○ مكتملة",this::toggleCompleted);
-        panelButton(controls2,"إعادة 10ث",()->seekRelative(-10000));
-        panelButton(controls2,"تقديم 10ث",()->seekRelative(10000));
+        seekBackButton=panelButton(controls2,"إعادة 10ث",()->seekRelative(-10000));
+        seekForwardButton=panelButton(controls2,"تقديم 10ث",()->seekRelative(10000));
         settingsPanel.addView(controls2,Ui.top(this,-1,40,5));
         FrameLayout.LayoutParams menuPos=new FrameLayout.LayoutParams(-1,-2,Gravity.BOTTOM);
         menuPos.leftMargin=dp(4);menuPos.rightMargin=dp(4);
@@ -297,6 +297,8 @@ public class PlayerActivity extends AppCompatActivity {
             ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type));
         if(speedButton!=null)speedButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
         if(pipButton!=null)pipButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
+        if(seekBackButton!=null)seekBackButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
+        if(seekForwardButton!=null)seekForwardButton.setVisibility(nativePlayer?View.VISIBLE:View.GONE);
         if(seekBar!=null && seekBar.getTag() instanceof View)
             ((View)seekBar.getTag()).setVisibility(nativePlayer?View.VISIBLE:View.GONE);
         if(playPauseButton!=null){
@@ -309,6 +311,8 @@ public class PlayerActivity extends AppCompatActivity {
         heading.setText(current.lesson.title);
         info.setText(current.teacher.name+"  •  "+current.chapter.title+"  •  دفعة "+current.teacher.batch);
         setToolsVisible(false);
+        if(seekBar!=null)seekBar.setProgress(0);
+        if(clock!=null)clock.setText("00:00 / 00:00");
         refreshActions();destroyPlayback();
         updateAvailableControls();
         if(!current.lesson.available()){setStatus("هذه المحاضرة غير متاحة للتشغيل حالياً");showUnavailable();return;}
@@ -632,6 +636,9 @@ public class PlayerActivity extends AppCompatActivity {
         if(details!=null)details.setVisibility(expanded?View.GONE:View.VISIBLE);
         if(playerChrome!=null)playerChrome.setVisibility(pipActive?View.GONE:View.VISIBLE);
         if(pipActive)setToolsVisible(false);
+        if(seekBar!=null && seekBar.getTag() instanceof View)
+            ((View)seekBar.getTag()).setVisibility(expanded && pipActive?View.GONE:
+                ("hls".equals(current.lesson.type)||"mp4".equals(current.lesson.type))?View.VISIBLE:View.GONE);
         LinearLayout.LayoutParams shell=new LinearLayout.LayoutParams(-1,expanded?0:-2,expanded?1f:0f);
         shell.topMargin=expanded?0:dp(10);
         playerShell.setLayoutParams(shell);
