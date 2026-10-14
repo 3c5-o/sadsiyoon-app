@@ -22,6 +22,9 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.ViewCompat;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private int selectedTeacher=1,selectedChapter=0;
     private String examBranch="scientific",examSubject="الرياضيات",examRound="الدور الأول";
     private LinearLayout content;
+    private ScrollView pageScroller;
+    private final ArrayDeque<String> navigationHistory=new ArrayDeque<>();
+    private final Map<String,Integer> scrollPositions=new HashMap<>();
+    private String scrollKey(){return page+":"+selectedBatch+":"+selectedTeacher+":"+selectedChapter+":"+examBranch+":"+examSubject+":"+examRound;}
+    private void rememberScroll(){if(pageScroller!=null)scrollPositions.put(scrollKey(),pageScroller.getScrollY());}
     private int questionIndex=0,quizScore=0;
     private final String[] questions={
         "ما ناتج ٢ + ٣ × ٤؟","أيّ مما يأتي اسم إشارة؟",
@@ -49,11 +57,41 @@ public class MainActivity extends AppCompatActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
-        prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);Catalog.initialize(this);render();
+        prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);
+        if(saved!=null){
+            page=saved.getString("page","home");
+            selectedBatch=saved.getString("batch","2026");
+            selectedTeacher=saved.getInt("teacher",1);
+            selectedChapter=saved.getInt("chapter",0);
+            subjectFilter=saved.getString("subjectFilter","");
+            libraryFilter=saved.getString("libraryFilter","fav");
+            examBranch=saved.getString("examBranch","scientific");
+            examSubject=saved.getString("examSubject","الرياضيات");
+            examRound=saved.getString("examRound","الدور الأول");
+            ArrayList<String> history=saved.getStringArrayList("navHistory");
+            if(history!=null)for(String oldPage:history)navigationHistory.addLast(oldPage);
+        }
+        Catalog.initialize(this);render();
     }
     private int d(int n){return Ui.dp(this,n);}
     private void space(LinearLayout a,int height){a.addView(Ui.gap(this,height));}
-    private void show(String s){page=s;render();}
+    private void show(String next){
+        if(next==null||next.equals(page))return;
+        rememberScroll();
+        navigationHistory.addLast(page);
+        if(navigationHistory.size()>30)navigationHistory.removeFirst();
+        page=next;render();
+    }
+    @Override protected void onSaveInstanceState(Bundle state){
+        rememberScroll();
+        state.putString("page",page);state.putString("batch",selectedBatch);
+        state.putInt("teacher",selectedTeacher);state.putInt("chapter",selectedChapter);
+        state.putString("subjectFilter",subjectFilter);state.putString("libraryFilter",libraryFilter);
+        state.putString("examBranch",examBranch);state.putString("examSubject",examSubject);
+        state.putString("examRound",examRound);
+        state.putStringArrayList("navHistory",new ArrayList<>(navigationHistory));
+        super.onSaveInstanceState(state);
+    }
     private void addTitle(LinearLayout dest,String s,int size){dest.addView(Ui.txt(this,s,size,Ui.WHITE,true),Ui.top(this,-1,-2,10));}
     private void addMuted(LinearLayout dest,String s){dest.addView(Ui.txt(this,s,13,Ui.MUTED,false),Ui.top(this,-1,-2,5));}
 
@@ -71,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         boolean rootPage=page.equals("home")||page.equals("teachers")||page.equals("library")||page.equals("tests")||page.equals("more");
         root.addView(toolbar(rootPage),Ui.lp(this,-1,65));
         ScrollView scroll=new ScrollView(this);
+        pageScroller=scroll;
         scroll.setFillViewport(true);scroll.setVerticalScrollBarEnabled(false);
         content=Ui.col(this);Ui.pad(this,content,17,12);scroll.addView(content);
         root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1f));
@@ -83,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
         else if(page.equals("more"))more();else if(page.equals("search"))search();
         else if(page.equals("notice"))notice();
         else if(page.equals("exams"))exams();
+        final int oldY=scrollPositions.getOrDefault(scrollKey(),0);
+        if(oldY>0)scroll.post(()->{if(scroll.getParent()!=null)scroll.scrollTo(0,oldY);});
     }
     private View toolbar(boolean topLevel){
         LinearLayout bar=Ui.row(this);Ui.pad(this,bar,16,8);
@@ -601,7 +642,7 @@ public class MainActivity extends AppCompatActivity {
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
-        addMuted(content,"سادسيون V1.2.7 Beta — نماذج ملازمنا 2025 العلمي والأدبي.");
+        addMuted(content,"سادسيون V1.3.0 Beta — تحسين الاستقرار والتنقل.");
     }
     private void notice(){
         LinearLayout empty=Ui.card(this);empty.addView(Ui.txt(this,"لا توجد إشعارات جديدة",19,Ui.WHITE,true));
@@ -619,9 +660,12 @@ public class MainActivity extends AppCompatActivity {
             }).show();
     }
     private void back(){
-        if(page.equals("chapter"))show("teacher");
-        else if(page.equals("teacher"))show("teachers");
-        else show("home");
+        rememberScroll();
+        if(!navigationHistory.isEmpty())page=navigationHistory.removeLast();
+        else if(page.equals("chapter"))page="teacher";
+        else if(page.equals("teacher"))page="teachers";
+        else page="home";
+        render();
     }
     @Override public void onBackPressed(){
         if(page.equals("home"))new AlertDialog.Builder(this).setTitle("الخروج من سادسيون")
@@ -629,5 +673,10 @@ public class MainActivity extends AppCompatActivity {
             .setPositiveButton("خروج",(d,w)->finish()).show();
         else back();
     }
-    @Override protected void onResume(){super.onResume();if(content!=null&&(page.equals("home")||page.equals("library")||page.equals("chapter")))render();}
+    @Override protected void onResume(){
+        super.onResume();
+        if(content!=null&&(page.equals("home")||page.equals("library")||page.equals("chapter"))){
+            rememberScroll();render();
+        }
+    }
 }

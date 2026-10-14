@@ -18,7 +18,9 @@ public final class Ui {
  public static final int BG=Color.rgb(7,22,33), PANEL=Color.rgb(16,37,48), PANEL2=Color.rgb(25,56,65);
  public static final int MINT=Color.rgb(85,230,191), GOLD=Color.rgb(217,182,108);
  public static final int WHITE=Color.rgb(242,249,246), MUTED=Color.rgb(160,185,189), RED=Color.rgb(255,160,155);
- private static final LruCache<String,Bitmap> imageCache=new LruCache<>(18);
+ private static final LruCache<String,Bitmap> imageCache=new LruCache<String,Bitmap>(8*1024*1024){
+    @Override protected int sizeOf(String key,Bitmap value){return value==null?0:value.getByteCount();}
+ };
  private Ui(){}
  public static int dp(Context c,float x){return Math.round(c.getResources().getDisplayMetrics().density*x);}
  public static GradientDrawable round(Context c,int bg,int r){

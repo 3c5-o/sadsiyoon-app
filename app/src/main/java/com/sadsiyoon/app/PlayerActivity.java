@@ -255,11 +255,11 @@ public class PlayerActivity extends AppCompatActivity {
             @Override public void onPageFinished(WebView view,String loaded){
                 // A loaded iframe is NOT proof that a playable video exists.
                 setStatus(current.lesson.access.equals("premium")?
-                    "المشغّل مفتوح. قد يطلب مزود الفيديو اشتراكاً؛ تحكّم بالتشغيل من داخل الفيديو.":
-                    "المشغّل مفتوح؛ استخدم أدوات التشغيل الداخلية للفيديو.");
+                    "تم تحميل صفحة المشغّل، لكن تشغيل الفيديو لم يتأكد وقد يحتاج Premium.":
+                    "تم تحميل صفحة المشغّل، لا يمكن تأكيد التشغيل حتى يبدأ الفيديو فعلياً.");
             }
             @Override public void onReceivedError(WebView view,android.webkit.WebResourceRequest request,android.webkit.WebResourceError error){
-                if(request.isForMainFrame())setStatus("تعذر عرض الفيديو. تحقق من اتصال الإنترنت.");
+                if(request.isForMainFrame())setStatus("تعذر تحميل صفحة المشغّل. تحقق من الإنترنت أو أعد المحاولة.");
             }
         });
         videoBox.addView(web,new FrameLayout.LayoutParams(-1,-1));
@@ -331,7 +331,7 @@ public class PlayerActivity extends AppCompatActivity {
     private void toggleOrientation(){
         landscape=!landscape;
         setRequestedOrientation(landscape?ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        updateOrientation();
+        // Android will call onConfigurationChanged when dimensions actually update.
     }
     private void enterPip(){
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.O||player==null){

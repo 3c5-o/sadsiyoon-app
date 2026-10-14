@@ -1,3 +1,11 @@
+# V1.3.0 Beta — Phase 1 stability
+
+- Implemented navigation history: Waziriat back button returns to entry page, with state restoration on rotation and saved per-page scroll.
+- Isolated parsing errors per JSON file, so one bad file does not halt later teachers.
+- Corrected embedded player messaging; improved reader HTTP/network errors; deferred orientation UI changes to Android configuration callback.
+- Changed teacher portrait LRU cache limit from entry count to 8 MiB.
+- Stable release signing is a separate, secure setup: NEVER commit signing keys or claim the automatically debug-signed artifact upgrades previously installed versions in place.
+
 # Sadsiyoon 1.2.7 Beta — 2025 Mlazemna exam samples
 
 Four real, source-verified 2025 first-round exams: Mathematics and Arabic for sixth scientific and literary.

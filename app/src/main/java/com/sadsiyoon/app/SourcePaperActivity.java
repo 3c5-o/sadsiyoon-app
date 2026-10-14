@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceResponse;
+import android.widget.Toast;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -67,6 +70,18 @@ public final class SourcePaperActivity extends Activity {
         settings.setAllowContentAccess(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         browser.setWebViewClient(new WebViewClient(){
+            @Override public void onReceivedError(WebView view,WebResourceRequest req,WebResourceError err){
+                if(req.isForMainFrame()){
+                    progress.setVisibility(View.GONE);
+                    Toast.makeText(SourcePaperActivity.this,"تعذّر فتح المصدر؛ جرّب فتحه بالمتصفح",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override public void onReceivedHttpError(WebView view,WebResourceRequest req,WebResourceResponse response){
+                if(req.isForMainFrame()&&response.getStatusCode()>=400){
+                    progress.setVisibility(View.GONE);
+                    Toast.makeText(SourcePaperActivity.this,"الموقع يعرض خطأ "+response.getStatusCode()+"؛ استخدم المتصفح",Toast.LENGTH_LONG).show();
+                }
+            }
             @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){
                 if(request.isForMainFrame()&&!allowed(request.getUrl())){
                     outside(request.getUrl());return true;

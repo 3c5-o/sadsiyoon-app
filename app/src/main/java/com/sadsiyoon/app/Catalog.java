@@ -101,6 +101,7 @@ public final class Catalog {
             if(filenames!=null){
                 Arrays.sort(filenames);
                 for(String filename:filenames){
+                    try{
                     if(!filename.endsWith(".json")||filename.length()<2)continue;
                     int number;
                     try{number=Integer.parseInt(filename.substring(0,2));}catch(Exception ignored){continue;}
@@ -142,9 +143,12 @@ public final class Catalog {
                             if(!duplicated)chapter.lessons.add(new Lesson(label,url));
                         }
                     }
+                    }catch(Exception fileError){
+                        android.util.Log.e("Sadsiyoon","Skipping invalid 2026 catalog "+filename,fileError);
+                    }
                 }
             }
-        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load bundled catalog",e);}
+        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot list bundled catalog files",e);}
         // Stable ordering: keep 2026 IDs 0..18 and Haider 2027 ID 19.
         // Import subsequent 2027 teachers by lexicographic asset filename.
         try{
@@ -152,6 +156,7 @@ public final class Catalog {
             if(batchFiles!=null){
                 Arrays.sort(batchFiles);
                 for(String name:batchFiles){
+                    try{
                     if(!name.endsWith(".json"))continue;
                     InputStream stream=context.getAssets().open("catalog_2027/"+name);
                     ByteArrayOutputStream buffer=new ByteArrayOutputStream();
@@ -184,9 +189,12 @@ public final class Catalog {
                         teacher.chapters.add(chapter);
                     }
                     out.add(teacher);
+                    }catch(Exception fileError){
+                        android.util.Log.e("Sadsiyoon","Skipping invalid 2027 catalog "+name,fileError);
+                    }
                 }
             }
-        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot load 2027 course catalogs",e);}
+        }catch(Exception e){android.util.Log.e("Sadsiyoon","Cannot list 2027 course catalogs",e);}
         teachers=Collections.unmodifiableList(out);
     }
     public static List<Teacher> teachers(Context c){initialize(c);return teachers;}
