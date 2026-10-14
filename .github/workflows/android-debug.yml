@@ -32,6 +32,14 @@ jobs:
         run: python3 scripts/audit_sources.py
       - name: Build debug APK
         run: gradle --no-daemon :app:assembleDebug
+      - name: Verify safe standalone preview application ID
+        shell: bash
+        run: |
+          AAPT=$(find /usr/local/lib/android/sdk/build-tools -type f -name aapt | sort -V | tail -n 1)
+          test -n "$AAPT"
+          BADGING=$("$AAPT" dump badging app/build/outputs/apk/debug/app-debug.apk | head -n 1)
+          echo "$BADGING"
+          echo "$BADGING" | grep "name='com.sadsiyoon.app.preview'"
       - uses: actions/upload-artifact@v4
         with:
           name: sadsiyoon-debug-apk

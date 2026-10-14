@@ -1,3 +1,10 @@
+# V1.4.1 Beta — safe standalone preview APK
+
+- Debug applicationId now uses `com.sadsiyoon.app.preview`, with display name `سادسيون تجريبي`, so it can be installed alongside the user's existing Sadsiyoon APK without uninstalling it or risking its local progress.
+- The manually signed Release applicationId stays `com.sadsiyoon.app` and requires private signing secrets.
+- Progress data in Preview is isolated; release/legacy data does not automatically transfer. If the installed version supports backup export, use the JSON export/import workflow explicitly.
+- GitHub Actions verifies the debug APK package name before publishing it.
+
 # V1.4.0 Beta — final phase: backups and secure release preparation
 
 - Export/import local favorites, notes, completed lesson flags and positions as versioned JSON using the Android Storage Access Framework, with strict type/size validation and user-chosen destinations.
