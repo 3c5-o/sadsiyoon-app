@@ -1,9 +1,9 @@
 <resources>
-  <color name="bg">#08131C</color>
-  <color name="panel">#112330</color>
-  <color name="panel_high">#1B3540</color>
-  <color name="mint">#55E6BF</color>
-  <color name="white">#F2FCF9</color>
-  <color name="muted">#A0B7BB</color>
-  <color name="danger">#FFB6B3</color>
+  <color name="bg">#0D1627</color>
+  <color name="panel">#17263D</color>
+  <color name="panel_high">#233753</color>
+  <color name="mint">#20C7B4</color>
+  <color name="white">#F5F8FF</color>
+  <color name="muted">#A4B6D2</color>
+  <color name="danger">#FF9CA5</color>
 </resources>

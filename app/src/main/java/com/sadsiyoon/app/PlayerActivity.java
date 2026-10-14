@@ -61,6 +61,7 @@ public class PlayerActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getWindow().getDecorView().setSystemUiVisibility(0);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         prefs=getSharedPreferences("sadsiyoon_local_v1",MODE_PRIVATE);
         int ti=getIntent().getIntExtra("ti",1),ci=getIntent().getIntExtra("ci",0),li=getIntent().getIntExtra("li",0);
         current=Catalog.ref(this,ti,ci,li);
@@ -98,47 +99,49 @@ public class PlayerActivity extends AppCompatActivity {
         LinearLayout labels=Ui.col(this);
         labels.setGravity(Gravity.CENTER_VERTICAL);
         labels.setPadding(dp(12),0,dp(7),0);
-        TextView brand=Ui.txt(this,"سادسيون",18,Ui.GOLD,true);
+        TextView brand=Ui.txt(this,"مشغل سادسيون",18,Ui.WHITE,true);
         brand.setSingleLine(true);brand.setEllipsize(TextUtils.TruncateAt.END);
         labels.addView(brand);
-        TextView subtitle=Ui.txt(this,"محاضرات دفعة "+current.teacher.batch,11,Ui.MUTED,false);
+        TextView subtitle=Ui.txt(this,"SADESION  •  دفعة "+current.teacher.batch,11,Ui.MINT,false);
         subtitle.setSingleLine(true);subtitle.setEllipsize(TextUtils.TruncateAt.END);
         labels.addView(subtitle);
         topbar.addView(labels,new LinearLayout.LayoutParams(0,dp(44),1f));
         root.addView(topbar,Ui.lp(this,-1,48));
 
-        heading=Ui.txt(this,"",20,Ui.WHITE,true);
-        heading.setSingleLine(true);heading.setEllipsize(TextUtils.TruncateAt.END);
-        heading.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
-        root.addView(heading,Ui.top(this,-1,34,8));
-        info=Ui.txt(this,"",12,Ui.MINT,false);
-        info.setSingleLine(true);info.setEllipsize(TextUtils.TruncateAt.END);
-        root.addView(info,Ui.top(this,-1,28,3));
-
         playerShell=Ui.col(this);
-        playerShell.setBackground(Ui.round(this,Ui.PANEL,17));
+        playerShell.setBackground(Ui.stroke(this,0xff142A48,20,0xff315481));
         playerShell.setClipToOutline(true);
         videoBox=new FrameLayout(this);
         videoBox.setBackgroundColor(Color.BLACK);
         playerShell.addView(videoBox,new LinearLayout.LayoutParams(-1,videoHeight()));
         actions=Ui.col(this);
-        Ui.pad(this,actions,5,7);
+        Ui.pad(this,actions,7,9);
+        TextView controlsCaption=Ui.txt(this,"التحكم بالمحاضرة",12,Ui.MINT,true);
+        actions.addView(controlsCaption,Ui.top(this,-1,24,1));
 
         LinearLayout navigation=Ui.row(this);
-        prev=addAction(navigation,"السابق",false,()->step(-1));
-        next=addAction(navigation,"التالي",true,()->step(1));
+        prev=addAction(navigation,"السابق  ◀",false,()->step(-1));
+        next=addAction(navigation,"التالي  ▶",true,()->step(1));
         favorite=addAction(navigation,"☆ حفظ",false,this::toggleFavorite);
         finished=addAction(navigation,"○ إكمال",false,this::toggleCompleted);
         actions.addView(navigation);
 
         secondRow=Ui.row(this);
-        fullscreenButton=addAction(secondRow,"تكبير",false,this::toggleOrientation);
+        fullscreenButton=addAction(secondRow,"ملء الشاشة",false,this::toggleOrientation);
         speedButton=addAction(secondRow,"السرعة 1×",false,this::nextSpeed);
         pipButton=addAction(secondRow,"نافذة عائمة",false,this::enterPip);
-        addAction(secondRow,"إعادة المحاولة",false,this::load);
+        addAction(secondRow,"إعادة",false,this::load);
         actions.addView(secondRow,Ui.top(this,-1,39,5));
         playerShell.addView(actions);
-        root.addView(playerShell,Ui.top(this,-1,-2,10));
+        root.addView(playerShell,Ui.top(this,-1,-2,9));
+
+        heading=Ui.txt(this,"",20,Ui.WHITE,true);
+        heading.setSingleLine(true);heading.setEllipsize(TextUtils.TruncateAt.END);
+        heading.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+        root.addView(heading,Ui.top(this,-1,33,12));
+        info=Ui.txt(this,"",12,Ui.MINT,false);
+        info.setSingleLine(true);info.setEllipsize(TextUtils.TruncateAt.END);
+        root.addView(info,Ui.top(this,-1,24,3));
 
         details=Ui.col(this);
         status=Ui.txt(this,"",12,Ui.MUTED,false);
@@ -148,7 +151,7 @@ public class PlayerActivity extends AppCompatActivity {
         addAction(tabs,"المحاضرات",true,()->selectTab("lessons"));
         addAction(tabs,"الملاحظات",false,()->selectTab("notes"));
         addAction(tabs,"الملفات",false,()->selectTab("files"));
-        details.addView(tabs,Ui.top(this,-1,40,13));
+        details.addView(tabs,Ui.top(this,-1,40,10));
         ScrollView listScroll=new ScrollView(this);
         listScroll.setFillViewport(true);
         listScroll.setVerticalScrollBarEnabled(false);
@@ -351,7 +354,7 @@ public class PlayerActivity extends AppCompatActivity {
                 final Catalog.Ref chosen=ref;
                 TextView v=Ui.txt(this,(i+1)+"  •  "+ref.lesson.title,13,
                     i==current.li?Ui.MINT:(ref.lesson.available()?Ui.WHITE:Ui.MUTED),i==current.li);
-                Ui.pad(this,v,12,13);v.setBackground(Ui.round(this,i==current.li?0xff15483c:Ui.PANEL,11));
+                Ui.pad(this,v,12,13);v.setBackground(Ui.round(this,i==current.li?0xff224A77:Ui.PANEL,11));
                 tabContent.addView(v,Ui.top(this,-1,-2,6));
                 v.setOnClickListener(w->{
                     if(!chosen.lesson.available()){Toast.makeText(this,"هذه المحاضرة غير متاحة حالياً",Toast.LENGTH_SHORT).show();return;}
@@ -395,7 +398,7 @@ public class PlayerActivity extends AppCompatActivity {
         playerShell.setLayoutParams(shell);
         LinearLayout.LayoutParams video=new LinearLayout.LayoutParams(-1,expanded?0:videoHeight(),expanded?1f:0f);
         videoBox.setLayoutParams(video);
-        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"تكبير");
+        if(fullscreenButton!=null)fullscreenButton.setText(wide?"تصغير":"ملء الشاشة");
         ViewCompat.requestApplyInsets(root);
     }
     @Override public void onBackPressed(){

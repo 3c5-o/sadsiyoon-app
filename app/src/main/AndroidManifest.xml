@@ -10,9 +10,9 @@
     <activity android:name=".PlayerActivity" android:exported="false"
       android:supportsPictureInPicture="true"
       android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"/>
-    <activity android:name=".SourcePaperActivity" android:exported="false"/>
-    <activity android:name=".MainActivity" android:exported="false"/>
-    <activity android:name=".IntroActivity" android:exported="true">
+    <activity android:name=".SourcePaperActivity" android:exported="false" android:screenOrientation="portrait"/>
+    <activity android:name=".MainActivity" android:exported="false" android:screenOrientation="portrait"/>
+    <activity android:name=".IntroActivity" android:exported="true" android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
