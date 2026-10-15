@@ -45,7 +45,7 @@ jobs:
           echo "$BADGING"
           echo "$BADGING" | grep "name='com.sadsiyoon.admin.preview2'"
           echo "$BADGING" | grep "versionCode='2'"
-          echo "$BADGING" | grep "sdkVersion:'26'"
+          "$AAPT" dump badging admin/build/outputs/apk/debug/admin-debug.apk | grep "sdkVersion:'26'"
       - name: Verify both preview APK signatures and archive integrity
         shell: bash
         run: |
