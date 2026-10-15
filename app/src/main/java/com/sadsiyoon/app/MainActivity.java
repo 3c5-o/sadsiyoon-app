@@ -267,6 +267,17 @@ public class MainActivity extends AppCompatActivity {
             quickParams());
         content.addView(secondRow,Ui.top(this,-1,-2,7));
 
+        sectionHeader("محتوى سادسيون المنشور","فتح",()->startActivity(
+            new Intent(this,RemoteCatalogActivity.class)));
+        LinearLayout online=Ui.card(this);
+        online.setBackground(Ui.gradient(this,0xff164C61,Ui.PANEL,17));
+        online.addView(Ui.txt(this,"المحاضرات والملازم الجديدة",18,Ui.WHITE,true));
+        addMuted(online,"تحديثات الإدارة تظهر هنا عند الاتصال، وتبقى آخر نسخة محفوظة متاحة دون إنترنت.");
+        TextView openOnline=Ui.btn(this,"استعراض المحتوى المنشور ←",true);
+        online.addView(openOnline,Ui.top(this,-1,45,12));
+        openOnline.setOnClickListener(v->startActivity(new Intent(this,RemoteCatalogActivity.class)));
+        content.addView(online,margins(-1,-2,9));
+
         sectionHeader("اختر دفعتك","المدرسون",()->show("teachers"));
         LinearLayout cohortRow=Ui.row(this);
         String[] batches={"2026","2027"};
