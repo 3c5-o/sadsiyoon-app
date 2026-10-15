@@ -8,6 +8,9 @@
     android:allowBackup="false" android:supportsRtl="true"
     android:usesCleartextTraffic="false" android:fullBackupContent="false"
     android:dataExtractionRules="@xml/data_extraction_rules">
+    <activity android:name=".RemoteCatalogActivity" android:exported="false" android:screenOrientation="portrait"/>
+    <activity android:name=".RemotePlayerActivity" android:exported="false"
+      android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"/>
     <activity android:name=".PlayerActivity" android:exported="false"
       android:supportsPictureInPicture="true"
       android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"/>
