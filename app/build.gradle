@@ -9,6 +9,12 @@ android {
         versionCode 19
         versionName '1.6.1-beta'
     }
+    buildFeatures { buildConfig true }
+    // Public project configuration only; Row Level Security restricts edits.
+    defaultConfig {
+        buildConfigField 'String', 'SUPABASE_URL', '"https://wvelvyxxfyvzgawzrawg.supabase.co"'
+        buildConfigField 'String', 'SUPABASE_PUBLISHABLE_KEY', '"sb_publishable_QuU0Spr5NS04aGFy7YWajQ_5Wu22UOV"'
+    }
     // Signing material must be injected by private environment variables.
     signingConfigs {
         if (System.getenv('SADSIYOON_KEYSTORE_FILE')) {
