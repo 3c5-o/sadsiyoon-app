@@ -34,8 +34,16 @@ jobs:
         run: python3 scripts/audit_sources.py
       - name: Verify Android privacy and component security
         run: python3 scripts/verify_release_security.py
-      - name: Run student unit tests and build debug APK
-        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug
+      - name: Run student tests and build student plus administration APKs
+        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug :admin:assembleDebug
+      - name: Verify administration preview package ID
+        shell: bash
+        run: |
+          AAPT=$(find /usr/local/lib/android/sdk/build-tools -type f -name aapt | sort -V | tail -n 1)
+          test -n "$AAPT"
+          BADGING=$("$AAPT" dump badging admin/build/outputs/apk/debug/admin-debug.apk | head -n 1)
+          echo "$BADGING"
+          echo "$BADGING" | grep "name='com.sadsiyoon.admin.preview'"
       - name: Verify safe standalone preview application ID
         shell: bash
         run: |
@@ -48,6 +56,14 @@ jobs:
         with:
           name: sadsiyoon-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload separate administration preview APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: sadesion-admin-debug-apk
+          path: admin/build/outputs/apk/debug/admin-debug.apk
           if-no-files-found: error
           retention-days: 30
 

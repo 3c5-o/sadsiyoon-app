@@ -6,8 +6,14 @@ android {
         applicationId 'com.sadsiyoon.app'
         minSdk 26
         targetSdk 35
-        versionCode 19
-        versionName '1.6.1-beta'
+        versionCode 20
+        versionName '1.7.0-beta'
+    }
+    buildFeatures { buildConfig true }
+    // Public project configuration only; Row Level Security restricts edits.
+    defaultConfig {
+        buildConfigField 'String', 'SUPABASE_URL', '"https://wvelvyxxfyvzgawzrawg.supabase.co"'
+        buildConfigField 'String', 'SUPABASE_PUBLISHABLE_KEY', '"sb_publishable_QuU0Spr5NS04aGFy7YWajQ_5Wu22UOV"'
     }
     // Signing material must be injected by private environment variables.
     signingConfigs {
