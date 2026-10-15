@@ -63,7 +63,7 @@ def build_indexes(files: list[Path]) -> tuple[bytes, bytes, int]:
         if doc is None:
             continue
         rel = path.relative_to(ROOT).as_posix()
-        if "/catalog/" not in rel and "/catalog_2027/" not in rel and "/research/edison/2026/" not in rel:
+        if not (rel.startswith("research/edison/2026/") or "/assets/catalog/" in rel or "/assets/catalog_2027/" in rel):
             continue
         chapters = chapters_of(doc)
         total = 0
