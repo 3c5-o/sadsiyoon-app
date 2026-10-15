@@ -41,23 +41,67 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.13'
-      - name: Check source indexes
+      - name: Check source indexes and Android security configuration
         run: |
           python3 scripts/verify_catalogs.py
           python3 scripts/audit_sources.py
+          python3 scripts/verify_release_security.py
       - name: Test student logic and build signed Release APK
         run: gradle --no-daemon :app:testDebugUnitTest :app:assembleRelease
-      - name: Verify Android signing
+      - name: Verify Android signing, production identity, and certificate
         shell: bash
+        env:
+          # Public certificate digest, set as a GitHub Actions *variable*
+          # after checking the first approved release; never a private key.
+          EXPECTED_SIGNER_SHA256: ${{ vars.SADSIYOON_EXPECTED_CERT_SHA256 }}
         run: |
+          set -euo pipefail
           APK="$GITHUB_WORKSPACE/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
           APKSIGNER=$(find /usr/local/lib/android/sdk/build-tools -type f -name apksigner | sort -V | tail -n 1)
-          test -n "$APKSIGNER"
-          "$APKSIGNER" verify --verbose "$APK"
+          AAPT=$(find /usr/local/lib/android/sdk/build-tools -type f -name aapt | sort -V | tail -n 1)
+          test -n "$APKSIGNER" && test -n "$AAPT"
+          REPORT="$GITHUB_WORKSPACE/app/build/outputs/apk/release/signing-report.txt"
+          "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 26 "$APK" > "$REPORT"
+          cat "$REPORT"
+          grep -Fq 'Verified using v2 scheme (APK Signature Scheme v2): true' "$REPORT"
+          CERT_SHA256=$(sed -n 's/^Signer #1 certificate SHA-256 digest: //p' "$REPORT" | head -n 1)
+          test -n "$CERT_SHA256"
+          CERT_SHA256="${CERT_SHA256,,}"
+          EXPECTED="${EXPECTED_SIGNER_SHA256,,}"
+          EXPECTED="${EXPECTED//:/}"
+          if [ -n "$EXPECTED" ] && [ "$CERT_SHA256" != "$EXPECTED" ]; then
+            echo "Signing certificate changed unexpectedly. Refusing release."
+            exit 1
+          fi
+          if [ -z "$EXPECTED" ]; then
+            echo "NOTICE: Pin SADSIYOON_EXPECTED_CERT_SHA256 in GitHub Actions variables after the first approved certificate."
+          fi
+          PACKAGE=$("$AAPT" dump badging "$APK" | grep '^package:')
+          echo "$PACKAGE"
+          echo "$PACKAGE" | grep -Fq "name='com.sadsiyoon.app' "
+          if "$AAPT" dump badging "$APK" | grep -q '^application-debuggable'; then
+            echo "Refusing a debuggable production APK"
+            exit 1
+          fi
+          (cd "$(dirname "$APK")" && sha256sum "$(basename "$APK")" > app-release.apk.sha256)
+          {
+            echo "### SADESION signed release"
+            echo "Package: com.sadsiyoon.app"
+            echo "Certificate SHA-256: $CERT_SHA256"
+            echo "APK SHA-256: $(awk '{print $1}' "$(dirname "$APK")/app-release.apk.sha256")"
+            echo "Play Protect verdict: NOT CHECKED by this CI job"
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: sadsiyoon-stable-signed-release
-          path: app/build/outputs/apk/release/app-release.apk
+          path: |
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/app-release.apk.sha256
+            app/build/outputs/apk/release/signing-report.txt
           if-no-files-found: error
           retention-days: 90
+      - name: Delete temporary signing key
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/sadsiyoon-release.jks"
