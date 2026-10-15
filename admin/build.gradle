@@ -1,0 +1,24 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.sadsiyoon.admin'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'com.sadsiyoon.admin'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0-beta'
+        buildConfigField 'String', 'SUPABASE_URL', '"https://wvelvyxxfyvzgawzrawg.supabase.co"'
+        buildConfigField 'String', 'SUPABASE_PUBLISHABLE_KEY', '"sb_publishable_QuU0Spr5NS04aGFy7YWajQ_5Wu22UOV"'
+    }
+    buildFeatures { buildConfig true }
+    buildTypes {
+        debug { applicationIdSuffix '.preview'; versionNameSuffix '-preview' }
+        release { minifyEnabled false }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.core:core:1.16.0'
+}
