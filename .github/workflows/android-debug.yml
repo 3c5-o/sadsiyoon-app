@@ -81,6 +81,17 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Export all teacher catalog indexes
+        run: python3 scripts/export_teacher_catalogs.py
+
+      - name: Upload complete teacher catalog archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: sadesion-all-teacher-catalogs
+          path: dist/sadesion-all-teacher-catalogs.zip
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Upload catalog health reports
         if: always()
         uses: actions/upload-artifact@v4
