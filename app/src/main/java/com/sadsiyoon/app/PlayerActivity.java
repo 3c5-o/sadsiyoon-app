@@ -336,7 +336,7 @@ public class PlayerActivity extends AppCompatActivity {
         if(timeline!=null)timeline.setVisibility(unlocked&&isNative()&&!overlayMenu&&playbackErrorView==null?View.VISIBLE:View.GONE);
         if(settingsPanel!=null)settingsPanel.setVisibility(overlayMenu?View.VISIBLE:View.GONE);
         if(unlockButton!=null)unlockButton.setVisibility(active&&controlsLocked?View.VISIBLE:View.GONE);
-        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive?View.VISIBLE:View.GONE);
+        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive&&playbackErrorView==null?View.VISIBLE:View.GONE);
     }
     private void showChrome(){
         chromeVisible=true;
