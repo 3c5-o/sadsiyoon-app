@@ -444,10 +444,26 @@ public class MainActivity extends AppCompatActivity {
         line.addView(text,new LinearLayout.LayoutParams(0,-2,1));
         TextView favorite=Ui.txt(this,fav?"★":"☆",24,fav?Ui.GOLD:Ui.MUTED,true);favorite.setGravity(Gravity.CENTER);
         line.addView(favorite,Ui.lp(this,30,44));
-        favorite.setOnClickListener(v->{prefs.edit().putBoolean("fav_"+id,!prefs.getBoolean("fav_"+id,false)).apply();favorite.setText(prefs.getBoolean("fav_"+id,false)?"★":"☆");favorite.setTextColor(prefs.getBoolean("fav_"+id,false)?Ui.GOLD:Ui.MUTED);});
+        favorite.setContentDescription(fav?"إزالة من المفضلة":"إضافة إلى المفضلة");
+        favorite.setOnClickListener(v->{
+            boolean value=!prefs.getBoolean("fav_"+id,false);
+            prefs.edit().putBoolean("fav_"+id,value).apply();
+            favorite.setText(value?"★":"☆");
+            favorite.setTextColor(value?Ui.GOLD:Ui.MUTED);
+            favorite.setContentDescription(value?"إزالة من المفضلة":"إضافة إلى المفضلة");
+            if(page.equals("library")){rememberScroll();render();}
+        });
         TextView finished=Ui.txt(this,done?"✓":"○",21,done?Ui.MINT:Ui.MUTED,true);finished.setGravity(Gravity.CENTER);
         line.addView(finished,Ui.lp(this,31,44));
-        finished.setOnClickListener(v->{prefs.edit().putBoolean("done_"+id,!prefs.getBoolean("done_"+id,false)).apply();boolean b=prefs.getBoolean("done_"+id,false);finished.setText(b?"✓":"○");finished.setTextColor(b?Ui.MINT:Ui.MUTED);});
+        finished.setContentDescription(done?"إلغاء اكتمال المحاضرة":"تحديد المحاضرة كمكتملة");
+        finished.setOnClickListener(v->{
+            boolean value=!prefs.getBoolean("done_"+id,false);
+            prefs.edit().putBoolean("done_"+id,value).apply();
+            finished.setText(value?"✓":"○");
+            finished.setTextColor(value?Ui.MINT:Ui.MUTED);
+            finished.setContentDescription(value?"إلغاء اكتمال المحاضرة":"تحديد المحاضرة كمكتملة");
+            if(page.equals("library")){rememberScroll();render();}
+        });
         host.addView(line,margins(-1,-2,8));
         line.setOnClickListener(v->openLesson(ref));
     }
@@ -478,8 +494,23 @@ public class MainActivity extends AppCompatActivity {
             addMuted(empty,"احفظ محاضراتك بالمفضلة أو علّمها كمكتملة حتى تظهر هنا.");
             content.addView(empty,margins(-1,-2,18));
         }
-        for(int i=0;i<Math.min(100,selected.size());i++)lessonRow(content,selected.get(i));
-        if(selected.size()>100)addMuted(content,"تم عرض أول 100 محاضرة. يمكنك الوصول للبقية عبر صفحات المدرسين.");
+        // Render the first page only. Subsequent pages are appended in place so
+        // a large collection stays usable without losing the student's scroll.
+        LinearLayout items=Ui.col(this);
+        content.addView(items);
+        final int[] shown={Math.min(100,selected.size())};
+        for(int i=0;i<shown[0];i++)lessonRow(items,selected.get(i));
+        if(shown[0]<selected.size()){
+            TextView loadMore=Ui.btn(this,"عرض المزيد ("+(selected.size()-shown[0])+" متبقية)",false);
+            content.addView(loadMore,Ui.top(this,-1,48,12));
+            loadMore.setOnClickListener(v->{
+                int nextLimit=Math.min(shown[0]+100,selected.size());
+                for(int i=shown[0];i<nextLimit;i++)lessonRow(items,selected.get(i));
+                shown[0]=nextLimit;
+                if(shown[0]>=selected.size())loadMore.setVisibility(View.GONE);
+                else loadMore.setText("عرض المزيد ("+(selected.size()-shown[0])+" متبقية)");
+            });
+        }
     }
     private void search(){
         EditText input=new EditText(this);input.setSingleLine(true);
@@ -785,7 +816,8 @@ public class MainActivity extends AppCompatActivity {
             .setNegativeButton("إلغاء",null).setPositiveButton("مسح",(dialog,w)->{
                 SharedPreferences.Editor edit=prefs.edit();
                 for(String key:new HashSet<>(prefs.getAll().keySet()))
-                    if(key.startsWith("done_")||key.startsWith("fav_")||key.startsWith("position_")||key.startsWith("note_"))
+                    if(key.startsWith("done_")||key.startsWith("fav_")||key.startsWith("position_")||key.startsWith("note_")||
+                       key.equals("last_t")||key.equals("last_c")||key.equals("last_l"))
                         edit.remove(key);
                 edit.apply();show("more");
             }).show());
