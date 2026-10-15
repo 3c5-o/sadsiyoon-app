@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView pageScroller;
     private final ArrayDeque<String> navigationHistory=new ArrayDeque<>();
     private final Map<String,Integer> scrollPositions=new HashMap<>();
-    private String scrollKey(){return page+":"+selectedBatch+":"+selectedTeacher+":"+selectedChapter+":"+examBranch+":"+examSubject+":"+examRound;}
+    private String scrollKey(){return page+":"+selectedBatch+":"+selectedTeacher+":"+selectedChapter+":"+
+        examBranch+":"+examSubject+":"+examRound+":"+subjectFilter+":"+libraryFilter+":"+practiceBranch;}
     private void rememberScroll(){if(pageScroller!=null)scrollPositions.put(scrollKey(),pageScroller.getScrollY());}
     private int questionIndex=0,quizScore=0;
     private String practiceBranch="scientific";
@@ -81,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private int d(int n){return Ui.dp(this,n);}
     private void space(LinearLayout a,int height){a.addView(Ui.gap(this,height));}
+    private static boolean isRootPage(String name){
+        return "home".equals(name)||"teachers".equals(name)||"exams".equals(name)||
+            "library".equals(name)||"more".equals(name);
+    }
     private void show(String next){
         if(next==null)return;
         if(next.equals(page)){
@@ -90,8 +95,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         rememberScroll();
-        navigationHistory.addLast(page);
-        if(navigationHistory.size()>30)navigationHistory.removeFirst();
+        // Bottom tab switching is not nested navigation: avoid a long back stack
+        // cycling between Home, Teachers, Library, Exams and Account.
+        if(isRootPage(next))navigationHistory.clear();
+        else {
+            navigationHistory.addLast(page);
+            if(navigationHistory.size()>30)navigationHistory.removeFirst();
+        }
         page=next;render();
     }
     @Override protected void onSaveInstanceState(Bundle state){
@@ -121,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             root.setPadding(bars.left,bars.top,bars.right,bars.bottom);
             return insets;
         });
-        boolean rootPage=page.equals("home")||page.equals("teachers")||page.equals("exams")||page.equals("library")||page.equals("more");
+        boolean rootPage=isRootPage(page);
         root.addView(toolbar(rootPage),Ui.lp(this,-1,65));
         ScrollView scroll=new ScrollView(this);
         pageScroller=scroll;
@@ -183,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
             box.addView(icon,Ui.lp(this,-1,27));
             TextView title=Ui.txt(this,labels[i],11,active?Ui.WHITE:Ui.MUTED,active);
             title.setGravity(Gravity.CENTER);
+            title.setSingleLine(true);
+            title.setAutoSizeTextTypeUniformWithConfiguration(9,11,1,android.util.TypedValue.COMPLEX_UNIT_SP);
             box.addView(title,Ui.lp(this,-1,21));
             if(active)box.setBackground(Ui.round(this,0xff264477,13));
             LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(56),1f);
@@ -476,23 +488,46 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("ti",r.ti);i.putExtra("ci",r.ci);i.putExtra("li",r.li);startActivity(i);
     }
     private void library(){
-        addTitle(content,"مكتبتي",24);addMuted(content,"مفضلاتك والمحاضرات المكتملة ومتابعة المشاهدة");
+        addTitle(content,"مكتبتي",24);
+        addMuted(content,"مفضلاتك، المحاضرات المكتملة، واستكمال المشاهدة المحفوظة على جهازك.");
         LinearLayout filters=Ui.row(this);
-        TextView fav=Ui.btn(this,"المفضلة",libraryFilter.equals("fav"));
-        TextView done=Ui.btn(this,"المكتملة",libraryFilter.equals("done"));
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,d(42),1f);p.leftMargin=d(6);filters.addView(fav,p);
-        filters.addView(done,new LinearLayout.LayoutParams(0,d(42),1f));content.addView(filters,margins(-1,42,13));
-        fav.setOnClickListener(v->{libraryFilter="fav";show("library");});
-        done.setOnClickListener(v->{libraryFilter="done";show("library");});
+        String[] filterIds={"fav","done","continue"};
+        String[] filterNames={"المفضلة","المكتملة","المتابعة"};
+        for(int i=0;i<filterIds.length;i++){
+            final String choice=filterIds[i];
+            TextView button=Ui.btn(this,filterNames[i],libraryFilter.equals(choice));
+            button.setTextSize(12);
+            button.setSingleLine(true);
+            button.setAutoSizeTextTypeUniformWithConfiguration(10,12,1,android.util.TypedValue.COMPLEX_UNIT_SP);
+            button.setContentDescription("عرض "+filterNames[i]);
+            LinearLayout.LayoutParams fp=new LinearLayout.LayoutParams(0,d(45),1f);
+            fp.setMargins(d(2),0,d(2),0);
+            filters.addView(button,fp);
+            button.setOnClickListener(v->{libraryFilter=choice;show("library");});
+        }
+        content.addView(filters,margins(-1,45,13));
         List<Catalog.Ref> selected=new ArrayList<>();
-        String key=libraryFilter.equals("fav")?"fav_":"done_";
-        for(Catalog.Ref ref:Catalog.all(this))if(prefs.getBoolean(key+ref.key(),false))selected.add(ref);
+        for(Catalog.Ref ref:Catalog.all(this)){
+            String id=ref.key();
+            boolean included;
+            if("continue".equals(libraryFilter)){
+                included=ref.lesson.available() && !prefs.getBoolean("done_"+id,false)
+                    && prefs.getLong("position_"+id,0L)>0L;
+            }else{
+                included=prefs.getBoolean(("fav".equals(libraryFilter)?"fav_":"done_")+id,false);
+            }
+            if(included)selected.add(ref);
+        }
         addMuted(content,selected.size()+" محاضرة");
         if(selected.isEmpty()){
             LinearLayout empty=Ui.card(this);
-            empty.addView(Ui.txt(this,"مكتبتك بانتظار أول محاضرة",18,Ui.WHITE,true));
-            addMuted(empty,"احفظ محاضراتك بالمفضلة أو علّمها كمكتملة حتى تظهر هنا.");
+            String message="continue".equals(libraryFilter)?"ابدأ مشاهدة محاضرة MP4 أو HLS، وراح يظهر تقدمها هنا.":
+                "done".equals(libraryFilter)?"علّم أي محاضرة كمكتملة حتى تظهر هنا.":
+                    "احفظ محاضراتك بالمفضلة حتى تظهر هنا.";
+            empty.addView(Ui.txt(this,"لا توجد محاضرات في هذا القسم بعد",18,Ui.WHITE,true));
+            addMuted(empty,message);
             content.addView(empty,margins(-1,-2,18));
+            return;
         }
         // Render the first page only. Subsequent pages are appended in place so
         // a large collection stays usable without losing the student's scroll.
