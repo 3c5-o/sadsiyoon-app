@@ -6,14 +6,20 @@ android {
         applicationId 'com.sadsiyoon.admin'
         minSdk 26
         targetSdk 35
-        versionCode 1
-        versionName '0.1.0-beta'
+        versionCode 2
+        versionName '0.2.0-beta'
         buildConfigField 'String', 'SUPABASE_URL', '"https://wvelvyxxfyvzgawzrawg.supabase.co"'
         buildConfigField 'String', 'SUPABASE_PUBLISHABLE_KEY', '"sb_publishable_QuU0Spr5NS04aGFy7YWajQ_5Wu22UOV"'
     }
     buildFeatures { buildConfig true }
     buildTypes {
-        debug { applicationIdSuffix '.preview'; versionNameSuffix '-preview' }
+        debug {
+            // A fresh debug-only package avoids Android's INSTALL_FAILED_UPDATE_INCOMPATIBLE
+            // when the previous preview used a different ephemeral CI signing certificate.
+            // This does NOT represent the production application's signing identity.
+            applicationIdSuffix '.preview2'
+            versionNameSuffix '-preview'
+        }
         release { minifyEnabled false }
     }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
