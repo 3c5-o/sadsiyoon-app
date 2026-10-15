@@ -43,7 +43,21 @@ jobs:
           test -n "$AAPT"
           BADGING=$("$AAPT" dump badging admin/build/outputs/apk/debug/admin-debug.apk | head -n 1)
           echo "$BADGING"
-          echo "$BADGING" | grep "name='com.sadsiyoon.admin.preview'"
+          echo "$BADGING" | grep "name='com.sadsiyoon.admin.preview2'"
+          echo "$BADGING" | grep "versionCode='2'"
+          "$AAPT" dump badging admin/build/outputs/apk/debug/admin-debug.apk | grep "sdkVersion:'26'"
+      - name: Verify both preview APK signatures and archive integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          APKSIGNER=$(find /usr/local/lib/android/sdk/build-tools -type f -name apksigner | sort -V | tail -n 1)
+          test -n "$APKSIGNER"
+          for APK in admin/build/outputs/apk/debug/admin-debug.apk app/build/outputs/apk/debug/app-debug.apk; do
+            test -s "$APK"
+            "$APKSIGNER" verify --verbose --print-certs --min-sdk-version 26 "$APK"
+            unzip -t "$APK" | tail -n 1
+            sha256sum "$APK"
+          done
       - name: Verify safe standalone preview application ID
         shell: bash
         run: |
