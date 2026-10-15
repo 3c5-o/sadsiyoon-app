@@ -78,6 +78,9 @@ public final class SourcePaperActivity extends Activity {
         settings.setDisplayZoomControls(false);
         settings.setAllowFileAccess(false);
         settings.setAllowContentAccess(false);
+        settings.setSafeBrowsingEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(false);
+        settings.setSupportMultipleWindows(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         browser.setWebViewClient(new WebViewClient(){
             @Override public void onReceivedError(WebView view,WebResourceRequest req,WebResourceError err){
