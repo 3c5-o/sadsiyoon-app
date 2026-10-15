@@ -173,6 +173,7 @@ public final class RemoteCatalogActivity extends AppCompatActivity {
         String id=x.optString("id"),kind=x.optString("kind");
         if("lesson".equals(kind)&&!x.optString("media_url").isEmpty()){
             Intent intent=new Intent(this,RemotePlayerActivity.class);
+            intent.putExtra("id",id);
             intent.putExtra("title",x.optString("title"));
             intent.putExtra("url",x.optString("media_url"));
             intent.putExtra("type",x.optString("media_type"));
