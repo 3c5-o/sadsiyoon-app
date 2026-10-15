@@ -37,28 +37,28 @@ final class ApiClient {
         }
     }
     private Response raw(String method,String path,JSONObject json,String bearer)throws Exception {
-        URL url=new URL(BuildConfig.SUPABASE_URL+path);
-        if(!"https".equalsIgnoreCase(url.getProtocol()))throw new Exception("اتصال غير آمن");
-        HttpURLConnection c=(HttpURLConnection)url.openConnection();
-        try {
-            c.setConnectTimeout(9000);c.setReadTimeout(14000);
-            c.setRequestMethod(method);
-            c.setRequestProperty("apikey",BuildConfig.SUPABASE_PUBLISHABLE_KEY);
-            c.setRequestProperty("Accept","application/json");
-            c.setRequestProperty("Content-Type","application/json");
-            if(bearer!=null&&!bearer.isEmpty())
-                c.setRequestProperty("Authorization","Bearer "+bearer);
-            if(path.startsWith("/rest/v1/") && !"GET".equals(method))
-                c.setRequestProperty("Prefer","return=representation");
-            if(json!=null){
-                c.setDoOutput(true);
-                try(OutputStream out=c.getOutputStream()){
-                    out.write(json.toString().getBytes(StandardCharsets.UTF_8));
-                }
-            }
-            int status=c.getResponseCode();
-            return new Response(status,read(status<400?c.getInputStream():c.getErrorStream()));
-        }finally{c.disconnect();}
+        okhttp3.OkHttpClient client=new okhttp3.OkHttpClient.Builder()
+            .connectTimeout(9,java.util.concurrent.TimeUnit.SECONDS)
+            .readTimeout(14,java.util.concurrent.TimeUnit.SECONDS)
+            .followRedirects(false)
+            .build();
+        okhttp3.Request.Builder req=new okhttp3.Request.Builder()
+            .url(BuildConfig.SUPABASE_URL+path)
+            .header("apikey",BuildConfig.SUPABASE_PUBLISHABLE_KEY)
+            .header("Accept","application/json")
+            .header("Content-Type","application/json");
+        if(bearer!=null&&!bearer.isEmpty())req.header("Authorization","Bearer "+bearer);
+        if(path.startsWith("/rest/v1/") && !"GET".equals(method))
+            req.header("Prefer","return=representation");
+        okhttp3.RequestBody payload=json==null?null:
+            okhttp3.RequestBody.create(json.toString(),
+                okhttp3.MediaType.parse("application/json; charset=utf-8"));
+        req.method(method,payload);
+        try(okhttp3.Response response=client.newCall(req.build()).execute()){
+            String body=response.body()==null?"":response.body().string();
+            if(body.length()>4*1024*1024)throw new Exception("استجابة كبيرة جداً");
+            return new Response(response.code(),body);
+        }
     }
     private static String error(Response r){
         try {
