@@ -2,6 +2,7 @@ package com.sadsiyoon.app;
 
 import android.app.AlertDialog;
 import android.app.PictureInPictureParams;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -519,6 +520,9 @@ public class PlayerActivity extends AppCompatActivity {
         });
         web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);
         web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);
+        web.getSettings().setSafeBrowsingEnabled(true);
+        web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
+        web.getSettings().setSupportMultipleWindows(false);
         web.getSettings().setMediaPlaybackRequiresUserGesture(false);
         web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         web.setWebChromeClient(new WebChromeClient(){
@@ -535,6 +539,16 @@ public class PlayerActivity extends AppCompatActivity {
             @Override public void onHideCustomView(){exitEmbeddedFullScreen();}
         });
         web.setWebViewClient(new WebViewClient(){
+            @Override public boolean shouldOverrideUrlLoading(WebView view,android.webkit.WebResourceRequest request){
+                if(!request.isForMainFrame())return false;
+                Uri next=request.getUrl();
+                if(next==null)return true;
+                // The embedded player remains in its iframe. Top-level links should
+                // not replace the trusted player page with arbitrary third-party UI.
+                if(!"https".equalsIgnoreCase(next.getScheme()))return true;
+                try{startActivity(new Intent(Intent.ACTION_VIEW,next));}catch(Exception ignored){}
+                return true;
+            }
             @Override public void onPageFinished(WebView view,String loaded){
                 // A loaded iframe is NOT proof that a playable video exists.
                 setStatus(current.lesson.access.equals("premium")?
