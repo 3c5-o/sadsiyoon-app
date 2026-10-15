@@ -15,10 +15,10 @@ Scope: **Android student application only**. This audit is based on the `main` r
 
 ### P0 — Release blockers
 
-1. **No Supabase integration in current Gradle dependencies or app source.** No real account authentication, remote course publishing, remote profile sync, or dynamic content-management layer is implemented.
-2. **No SADESION-named Supabase project in the three currently connected Supabase accounts.** A project/account must be chosen explicitly before any database writes. Never reuse unrelated projects.
-3. **External video playback is not end-to-end verified.** Several indexed provider embeds may require provider subscriptions; the UI already warns about this. Real-device tests must verify source access, sound, video, buffering and back navigation without bypassing subscription protections.
-4. **No automated UI/instrumented test suite.** Successful CI compilation and static catalog checks do not establish navigation correctness on a phone.
+1. **Local-only architecture is intentionally selected by the owner.** There is no Supabase dependency and no remote login or cross-device sync; student progress stays on the device with optional manual backup. This is not a release blocker for an offline-first student application.
+2. **External video playback is not end-to-end verified.** Several indexed provider embeds may require provider subscriptions; the UI already warns about this. Real-device tests must verify source access, sound, video, buffering and back navigation without bypassing subscription protections.
+3. **No automated UI/instrumented device test suite.** Source-level student library unit tests were added in 1.6.1, but compilation and JVM tests still cannot establish navigation correctness on a phone.
+4. **Production signing remains unconfigured until the owner supplies the stable keystore privately via GitHub Actions secrets.**
 
 ### P1 — Student quality
 
@@ -31,12 +31,11 @@ Scope: **Android student application only**. This audit is based on the `main` r
 
 ### P2 — Next phase
 
-1. Design the full student UI in Figma against the existing Android styles/tokens, then implement using native Android layouts or a consistent component system.
-2. After selecting a new Supabase project, design tables `teachers`, `cohorts`, `subjects`, `chapters`, `lessons`, `student_progress`, and `resources`; enable RLS and use only a publishable/anon key in the APK, NEVER `service_role`.
-3. Build an offline-first read-only remote catalog backed by the currently bundled safe JSON until remote sync is verified; surface explicit unavailable/loading states.
-4. When user accounts launch, sync only scoped student progress with consent. Keep private notes private.
-5. Add runtime crash reporting/analytics only after an explicit privacy and instrumentation plan. PostHog connection in ChatGPT is **not** equivalent to SDK installation in the Android app.
-6. Admin dashboard is **deferred** until the student workflow and read-only schema are stable.
+1. Design the full student UI in Figma against the existing Android styles/tokens, then implement native layouts and responsive typography after a real-device screenshot review.
+2. Keep bundled JSON catalogs readable offline, with honest labels when a source is not available or cannot be verified.
+3. Improve local-only backup/restore and study progress, and test package upgrade behavior before signing for release.
+4. Add crash reporting/analytics only if specifically requested and after a clear student privacy plan; connecting PostHog in ChatGPT is **not** Android SDK integration.
+5. The admin dashboard, Supabase database, cloud accounts and remote synchronization are **out of scope** until the owner changes that instruction.
 
 ## Changes on this branch
 
@@ -56,3 +55,13 @@ Scope: **Android student application only**. This audit is based on the `main` r
 - [ ] Validate portrait labels / clipping on small device and with increased system font sizes.
 
 **Not yet completed:** real-device playback validation, visual Figma audit of a linked design file, Supabase project creation/integration, telemetry SDK, full exam library, production signing and signed APK publishing.
+
+
+## 1.6.1 offline-only student follow-up
+
+- Three library filters (favorites, completed, continue-watching). Continue-watching is based on locally saved position for native MP4/HLS, not external embeds.
+- Bottom navigation no longer accumulates a cyclic history across top-level tabs.
+- Teacher portraits use a bounded download pool and retain their initial-letter placeholder when offline.
+- Native player errors/long buffering show an in-player retry action; full playback success is still unverified on a device.
+- Four JVM tests protect local library selection rules; debug and signed release CI now run these tests before APK build.
+- The project remains **fully independent of Supabase** by request. Do not introduce a cloud dependency without explicit later approval.

@@ -56,12 +56,17 @@ public class PlayerActivity extends AppCompatActivity {
     private LinearLayout root,topbar,tabContent,details,playerShell,settingsPanel,playerChrome,centerControls,timeline;
     private TextView heading,info,status,favorite,finished,prev,next,speedButton,fullscreenButton,pipButton,playPauseButton,lockButton,unlockButton,seekBackButton,seekForwardButton;
     private TextView tabsLessons,tabsNotes,tabsBooks,clock;
-    private View tapSurface;
+    private View tapSurface,playbackErrorView;
     private SeekBar seekBar;
     private boolean userSeeking=false,chromeVisible=false,controlsLocked=false;
     private static final long AUTO_HIDE_MS=3000L;
     private final Handler ticker=new Handler(Looper.getMainLooper());
     private final Runnable autoHide=()->hideChrome();
+    // A stalled source should offer a visible retry option, not spin forever.
+    private final Runnable bufferingWatchdog=()->{
+        if(player!=null && player.getPlaybackState()==Player.STATE_BUFFERING && !isFinishing())
+            showPlaybackError("تأخر تحميل الفيديو. تحقق من الإنترنت أو حاول مرة أخرى.");
+    };
     private final Runnable progressTick=new Runnable(){
         @Override public void run(){updateProgress();ticker.postDelayed(this,1000);}
     };
@@ -327,11 +332,11 @@ public class PlayerActivity extends AppCompatActivity {
         boolean unlocked=active&&!controlsLocked;
         boolean overlayMenu=unlocked&&toolsVisible;
         if(playerChrome!=null)playerChrome.setVisibility(unlocked?View.VISIBLE:View.GONE);
-        if(centerControls!=null)centerControls.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
-        if(timeline!=null)timeline.setVisibility(unlocked&&isNative()&&!overlayMenu?View.VISIBLE:View.GONE);
+        if(centerControls!=null)centerControls.setVisibility(unlocked&&isNative()&&!overlayMenu&&playbackErrorView==null?View.VISIBLE:View.GONE);
+        if(timeline!=null)timeline.setVisibility(unlocked&&isNative()&&!overlayMenu&&playbackErrorView==null?View.VISIBLE:View.GONE);
         if(settingsPanel!=null)settingsPanel.setVisibility(overlayMenu?View.VISIBLE:View.GONE);
         if(unlockButton!=null)unlockButton.setVisibility(active&&controlsLocked?View.VISIBLE:View.GONE);
-        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive?View.VISIBLE:View.GONE);
+        if(tapSurface!=null)tapSurface.setVisibility(isNative()&&!pipActive&&playbackErrorView==null?View.VISIBLE:View.GONE);
     }
     private void showChrome(){
         chromeVisible=true;
@@ -400,6 +405,37 @@ public class PlayerActivity extends AppCompatActivity {
         renderChrome();
     }
     private void setStatus(String msg){if(status!=null)status.setText(msg);}
+    private void clearPlaybackError(){
+        if(playbackErrorView!=null){
+            mediaStage.removeView(playbackErrorView);
+            playbackErrorView=null;
+            renderChrome();
+        }
+    }
+    private void showPlaybackError(String message){
+        setStatus(message);
+        if(mediaStage==null)return;
+        if(playbackErrorView!=null)return;
+        LinearLayout panel=Ui.col(this);
+        panel.setGravity(Gravity.CENTER);
+        Ui.pad(this,panel,16,12);
+        panel.setBackground(Ui.round(this,0xee14243B,16));
+        TextView heading=Ui.txt(this,"تعذر تشغيل المحاضرة",16,Ui.WHITE,true);
+        heading.setGravity(Gravity.CENTER);
+        panel.addView(heading);
+        TextView reason=Ui.txt(this,message,12,Ui.MUTED,false);
+        reason.setGravity(Gravity.CENTER);
+        panel.addView(reason,Ui.top(this,-1,-2,9));
+        TextView retry=Ui.btn(this,"إعادة المحاولة",true);
+        retry.setContentDescription("إعادة محاولة تشغيل المحاضرة");
+        panel.addView(retry,Ui.top(this,-1,45,12));
+        retry.setOnClickListener(v->load());
+        FrameLayout.LayoutParams params=new FrameLayout.LayoutParams(-1,-2,Gravity.CENTER);
+        params.setMargins(dp(20),dp(14),dp(20),dp(14));
+        playbackErrorView=panel;
+        mediaStage.addView(panel,params);
+        showChrome();
+    }
     private void load(){
         if(current==null)return;
         heading.setText(current.lesson.title);
@@ -436,8 +472,15 @@ public class PlayerActivity extends AppCompatActivity {
                 if(isPlaying)scheduleAutoHide();else showChrome();
             }
             @Override public void onPlaybackStateChanged(int state){
-                if(state==Player.STATE_BUFFERING)setStatus("جاري تحميل المحاضرة...");
-                if(state==Player.STATE_READY)setStatus("المحاضرة جاهزة للمشاهدة");
+                ticker.removeCallbacks(bufferingWatchdog);
+                if(state==Player.STATE_BUFFERING){
+                    setStatus("جاري تحميل المحاضرة...");
+                    ticker.postDelayed(bufferingWatchdog,30000L);
+                }
+                if(state==Player.STATE_READY){
+                    clearPlaybackError();
+                    setStatus("المحاضرة جاهزة للمشاهدة");
+                }
                 if(state==Player.STATE_ENDED){
                     prefs.edit().putBoolean("done_"+current.key(),true).putLong("position_"+current.key(),0L).apply();
                     refreshActions();if(prefs.getBoolean("autoplay",true))step(1);
@@ -445,9 +488,9 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             }
             @Override public void onPlayerError(PlaybackException err){
-                setStatus("تعذر تشغيل هذه المحاضرة. تحقق من اتصال الإنترنت أو حاول مرة أخرى.");
-                showChrome();
-                Toast.makeText(PlayerActivity.this,"حدث خطأ أثناء التشغيل",Toast.LENGTH_LONG).show();
+                ticker.removeCallbacks(bufferingWatchdog);
+                android.util.Log.w("SadsiyoonPlayer","Playback error: "+err.getErrorCodeName());
+                showPlaybackError("تعذر تشغيل الفيديو. قد يكون الرابط غير متاح أو اتصال الإنترنت ضعيفاً.");
             }
         });
         MediaItem.Builder builder=new MediaItem.Builder().setUri(Uri.parse(current.lesson.url));
@@ -499,7 +542,8 @@ public class PlayerActivity extends AppCompatActivity {
                     "تم تحميل صفحة المشغّل، لا يمكن تأكيد التشغيل حتى يبدأ الفيديو فعلياً.");
             }
             @Override public void onReceivedError(WebView view,android.webkit.WebResourceRequest request,android.webkit.WebResourceError error){
-                if(request.isForMainFrame())setStatus("تعذر تحميل صفحة المشغّل. تحقق من الإنترنت أو أعد المحاولة.");
+                if(request.isForMainFrame())
+                    showPlaybackError("تعذر تحميل صفحة المشغّل. تحقق من الإنترنت أو أعد المحاولة.");
             }
         });
         mediaStage.addView(web,new FrameLayout.LayoutParams(-1,-1));
@@ -525,10 +569,11 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
     private void destroyPlayback(){
+        ticker.removeCallbacks(bufferingWatchdog);
         exitEmbeddedFullScreen();
         if(player!=null){if(playerView!=null)playerView.setPlayer(null);player.release();player=null;}
         if(web!=null){web.loadUrl("about:blank");web.stopLoading();web.destroy();web=null;}
-        mediaStage.removeAllViews();playerView=null;
+        mediaStage.removeAllViews();playerView=null;playbackErrorView=null;
         updateProgress();
     }
     private void savePosition(){
@@ -823,10 +868,13 @@ public class PlayerActivity extends AppCompatActivity {
     @Override protected void onResume(){
         super.onResume();
         ticker.removeCallbacks(progressTick);ticker.post(progressTick);
+        if(player!=null && player.getPlaybackState()==Player.STATE_BUFFERING && playbackErrorView==null)
+            ticker.postDelayed(bufferingWatchdog,30000L);
     }
     @Override protected void onPause(){
         ticker.removeCallbacks(progressTick);
         ticker.removeCallbacks(autoHide);
+        ticker.removeCallbacks(bufferingWatchdog);
         savePosition();
         super.onPause();
     }
@@ -837,6 +885,7 @@ public class PlayerActivity extends AppCompatActivity {
     @Override protected void onDestroy(){
         ticker.removeCallbacks(progressTick);
         ticker.removeCallbacks(autoHide);
+        ticker.removeCallbacks(bufferingWatchdog);
         destroyPlayback();
         super.onDestroy();
     }

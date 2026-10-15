@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.util.LruCache;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public final class Ui {
  public static final int BG=Color.rgb(13,22,39), PANEL=Color.rgb(23,38,61), PANEL2=Color.rgb(35,55,83);
@@ -21,6 +24,8 @@ public final class Ui {
  private static final LruCache<String,Bitmap> imageCache=new LruCache<String,Bitmap>(8*1024*1024){
     @Override protected int sizeOf(String key,Bitmap value){return value==null?0:value.getByteCount();}
  };
+ // Limit concurrent portrait downloads instead of starting a thread per card.
+ private static final ExecutorService portraitDownloads=Executors.newFixedThreadPool(3);
  private Ui(){}
  public static int dp(Context c,float x){return Math.round(c.getResources().getDisplayMetrics().density*x);}
  public static GradientDrawable round(Context c,int bg,int r){
@@ -64,6 +69,7 @@ public final class Ui {
  public static View portrait(Context c,String url,String name,int size){
     android.widget.FrameLayout frame=new android.widget.FrameLayout(c);
     frame.setBackground(round(c,PANEL2,15));frame.setClipToOutline(true);
+    frame.setContentDescription("صورة الأستاذ "+name);
     TextView initial=txt(c,name.isEmpty()?"س":name.substring(0,1),28,GOLD,true);initial.setGravity(Gravity.CENTER);
     frame.addView(initial,new android.widget.FrameLayout.LayoutParams(-1,-1));
     if(url!=null&&url.startsWith("https://")){
@@ -71,19 +77,30 @@ public final class Ui {
       frame.addView(image,new android.widget.FrameLayout.LayoutParams(-1,-1));
       Bitmap cached=imageCache.get(url);
       if(cached!=null)image.setImageBitmap(cached);
-      else new Thread(()->{
+      else portraitDownloads.execute(()->{
         HttpURLConnection connection=null;
         try{
           connection=(HttpURLConnection)new URL(url).openConnection();
-          connection.setConnectTimeout(4500);connection.setReadTimeout(4500);connection.setInstanceFollowRedirects(true);
-          // Render remote portraits as bounded thumbnails to avoid storing full-size
-          // 1200px+ source images for every teacher in the in-memory card cache.
+          connection.setConnectTimeout(4500);
+          connection.setReadTimeout(4500);
+          connection.setInstanceFollowRedirects(true);
+          if(connection.getResponseCode()!=HttpURLConnection.HTTP_OK)return;
+          // Reject unexpectedly large downloads before allocating a bitmap.
+          int length=connection.getContentLength();
+          if(length>4*1024*1024)return;
           BitmapFactory.Options opts=new BitmapFactory.Options();
           opts.inSampleSize=4;
-          Bitmap decoded=BitmapFactory.decodeStream(connection.getInputStream(),null,opts);
-          if(decoded!=null){imageCache.put(url,decoded);image.post(()->{if(image.isAttachedToWindow())image.setImageBitmap(decoded);});}
-        }catch(Exception ignored){}finally{if(connection!=null)connection.disconnect();}
-      }).start();
+          try(InputStream input=connection.getInputStream()){
+            Bitmap decoded=BitmapFactory.decodeStream(input,null,opts);
+            if(decoded!=null){
+              imageCache.put(url,decoded);
+              image.post(()->{if(image.isAttachedToWindow())image.setImageBitmap(decoded);});
+            }
+          }
+        }catch(Exception ignored){
+          // Teacher initials stay visible when the external photo is unavailable.
+        }finally{if(connection!=null)connection.disconnect();}
+      });
     }
     return frame;
  }
