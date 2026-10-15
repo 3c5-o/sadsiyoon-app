@@ -509,14 +509,9 @@ public class MainActivity extends AppCompatActivity {
         List<Catalog.Ref> selected=new ArrayList<>();
         for(Catalog.Ref ref:Catalog.all(this)){
             String id=ref.key();
-            boolean included;
-            if("continue".equals(libraryFilter)){
-                included=ref.lesson.available() && !prefs.getBoolean("done_"+id,false)
-                    && prefs.getLong("position_"+id,0L)>0L;
-            }else{
-                included=prefs.getBoolean(("fav".equals(libraryFilter)?"fav_":"done_")+id,false);
-            }
-            if(included)selected.add(ref);
+            if(StudentLibraryFilter.includes(libraryFilter,ref.lesson.available(),
+                prefs.getBoolean("fav_"+id,false),prefs.getBoolean("done_"+id,false),
+                prefs.getLong("position_"+id,0L)))selected.add(ref);
         }
         addMuted(content,selected.size()+" محاضرة");
         if(selected.isEmpty()){
