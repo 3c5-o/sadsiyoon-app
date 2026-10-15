@@ -23,7 +23,7 @@ as $$
     );
 $$;
 revoke all on function public.sadesion_is_admin() from public;
-grant execute on function public.sadesion_is_admin() to authenticated;
+grant execute on function public.sadesion_is_admin() to anon,authenticated;
 
 create table if not exists public.sadesion_content (
     id uuid primary key default gen_random_uuid(),
