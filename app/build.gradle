@@ -6,8 +6,8 @@ android {
         applicationId 'com.sadsiyoon.app'
         minSdk 26
         targetSdk 35
-        versionCode 18
-        versionName '1.6.0-beta'
+        versionCode 19
+        versionName '1.6.1-beta'
     }
     // Signing material must be injected by private environment variables.
     signingConfigs {
