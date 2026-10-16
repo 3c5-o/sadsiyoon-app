@@ -2,13 +2,13 @@ name: Android Debug CI & Validation
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   validate-and-build:
-    name: Validate Catalogs and Build Check
+    name: Validate and Build Android Preview APK
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +29,33 @@ jobs:
 
       - name: Build Web Production Assets
         run: npm run build
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: Build Debug APK
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --stacktrace
+          cd ..
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sadsiyoon-preview-apk-debug
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+          retention-days: 14
 
       - name: Verify Update Manifest
         run: |

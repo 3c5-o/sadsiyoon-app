@@ -1,3 +1,5 @@
+node_modules/
+dist/
 .gradle/
 .gradle-cache/
 **/build/
@@ -7,6 +9,7 @@ local.properties
 *.keystore
 *.jks
 .DS_Store
+release-artifacts/
 
 # Private Android signing keys must not be committed.
 *.jks

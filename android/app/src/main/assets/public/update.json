@@ -1,0 +1,21 @@
+{
+  "version": "1.7.0",
+  "versionCode": 20,
+  "name": "سادسيون — تحديث v1.7.0",
+  "releaseTag": "v1.7.0",
+  "releaseDate": "2026-10-16",
+  "downloadUrl": "https://github.com/3c5-o/sadsiyoon-app/releases/download/v1.7.0/sadsiyoon-v1.7.0-release.apk",
+  "latestReleaseUrl": "https://github.com/3c5-o/sadsiyoon-app/releases/latest",
+  "minAndroidVersion": "8.0",
+  "fileSize": "14.8 MB",
+  "sha256": "8d3e914bf847c21045aa3e3f73617b07e7c91350a41793740e21a2c98d6fa7c2",
+  "changelog": [
+    "قارئ ملازم وملخصات PDF مدمج مع فهرس الفصول وخلاصات القوانين",
+    "حاسبة المعدل الوزاري للفرعين العلمي والأدبي مع احتساب درجات الدور الأول واللغة الفرنسية وتوقع الكليات",
+    "مؤقت دراسي بومودورو (25 و 50 دقيقة) لتنظيم فترات المذاكرة والتركيز",
+    "توسيع بنك الأسئلة ليشمل اختبارات تفاعلية لكل فصل مع التصحيح الفوري والشرح الوزاري",
+    "تصميم متكيف ينسجم تلقائياً مع الشاشات الكبيرة (الأجهزة اللوحية والحواسيب)",
+    "نظام التحديث الذكي المباشر للنسخة APK من خلال GitHub Releases"
+  ],
+  "forceUpdate": false
+}
