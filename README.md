@@ -1,82 +1,71 @@
-# V1.4.1 Beta — safe standalone preview APK
+# سادسيون — Sadsiyoon Web Application
 
-- Debug applicationId now uses `com.sadsiyoon.app.preview`, with display name `سادسيون تجريبي`, so it can be installed alongside the user's existing Sadsiyoon APK without uninstalling it or risking its local progress.
-- The manually signed Release applicationId stays `com.sadsiyoon.app` and requires private signing secrets.
-- Progress data in Preview is isolated; release/legacy data does not automatically transfer. If the installed version supports backup export, use the JSON export/import workflow explicitly.
-- GitHub Actions verifies the debug APK package name before publishing it.
+منصة **سادسيون** التعليمية الموجهة لطلبة السادس الإعدادي في العراق (الفرعين العلمي والأدبي).
+تمت إعادة كتابة المشروع وتطويره كـ تطبيق ويب متجاوب بتقنيات React و TypeScript و Vite و Tailwind CSS مع الحفاظ الكامل على كافة الوظائف وقواعد البيانات المحلية والمنشورة.
 
-# V1.4.0 Beta — final phase: backups and secure release preparation
+## الميزات والوظائف المكتملة
 
-- Export/import local favorites, notes, completed lesson flags and positions as versioned JSON using the Android Storage Access Framework, with strict type/size validation and user-chosen destinations.
-- Added optional secure signing configuration and manual GitHub Actions workflow; **the signing workflow cannot run until the owner provides the four secrets**.
-- Debug APK still has a per-run signature and is not a universal in-place upgrade. No user data, lesson assets or keystores were deleted.
+- **الرئيسية (Home)**:
+  - بطاقة ترحيب شخصية ومؤشر إنجاز دراسي ديناميكي.
+  - متابعة المحاضرة الأخيرة بنقرة واحدة ("أكمل من حيث توقفت").
+  - روابط سريعة لجميع أقسام المنصة (المدرسون، الوزاريات، الاختبارات، مكتبتي).
+  - بطاقة المحتوى المنشور سحابياً من سوبابيس (Supabase).
+  - تحديد الدفعة (2026 / 2027) وعرض إحصائيات المدرسين والمحاضرات المفهرسة.
+  - شريط تمرير أفقي للمدرسين المتميزين مع صورهم الرسمية.
+  - شبكة المواد الدراسية ورموزها وفلترة سريعة.
 
-# V1.3.2 Beta — Phase 3: actual interactive practice
+- **فهرس المدرسين (Teachers Directory)**:
+  - التبديل بين دفعة 2026 و 2027.
+  - فلاتر المواد الدراسية (الرياضيات، الفيزياء، الكيمياء، الأحياء، العربية، الإنكليزية، الإسلامية).
+  - بطاقات الأساتذة مع عدد الأقسام والمحاضرات المفهرسة وحالة الروابط.
+  - صفحة الأستاذ التفصيلية مع قائمة الفصول والمحاضرات.
 
-- Implemented ten originally authored, offline multiple-choice practice questions for sixth scientific and ten for sixth literary, with scoring, explanations, retry and best local score for each track.
-- These questions are **practice items, NOT claimed as official ministry exam questions**; the real 2025 Mlazemna paper links remain under Waziriat and are attributed to their source.
-- Fixed a regression introduced in Phase 1: when a filter changed while remaining on the same screen, render was skipped; same-page quiz, exams, and search refresh now rerender correctly.
-- Added system bar inset padding to the original-paper WebView reader to reduce clipping on Android 15.
+- **مشغل المحاضرات الشامل (Comprehensive Video Player)**:
+  - دعم بثوث HLS (.m3u8) وفيديوهات MP4 المباشرة ومشغلات Iframe الخارجية (Rumble، BitChute، Ok.ru، وغيرها).
+  - أدوات تحكم تفاعلية: تشغيل/إيقاف، تقديم/تأخير 10 ثوانٍ، شريط تقدم زمني، سرعات تشغيل متعددة (0.75x، 1x، 1.25x، 1.5x، 2x)، ملء الشاشة، قفل أدوات التحكم لمنع اللمس غير المقصود.
+  - التنقل بين المحاضرات (السابقة / التالية) والتشغيل التلقائي.
+  - حفظ الموضع الزمني للمشاهدة محلياً لاستكمالها لاحقاً.
+  - تبويب المحاضرات (Playlist للفصل مع تمييز المحاضرة الحالية).
+  - تبويب بطاقات الملاحظات (NoteCards): إضافة وتعديل وحذف ملاحظات مرتبطة بالدقيقة والثانية في الفيديو، والنقر على التوقيت للانتقال المباشر.
+  - تبويب الملازم ومصادر الدراسة.
 
-# V1.3.1 Beta: source catalog audit
+- **وزاريات سادسيون (Waziriat 2025 Gallery)**:
+  - أوراق الامتحانات الوزارية لعام 2025 لفرعي العلمي والأدبي ومختلف الأدوار.
+  - معرض صور تفاعلي مع علامة سادسيون المائية وربط بصفحات المصدر المعتمدة (ملازمنا وأسئلتنا).
 
-Every Debug CI run now checks missing and repeated links and uploads reports/catalog_health.json and Markdown. Playback is not inferred from the URL and no missing lessons are fabricated. The 2026 teacher directory warns about known missing links. Source-linked videos show the uncertainty of playback.
+- **بنك الاختبارات والتدريب (Tests & Practice Bank)**:
+  - 10 أسئلة تدريبية علمية و 10 أسئلة أدبية بمستويات تفكير متعددة.
+  - نافذة شرح فوري للإجابة الصحيحة وتوضيح التعليل العلمي والتاريخي.
+  - حساب النتيجة النهائية وحفظ أعلى درجة مسجلة محلياً على الجهاز.
 
-# V1.3.0 Beta — Phase 1 stability
+- **مكتبتي الشخصية (My Library)**:
+  - فرز المحاضرات بحسب: المفضلة، المكتملة، والمتابعة (المحاضرات قيد المشاهدة).
+  - دعم ترقيم الصفحات وزر "عرض المزيد" للمجموعات الكبيرة.
 
-- Implemented navigation history: Waziriat back button returns to entry page, with state restoration on rotation and saved per-page scroll.
-- Isolated parsing errors per JSON file, so one bad file does not halt later teachers.
-- Corrected embedded player messaging; improved reader HTTP/network errors; deferred orientation UI changes to Android configuration callback.
-- Changed teacher portrait LRU cache limit from entry count to 8 MiB.
-- Stable release signing is a separate, secure setup: NEVER commit signing keys or claim the automatically debug-signed artifact upgrades previously installed versions in place.
+- **حسابي والنسخ الاحتياطي (Account & Local Backup)**:
+  - تعديل اسم الطالب وحفظه محلياً.
+  - تفعيل أو تعطيل التشغيل التلقائي للمحاضرة التالية.
+  - تصدير نسخة احتياطية محلية كاملة كملف JSON بتنسيق `sadsiyoon-backup-v1`.
+  - استيراد ودمج النسخ الاحتياطية مع التحقق الصارم من هيكل البيانات.
+  - مسح وإعادة تعيين تقدم المشاهدة والمفضلة.
 
-# Sadsiyoon 1.2.7 Beta — 2025 Mlazemna exam samples
+- **البحث الفوري (Instant Search)**:
+  - بحث لحظي في أسماء الأساتذة والمواد والفصول والمحاضرات المفهرسة.
 
-Four real, source-verified 2025 first-round exams: Mathematics and Arabic for sixth scientific and literary.
-Select 2025, branch, subject and first round in the Waziriat gallery; opening a card displays the unmodified original Mlazemna webpage and its paper images within an attributed WebView.
-An external-browser button is available if the source website restricts in-app viewing.
-No third-party images are copied, downloaded, rebranded or watermarks removed. These are live webpage embeds, not re-hosted image files.
-Other years, subjects and rounds are untouched. The prior teacher course catalogs are preserved.
+- **محتوى سادسيون المنشور (Remote Supabase Catalog)**:
+  - مزامنة حية مع جدول `sadesion_content` المنشور على Supabase.
+  - تصفح شجري متعدد المستويات (الدفعات -> المواد -> المدرسين -> الفصول -> المحاضرات/الملازم/الإعلانات).
+  - تخزين مؤقت محلي (Cache) يتيح التصفح دون إنترنت في حال انقطاع الشبكة.
 
-# Sadsiyoon 1.2.6 — 2025 exam image-gallery pilot
+## التشغيل والتطوير
 
-The new `وزاريات سادسيون` screen is accessible from Home and Tests.
-It contains 2025 cohort exam-year filters for science/literary subjects and rounds, a clearly labeled **empty illustration**, links to the corresponding Aselatna sections, and an image viewer that supports multiple page images and displays an in-app translucent "سادسيون" watermark without modifying source pixels.
+```bash
+# تثبيت الاعتماديات
+npm install
 
-**Data integrity:** Aselatna's visible preparatory sixth-grade archive checked on October 13, 2026 shows papers through 2021; its 2025 tag visible items concern lower grades. The pilot therefore intentionally contains **zero** 2025 sixth-preparatory scanned papers. No source image was fabricated or misdated; there is nothing to strip/rebrand yet. On receipt of verified licensed 2025 source sheets, populate `app/src/main/assets/exams/2025.json` with paper objects specifying year, branch (scientific/literary), subject, round, title, source, and an array of `https://` image URLs. Verify rights and original sheets before altering old branding.
+# تشغيل خادم التطوير
+npm run dev
 
-# Sadsiyoon — teacher portraits 1.2.5
-
-- 14 teacher images are linked to existing catalog names directly from the user-supplied top4top.io URLs.
-- 2026 and 2027 show the same portrait for the same canonical teacher name, because the shared `Catalog.IMAGES` array is used in both batches.
-- All existing lessons and provider embeds remain unchanged.
-- Teacher photos are loaded over HTTPS at runtime and are *not* bundled into the APK. Images can fail to load when the external host is unavailable; the UI keeps an initial-letter placeholder.
-- External images are downsampled in memory for list performance.
-- **Name review before a production release:** the user-provided label `سجاد العگيلي` was paired provisionally with the existing teacher entry `ساجد العكيلي`, and `هشام الغرباوي` with `هاشم الغرباوي`. Please confirm these are the same teachers.
-- Debug build workflow validates catalog and portrait mappings, then publishes APK as a GitHub Actions artifact.
-
-# سادسيون — Sadsiyoon
-
-Android app (Java / AndroidX / Media3) with Arabic RTL UI and 2026/2027 batch navigation.
-
-New in 1.2.4 Beta: indexed 2027 teacher **محمد قاسم** (24 math lectures, 1 chapter), **هشام المعموري** (53 Arabic lectures, 4 chapters), and **سجاد العبيدي** (45 English lectures, 6 chapters). Including the earlier Haider catalog's 61 lessons, 2027 has 183 indexed episode embed links for 4 teachers. The teacher directory advertised 99+ for Sajjad, but only 45 public episode entries were verified in the six pages checked; do not imply completion of unavailable content.
-
-All newly added URLs use public Rumble iframe embeds and may require provider Premium subscription; iframe URL retrieval alone does NOT prove actual playback. No playback restrictions are circumvented.
-
-
-## 1.2.5 Beta — Teacher portraits / photos
-
-- **2026**: original 19-teacher course indexes remain unchanged.
-- **2027**: حيدر عبدالائمة, mathematics — Chapter 1: 28 lessons; Chapter 2: 26 lessons; Chapter 3: 7 lessons; **61 lessons total**. The home card totals are computed from the bundled catalog.
-- Chapter three's seven Rumble iframe URLs were observed on the public server 4 of https://v.sea-novels.com/p/2027.html?m=1. All seven show Premium Only Content when opened directly without subscription; iframe visibility is not proof of playback rights or successful playback.
-- Chapter two's 26 Rumble iframe URLs were selected from the public "سيرفر 3" option of https://v.sea-novels.com/p/3.html?m=1 and their external video titles matched lecture numbers. A misleading advertisement iframe was rejected for lecture 14 and replaced by its correct verified Rumble embed URL.
-- All **26 chapter-two Rumble embeds show Premium Only Content** when opened directly without a qualifying subscription. Their presence in the catalog does **not** mean playback can be guaranteed or access restrictions circumvented.
-- Chapter one retains Rumble-first/Bitchute-when-Rumble-absent link choices.
-- Video displays in licensed provider iframe controls for embeds; Media3 ExoPlayer controls HLS/MP4 directly when an authorized direct video URL is available. Provider player branding or subscriber checks cannot be removed by app-side UI styling.
-- Favorites, saved positions, and notes are stored locally per lecture.
-
-**Important:** Public iframe links are not proof of permission to redistribute third-party lectures in a public app. Obtain authorization from rights holders before distribution.
-
-## Build
-
-On each push to main, GitHub Actions runs `scripts/verify_catalogs.py`, builds `app-debug.apk`, and uploads `sadsiyoon-debug-apk` in artifacts. This is a Debug-signed test APK, not a production-signing certificate.
+# بناء النسخة الإنتاجية
+npm run build
+```

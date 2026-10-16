@@ -1,0 +1,50 @@
+{
+  "version": 2,
+  "year": 2025,
+  "source": "ملازمنا",
+  "verified_on": "2026-10-13",
+  "status": "source_links_verified",
+  "note": "Pilot source pages are opened within an attributed in-app reader. No images copied, no copyright marks removed.",
+  "papers": [
+    {
+      "year": 2025,
+      "branch": "scientific",
+      "subject": "الرياضيات",
+      "round": "الدور الأول",
+      "title": "رياضيات السادس العلمي 2025 — الدور الأول",
+      "source": "https://mlazemna.com/t25mt/",
+      "type": "source_page",
+      "images": []
+    },
+    {
+      "year": 2025,
+      "branch": "literary",
+      "subject": "الرياضيات",
+      "round": "الدور الأول",
+      "title": "رياضيات السادس الأدبي 2025 — الدور الأول",
+      "source": "https://mlazemna.com/t25mtd/",
+      "type": "source_page",
+      "images": []
+    },
+    {
+      "year": 2025,
+      "branch": "scientific",
+      "subject": "اللغة العربية",
+      "round": "الدور الأول",
+      "title": "عربي السادس العلمي 2025 — الدور الأول",
+      "source": "https://mlazemna.com/as25ara/",
+      "type": "source_page",
+      "images": []
+    },
+    {
+      "year": 2025,
+      "branch": "literary",
+      "subject": "اللغة العربية",
+      "round": "الدور الأول",
+      "title": "عربي السادس الأدبي 2025 — الدور الأول",
+      "source": "https://mlazemna.com/as25ard/",
+      "type": "source_page",
+      "images": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "سادسيون — Sadsiyoon",
+  "description": "منصة سادسيون التعليمية لطلبة السادس الإعدادي في العراق — فهرس المدرسين والمحاضرات والوزاريات والاختبارات التدريبية والمكتبة الشخصية.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
