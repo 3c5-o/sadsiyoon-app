@@ -52,13 +52,31 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        run: |
+          echo "Setting up Android SDK environment..."
+          ANDROID_PATH="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          echo "ANDROID_HOME=$ANDROID_PATH" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$ANDROID_PATH" >> $GITHUB_ENV
+          export ANDROID_HOME="$ANDROID_PATH"
+          export ANDROID_SDK_ROOT="$ANDROID_PATH"
+          export PATH="$ANDROID_PATH/cmdline-tools/latest/bin:$ANDROID_PATH/platform-tools:$PATH"
+          
+          # Automatically accept all Android licenses
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          
+          # Ensure target platform 35 is present
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" > /dev/null 2>&1 || true
 
       - name: Build Web App & Sync Capacitor
         run: |
           npm run build
           npx cap sync android
+          # Ensure local.properties points directly to Android SDK
+          echo "sdk.dir=${ANDROID_HOME:-/usr/local/lib/android/sdk}" > android/local.properties
 
       - name: Configure Keystore (if provided)
         run: |
@@ -66,8 +84,8 @@ jobs:
             echo "Using private signing keystore from secrets..."
             echo "${{ secrets.SADSIYOON_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
           elif [ -f "debug.keystore.base64" ]; then
-            echo "Using provided debug keystore..."
-            echo "$SADSIYOON_KEYSTORE_BASE64"
+            echo "Using bundled debug keystore..."
+            base64 -d debug.keystore.base64 > android/app/release.keystore 2>/dev/null || cat debug.keystore.base64 > android/app/release.keystore
           fi
 
       - name: Build Android APK (Gradle)
@@ -90,7 +108,7 @@ jobs:
           
           if [ -f "android/app/build/outputs/apk/debug/app-debug.apk" ]; then
             cp "android/app/build/outputs/apk/debug/app-debug.apk" "release-artifacts/sadsiyoon-v${VERSION}-debug.apk"
-            # If no release APK, use debug APK as standard release
+            # If no release APK was generated, use debug APK as standard release
             if [ ! -f "release-artifacts/sadsiyoon-release.apk" ]; then
               cp "android/app/build/outputs/apk/debug/app-debug.apk" "release-artifacts/sadsiyoon-release.apk"
             fi
