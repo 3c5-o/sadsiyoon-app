@@ -8,7 +8,17 @@ import {
   CheckCircle,
   AlertTriangle,
   Sparkles,
+  RefreshCw,
+  ExternalLink,
 } from 'lucide-react';
+import { UpdateModal } from '../modals/UpdateModal';
+import {
+  checkForAppUpdate,
+  AppUpdateInfo,
+  CURRENT_APP_VERSION,
+  GITHUB_REPO,
+  downloadApkUpdate,
+} from '../../utils/appUpdater';
 import {
   getNickname,
   setNickname,
@@ -30,7 +40,28 @@ export const AccountView: React.FC<AccountViewProps> = ({ onRefreshData }) => {
   const [autoplay, setAutoplayState] = useState<boolean>(getAutoplay());
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
+  // GitHub APK update state
+  const [updateInfo, setUpdateInfo] = useState<AppUpdateInfo | null>(null);
+  const [isCheckingUpdate, setIsCheckingUpdate] = useState<boolean>(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCheckUpdate = async (openModalAfter = true) => {
+    setIsCheckingUpdate(true);
+    try {
+      const info = await checkForAppUpdate();
+      setUpdateInfo(info);
+      if (openModalAfter) {
+        setIsUpdateModalOpen(true);
+      }
+    } catch {
+      setStatusMessage('تعذر فحص التحديثات. تحقق من اتصال الإنترنت.');
+      setTimeout(() => setStatusMessage(null), 3000);
+    } finally {
+      setIsCheckingUpdate(false);
+    }
+  };
 
   const handleSaveName = () => {
     const trimmed = tempName.trim();
@@ -234,6 +265,49 @@ export const AccountView: React.FC<AccountViewProps> = ({ onRefreshData }) => {
         />
       </div>
 
+      {/* GitHub Releases APK Updates Card */}
+      <div className="bg-[#14263D] border border-[#213C60] p-4 rounded-2xl space-y-3 shadow-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#20C7B4]/20 text-[#20C7B4] flex items-center justify-center">
+              <Download size={16} />
+            </div>
+            <div>
+              <div className="font-bold text-sm text-white">تحديثات تطبيق أندرويد (APK)</div>
+              <div className="text-[11px] text-[#A4B6D2]">مزامنة مباشرة مع GitHub Releases</div>
+            </div>
+          </div>
+          <span className="text-xs font-mono font-bold text-[#20C7B4] bg-[#20C7B4]/10 px-2 py-0.5 rounded-lg border border-[#20C7B4]/30">
+            v{CURRENT_APP_VERSION}
+          </span>
+        </div>
+
+        <p className="text-xs text-[#A4B6D2] leading-relaxed">
+          يمكنك التحقق من وجود إصدارات أحدث وتنزيل ملف التثبيت (APK) مباشرة مع الحفاظ على ملاحظاتك ومفضلاتك.
+        </p>
+
+        <div className="grid grid-cols-2 gap-2 pt-1">
+          <button
+            onClick={() => handleCheckUpdate(true)}
+            disabled={isCheckingUpdate}
+            className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#203E6B] hover:bg-[#284E85] text-white font-bold text-xs transition cursor-pointer disabled:opacity-50"
+          >
+            <RefreshCw size={14} className={isCheckingUpdate ? 'animate-spin' : ''} />
+            <span>فحص التحديثات</span>
+          </button>
+
+          <a
+            href={`https://github.com/${GITHUB_REPO}/releases`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#172B45] hover:bg-[#1E3758] text-[#D0E0F2] font-bold text-xs transition border border-[#223E63]"
+          >
+            <ExternalLink size={14} />
+            <span>مستودع GitHub</span>
+          </a>
+        </div>
+      </div>
+
       {/* Clear Progress Button */}
       <button
         onClick={handleResetProgress}
@@ -247,6 +321,15 @@ export const AccountView: React.FC<AccountViewProps> = ({ onRefreshData }) => {
       <div className="text-center text-[11px] text-[#A4B6D2]/70 pt-4">
         سادسيون V1.7.0 — نسخة الويب المحلية الكاملة لطلبة السادس الإعدادي.
       </div>
+
+      {/* APK Update Modal */}
+      <UpdateModal
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        updateInfo={updateInfo}
+        isChecking={isCheckingUpdate}
+        onRecheck={() => handleCheckUpdate(false)}
+      />
     </div>
   );
 };

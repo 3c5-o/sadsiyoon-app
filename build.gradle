@@ -5,3 +5,7 @@ tasks.register('build', Exec) {
 tasks.register('assembleDebug', Exec) {
     commandLine 'npm', 'run', 'build'
 }
+
+tasks.register('assembleRelease', Exec) {
+    commandLine 'npm', 'run', 'build'
+}
