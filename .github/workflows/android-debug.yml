@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci || npm install --legacy-peer-deps
 
       - name: Check TypeScript Compilation
         run: npm run lint
@@ -39,6 +39,8 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          build-root-directory: android
 
       - name: Set up Android SDK
         run: |
@@ -53,7 +55,7 @@ jobs:
           # Automatically accept all Android licenses
           yes | sdkmanager --licenses > /dev/null 2>&1 || true
           
-          # Ensure target platform 35 is present
+          # Ensure target platform 35 and build-tools 35 are present
           sdkmanager "platforms;android-35" "build-tools;35.0.0" > /dev/null 2>&1 || true
 
       - name: Sync Capacitor Android
@@ -75,12 +77,13 @@ jobs:
           path: |
             android/app/build/outputs/apk/debug/*.apk
           retention-days: 14
+          if-no-files-found: warn
 
       - name: Verify Update Manifest
         run: |
           node -e "
             const fs = require('fs');
-            const data = JSON.parse(fs.readFileSync('update.json', 'utf8'));
+            const data = fs.existsSync('update.json') ? JSON.parse(fs.readFileSync('update.json', 'utf8')) : {};
             if (!data.version || !data.downloadUrl) {
               console.error('Invalid update.json manifest');
               process.exit(1);
