@@ -70,8 +70,8 @@ jobs:
           # Automatically accept all Android licenses
           yes | sdkmanager --licenses > /dev/null 2>&1 || true
           
-          # Ensure target platform 35 and build-tools 35 are present
-          sdkmanager "platforms;android-35" "build-tools;35.0.0" > /dev/null 2>&1 || true
+          # Ensure target platform 36 and build-tools 36 are present
+          sdkmanager "platforms;android-36" "build-tools;36.0.0" > /dev/null 2>&1 || true
 
       - name: Build Web App & Sync Capacitor
         run: |
